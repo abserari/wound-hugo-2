@@ -3,101 +3,56 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://abser.top/about/</loc>
+    <loc>https://blog.abser.top/about/</loc>
     <lastmod>2014-04-09T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pl"
-                href="https://abser.top/pl/about/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://abser.top/fr/about/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://abser.top/about/"
-                />
   </url>
   
   <url>
-    <loc>https://abser.top/categories/</loc>
+    <loc>https://blog.abser.top/categories/</loc>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
-                hreflang="fr"
-                href="https://abser.top/fr/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pl"
-                href="https://abser.top/pl/categories/"
+                hreflang="ch"
+                href="https://blog.abser.top/ch/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://abser.top/categories/"
+                href="https://blog.abser.top/categories/"
                 />
   </url>
   
   <url>
-    <loc>https://abser.top/contact/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://abser.top/fr/contact/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pl"
-                href="https://abser.top/pl/contact/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://abser.top/contact/"
-                />
+    <loc>https://blog.abser.top/contact/</loc>
   </url>
   
   <url>
-    <loc>https://abser.top/</loc>
+    <loc>https://blog.abser.top/</loc>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
-                hreflang="fr"
-                href="https://abser.top/fr/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pl"
-                href="https://abser.top/pl/"
+                hreflang="ch"
+                href="https://blog.abser.top/ch/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://abser.top/"
+                href="https://blog.abser.top/"
                 />
   </url>
   
   <url>
-    <loc>https://abser.top/tags/</loc>
+    <loc>https://blog.abser.top/tags/</loc>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
-                hreflang="fr"
-                href="https://abser.top/fr/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pl"
-                href="https://abser.top/pl/tags/"
+                hreflang="ch"
+                href="https://blog.abser.top/ch/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://abser.top/tags/"
+                href="https://blog.abser.top/tags/"
                 />
   </url>
   
