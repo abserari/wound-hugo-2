@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Unix编程 on Wound:Abser&#39;s Blog</title>
+    <link>https://blog.abser.top/tags/unix%E7%BC%96%E7%A8%8B/</link>
+    <description>Recent content in Unix编程 on Wound:Abser&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 14 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.abser.top/tags/unix%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Produce Consume</title>
+      <link>https://blog.abser.top/blog/produce-consume/</link>
+      <pubDate>Fri, 14 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.abser.top/blog/produce-consume/</guid>
+      <description>__ Processes Programming__ Task description: Create 3 processes to handle data. One process *PGone* generates int numbers and stores them in a loop array including 10 elements. One process *PGtwo* also generates int numbers and stores them in the same loop array. One process *PS* stores the generated numbers into a txt file in hard disk. Requests: 1. The 3 processes should work concurrently. 2. *PGone and PGtwo *can generate numbers at any time as long as the array is not occupied by the other processes, and there still remains spaces or there exists elements that have been stored by PS.</description>
+    </item>
+    
+  </channel>
+</rss>

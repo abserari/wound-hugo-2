@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>leetcode on Wound:Abser&#39;s Blog</title>
+    <link>https://blog.abser.top/tags/leetcode/</link>
+    <description>Recent content in leetcode on Wound:Abser&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 12 Dec 2018 13:09:34 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.abser.top/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>三数之和</title>
+      <link>https://blog.abser.top/blog/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</link>
+      <pubDate>Wed, 12 Dec 2018 13:09:34 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</guid>
+      <description> 问题描述 给定一个包含 *n* 个整数的数组 nums，判断 nums 中是否存在三个元素 *a，b，c ，*使得 *a + b + c = *0 ？找出所有满足条件且不重复的三元组。
+注意：答案中不可以包含重复的三元组。
+示例 例如, 给定数组 nums = [-1, 0, 1, 2, -1, -4]， 满足要求的三元组集合为： [ [-1, 0, 1], [-1, -1, 2] ]  思路及实现 func threeSum(nums []int) [][]int { // 排序后，可以按规律查找 sort.Ints(nums) res := [][]int{} for i := range nums { // 避免添加重复的结果 // i&amp;gt;0 是为了防止nums[i-1]溢出 if i &amp;gt; 0 &amp;amp;&amp;amp; nums[i] == nums[i-1] { continue } l, r := i+1, len(nums)-1 for l &amp;lt; r { s := nums[i] + nums[l] + nums[r] switch { case s &amp;lt; 0: // 较小的 l 需要变大 l++ case s &amp;gt; 0: // 较大的 r 需要变小 r-- default: res = append(res, []int{nums[i], nums[l], nums[r]}) // 为避免重复添加，l 和 r 都需要移动到不同的元素上。 l, r = next(nums, l, r) } } } return res } func next(nums []int, l, r int) (int, int) { for l &amp;lt; r { switch { case nums[l] == nums[l+1]: l++ case nums[r] == nums[r-1]: r-- default: l++ r-- return l, r } } return l, r } } else { j++ for j &amp;lt; k &amp;amp;&amp;amp; nums[j-1] == nums[j] { j++ } } } } return result }  </description>
+    </item>
+    
+    <item>
+      <title>两个排序数组的中位数</title>
+      <link>https://blog.abser.top/blog/%E4%B8%A4%E4%B8%AA%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0/</link>
+      <pubDate>Sun, 09 Dec 2018 17:07:54 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E4%B8%A4%E4%B8%AA%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0/</guid>
+      <description>问题描述 给定两个大小为 m 和 n 的有序数组 nums1 和 nums2 。
+请找出这两个有序数组的中位数。要求算法的时间复杂度为 O(log (m+n)) 。
+你可以假设 nums1 和 nums2 不同时为空。
+示例 1 nums1 = [1, 3] nums2 = [2] 中位数是 2.0  示例 2 nums1 = [1, 2] nums2 = [3, 4] 中位数是 (2 + 3)/2 = 2.5  思路 给出两个有序数组，假设两个数组的长度和是 len，如果 len 为奇数，那么我们求的就是两个数组合并后的第 (len &amp;gt;&amp;gt; 1) + 1 大的数，如果 len 为偶数，就是第 (len &amp;gt;&amp;gt; 1) 和 (len &amp;gt;&amp;gt; 1) + 1 两个数的平均数。</description>
+    </item>
+    
+    <item>
+      <title>最长有效括号</title>
+      <link>https://blog.abser.top/blog/%E6%9C%80%E9%95%BF%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7/</link>
+      <pubDate>Sun, 09 Dec 2018 17:07:24 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%9C%80%E9%95%BF%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7/</guid>
+      <description>问题描述 给定一个只包含 &#39;(&#39; 和 &#39;)&#39; 的字符串，找出最长的包含有效括号的子串的长度。
+示例 1 输入: &amp;quot;(()&amp;quot; 输出: 2 解释: 最长有效括号子串为 &amp;quot;()&amp;quot;  示例 2 输入: &amp;quot;)()())&amp;quot; 输出: 4 解释: 最长有效括号子串为 &amp;quot;()()&amp;quot;  思路 遍历 1.record 记录每个符号的状态，如果能够和前面的配上对，就记录为2，否则，记录为0
+输入：) ( ( ) ( ) ) ) ( ( ( ( ( ) ) ) ) ( 记录：0 0 0 2 0 2 2 0 0 0 0 0 0 2 2 2 2 0 检查：0 1 1 1 1 1 1 0 0 1 1 1 1 1 1 1 1 0  2.</description>
+    </item>
+    
+    <item>
+      <title>正则表达式匹配</title>
+      <link>https://blog.abser.top/blog/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/</link>
+      <pubDate>Sun, 09 Dec 2018 17:06:43 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/</guid>
+      <description>问题描述 给定一个字符串 (s) 和一个字符模式 (p)。实现支持 &#39;.&#39; 和 &#39;*&#39; 的正则表达式匹配。
+&#39;.&#39; 匹配任意单个字符。 &#39;*&#39; 匹配零个或多个前面的元素。  匹配应该覆盖整个字符串 (s) ，而不是部分字符串。
+说明  s 可能为空，且只包含从 a-z 的小写字母。 p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。  示例 1 输入: s = &amp;quot;aa&amp;quot; p = &amp;quot;a&amp;quot; 输出: false 解释: &amp;quot;a&amp;quot; 无法匹配 &amp;quot;aa&amp;quot; 整个字符串。  示例 2 输入: s = &amp;quot;aa&amp;quot; p = &amp;quot;a*&amp;quot; 输出: true 解释: &#39;*&#39; 代表可匹配零个或多个前面的元素, 即可以匹配 &#39;a&#39; 。因此, 重复 &#39;a&#39; 一次, 字符串可变为 &amp;quot;aa&amp;quot;。  示例 3 输入: s = &amp;quot;ab&amp;quot; p = &amp;quot;.</description>
+    </item>
+    
+    <item>
+      <title>字符串的排列</title>
+      <link>https://blog.abser.top/blog/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97/</link>
+      <pubDate>Sun, 09 Dec 2018 17:06:03 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97/</guid>
+      <description> 问题描述 给定两个字符串 s1 和 s2，写一个函数来判断 s2 是否包含 s1 的排列。
+换句话说，第一个字符串的排列之一是第二个字符串的子串。
+示例1 输入: s1 = &amp;quot;ab&amp;quot; s2 = &amp;quot;eidbaooo&amp;quot; 输出: True 解释: s2 包含 s1 的排列之一 (&amp;quot;ba&amp;quot;).  示例2 输入: s1= &amp;quot;ab&amp;quot; s2 = &amp;quot;eidboaoo&amp;quot; 输出: False  注意：
+ 输入的字符串只包含小写字母 两个字符串的长度都在 [1, 10,000] 之间  思路 滑动窗口 实现 func checkInclusion(s1 string, s2 string) bool { n1 := len(s1) n2 := len(s2) if n1 &amp;gt; n2 { return false } h1 := 0 h2 := 0 for i := 0; i &amp;lt; n1; i++ { c1 := s1[i] - &#39;a&#39; c2 := s2[i] - &#39;a&#39; h1 += 1 &amp;lt;&amp;lt; c1 h2 += 1 &amp;lt;&amp;lt; c2 } if h1 == h2 { return true } for i := n1; i &amp;lt; n2; i++ { cb := s2[i-n1] - &#39;a&#39; ce := s2[i] - &#39;a&#39; h2 += (1 &amp;lt;&amp;lt; ce) - (1 &amp;lt;&amp;lt; cb) if h1 == h2 { return true } } return false }  </description>
+    </item>
+    
+    <item>
+      <title>两数相加</title>
+      <link>https://blog.abser.top/blog/%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</link>
+      <pubDate>Sun, 09 Dec 2018 17:05:31 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</guid>
+      <description>问题描述 给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
+如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
+您可以假设除了数字 0 之外，这两个数都不会以 0 开头。
+示例：
+输入：(2 -&amp;gt; 4 -&amp;gt; 3) + (5 -&amp;gt; 6 -&amp;gt; 4) 输出：7 -&amp;gt; 0 -&amp;gt; 8 原因：342 + 465 = 807  思路 我们使用变量来跟踪进位，并从包含最低有效位的表头开始模拟逐位相加的过程。
+图1，对两数相加方法的可视化: 342 + 465 = 807342+465=807， 每个结点都包含一个数字，并且数字按位逆序存储。
+请特别注意以下情况      测试用例  说明    l1=[0,1]l1=[0,1] l2=[0,1,2]l2=[0,1,2]   当一个列表比另一个列表长时。    l1=[]l1=[] l2=[0,1]l2=[0,1]   当一个列表为空时，即出现空列表。    l1=[9,9]l1=[9,9] l2=[1]l2=[1]   求和运算最后可能出现额外的进位，这一点很容易被遗忘      实现 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode { resPre := &amp;amp;ListNode{} cur := resPre carry := 0 for l1 !</description>
+    </item>
+    
+    <item>
+      <title>盛最多水的容器</title>
+      <link>https://blog.abser.top/blog/%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/</link>
+      <pubDate>Sun, 09 Dec 2018 17:04:59 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/</guid>
+      <description> 问题描述 给定 *n* 个非负整数 a~1~，a~2，~&amp;hellip;，a~n，~每个数代表坐标中的一个点 (i, ai) 。在坐标内画 *n* 条垂直线，垂直线 *i* 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 *x* 轴共同构成的容器可以容纳最多的水。
+说明：你不能倾斜容器，且 *n* 的值至少为 2。
+图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。
+示例 1 输入: [1,8,6,2,5,4,8,3,7] 输出: 49  思路 遍历 直接遍历每对可能出现的线段组合并找出这些情况之下的最大面积。
+双指针 两线段之间形成的区域总是会受到其中较短那条长度的限制。此外，两线段距离越远，得到的面积就越大。 在线段长度构成的数组中使用两个指针，一个放在开始，一个置于末尾。 此外，我们会使用变量 maxArea来持续存储到目前为止所获得的最大面积。 找出指针所指向的两条线段形成的区域，更新 maxArea，并将指向较短线段的指针向较长线段那端移动一步。
+实现 遍历 func maxArea(height []int) int { var maxArea int var curArea int for i := 0; i &amp;lt; len(height)-1; i++ { for j := 0; j &amp;lt; len(height); j++ { if height[i]&amp;gt;height[j] { curArea = (j-i)*height[j] }else { curArea = (j-i)*height[i] } if curArea &amp;gt; maxArea { maxArea = curArea } } } return maxArea }  双指针 func maxArea(height []int) int { maxArea := 0 for i, j := 0, len(height)-1; i &amp;lt; j; { if height[i] &amp;lt;= height[j] { curArea := height[i] * (j - i) if curArea &amp;gt; maxArea { maxArea = curArea } i++ } else { curArea := height[j] * (j - i) if curArea &amp;gt; maxArea { maxArea = curArea } j-- } } return area }  </description>
+    </item>
+    
+    <item>
+      <title>旋转图像</title>
+      <link>https://blog.abser.top/blog/%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/</link>
+      <pubDate>Sun, 09 Dec 2018 17:04:02 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/</guid>
+      <description>问题描述 给定一个 *n *× *n* 的二维矩阵表示一个图像。
+将图像顺时针旋转 90 度。
+说明 你必须在原地旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要使用另一个矩阵来旋转图像。
+示例 1 给定 matrix = [ [1,2,3], [4,5,6], [7,8,9] ], 原地旋转输入矩阵，使其变为: [ [7,4,1], [8,5,2], [9,6,3] ]  示例 2 给定 matrix = [ [ 5, 1, 9,11], [ 2, 4, 8,10], [13, 3, 6, 7], [15,14,12,16] ], 原地旋转输入矩阵，使其变为: [ [15,13, 2, 5], [14, 3, 4, 1], [12, 6, 8, 9], [16, 7,10,11] ]  思路 分治法（可能） 该题意，可以把一个四边形框四个角上的元素逐个交换，顺序调整框的大小和位置，进行操作
+数学法（？） 可以看出，旋转90度实际上是将矩阵先转置，然后进行列的交换</description>
+    </item>
+    
+    <item>
+      <title>无重复字符的最长字串</title>
+      <link>https://blog.abser.top/blog/%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%97%E4%B8%B2/</link>
+      <pubDate>Sun, 09 Dec 2018 17:03:34 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%97%E4%B8%B2/</guid>
+      <description>问题描述 给定一个字符串，找出不含有重复字符的最长子串的长度。
+示例 1 输入: &amp;quot;abcabcbb&amp;quot; 输出: 3 解释: 无重复字符的最长子串是 &amp;quot;abc&amp;quot;，其长度为 3。  示例 2 输入: &amp;quot;bbbbb&amp;quot; 输出: 1 解释: 无重复字符的最长子串是 &amp;quot;b&amp;quot;，其长度为 1。  示例 3 输入: &amp;quot;pwwkew&amp;quot; 输出: 3 解释: 无重复字符的最长子串是 &amp;quot;wke&amp;quot;，其长度为 3。 请注意，答案必须是一个子串，&amp;quot;pwke&amp;quot; 是一个子序列 而不是子串。  思路 滑动窗口 使用 整数数组用asc2码表示字符 将字符存储在当前窗口 [i,j)（最初 j=i）中。 滑动索引 j，如果它不在 整数数组标记中，继续滑动 j 向后查找 如果 s[j]在 [i,j)范围内有与 j′重复的字符， 直接跳过 [i，j′]范围内的所有元素，并将 i变为 j′+1。
+实现 滑动窗口 func lengthOfLongestSubstring(s string) int { length := len(s) num := 0 ascii := [128]int{} i := 0 for j := 0; j &amp;lt; length; j++ { tmp := ascii[s[j]] if tmp &amp;gt; i { i = tmp } tmp = j - i + 1 if tmp &amp;gt; num { num = tmp } ascii[s[j]] = j + 1 } return num }  滑动二 func lengthOfLongestSubstring(s string) int { // location[s[i]] == j 表示： // s中第i个字符串，上次出现在s的j位置，所以，在s[j+1:i]中没有s[i] // location[s[i]] == -1 表示： s[i] 在s中第一次出现 location := [256]int{} // 只有256长是因为，假定输入的字符串只有ASCII字符 for i := range location { location[i] = -1 // 先设置所有的字符都没有见过 } maxLen, left := 0, 0 for i := 0; i &amp;lt; len(s); i++ { // 说明s[i]已经在s[left:i+1]中重复了 // 并且s[i]上次出现的位置在location[s[i]] if location[s[i]] &amp;gt;= left { left = location[s[i]] + 1 // 在s[left:i+1]中去除s[i]字符及其之前的部分 } else if i+1-left &amp;gt; maxLen { // fmt.</description>
+    </item>
+    
+    <item>
+      <title>删除链表中的倒数第N个节点</title>
+      <link>https://blog.abser.top/blog/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/</link>
+      <pubDate>Sun, 09 Dec 2018 17:02:34 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/</guid>
+      <description>问题描述 给定一个链表，删除链表的倒数第 *n *个节点，并且返回链表的头结点。
+示例 1 给定一个链表: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5, 和 n = 2. 当删除了倒数第二个节点后，链表变为 1-&amp;gt;2-&amp;gt;3-&amp;gt;5.  说明 给定的 *n* 保证是有效的。
+进阶 你能尝试使用一趟扫描实现吗？
+思路 一趟扫描，通过使用两个相距定长 n 的指针，同时向后移动，当后面的指针指到链表的尾部的时候，该指针正好指向需要删除的倒数第 n 个节点
+实现 Go 版本 /** * Definition for singly-linked list. * type ListNode struct { * Val int * Next *ListNode * } */ func removeNthFromEnd(head *ListNode, n int) *ListNode { p := &amp;amp;ListNode{Val: 0, Next: head} q := p qhead := q for i := 0; i &amp;lt; n; i++ { p = p.</description>
+    </item>
+    
+    <item>
+      <title>岛屿的个数</title>
+      <link>https://blog.abser.top/blog/%E5%B2%9B%E5%B1%BF%E7%9A%84%E4%B8%AA%E6%95%B0/</link>
+      <pubDate>Sun, 09 Dec 2018 17:01:51 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E5%B2%9B%E5%B1%BF%E7%9A%84%E4%B8%AA%E6%95%B0/</guid>
+      <description> 问题描述 给定一个由 &#39;1&#39;（陆地）和 &#39;0&#39;（水）组成的的二维网格，计算岛屿的数量。一个岛被水包围，并且它是通过水平方向或垂直方向上相邻的陆地连接而成的。你可以假设网格的四个边均被水包围。
+示例 1 输入: 11110 11010 11000 00000 输出: 1  示例 2 输入: 11000 11000 00100 00011 输出: 3  思路 遍历每一个网格，如果存在，则以此为起点，向4个方向扩张，如果是岛屿&amp;rsquo;1&amp;rsquo;就置为&amp;rsquo;0&amp;rsquo;，表示这个岛屿是刚才的岛屿的一部分。最后返回 island 的个数
+实现 Go 版本 func numIslands(grid [][]byte) int { islands := 0 for i,_ := range grid { for j,_ := range grid[i]{ if grid[i][j] == &#39;1&#39; { islands++ expandIsland(grid, i, j) } } } return islands } func expandIsland(grid [][]byte, m int, n int){ if m &amp;gt;= 0 &amp;amp;&amp;amp; m &amp;lt; len(grid) &amp;amp;&amp;amp; n &amp;gt;= 0 &amp;amp;&amp;amp; n &amp;lt; len(grid[m]) &amp;amp;&amp;amp; grid[m][n] == &#39;1&#39; { grid[m][n] = &#39;0&#39; expandIsland(grid, m-1, n) expandIsland(grid, m+1, n) expandIsland(grid, m, n-1) expandIsland(grid, m, n+1) } }  </description>
+    </item>
+    
+    <item>
+      <title>环形数组循环</title>
+      <link>https://blog.abser.top/blog/%E7%8E%AF%E5%BD%A2%E6%95%B0%E7%BB%84%E5%BE%AA%E7%8E%AF/</link>
+      <pubDate>Sun, 09 Dec 2018 17:01:20 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E7%8E%AF%E5%BD%A2%E6%95%B0%E7%BB%84%E5%BE%AA%E7%8E%AF/</guid>
+      <description>问题描述 给定一组含有正整数和负整数的数组。如果某个索引中的 n 是正数的，则向前移动 n 个索引。相反，如果是负数(-n)，则向后移动 n 个索引。
+假设数组首尾相接。判断数组中是否有环。环中至少包含 2 个元素。环中的元素一律“向前”或者一律“向后”。
+注意：给定数组保证不包含元素&amp;rdquo;0&amp;rdquo;。
+示例 1 给定数组[-1, 2], 没有循环。  示例 2 给定数组 [2, -1, 1, 2, 2], 有一个循环，从索引 0 -&amp;gt; 2 -&amp;gt; 3 -&amp;gt; 0。  思路 这里的循环必须是只向前或者只向后形成循环，即一个循环中，都是正数或者负数。 根据坐标建立一对一的映射，一旦某个达到的坐标已经有映射了，说明环存在。 建立一个 v 数组，来记录访问过的数字，然后遍历原数组，如果当前数字已经访问过了，直接跳过，否则就以当前位置坐标为起始点开始查找 将当前位置在 v 数组中标记 true ，然后查找当前位置坐标加上对应的数字的新索引，由于是循环数组，所以结果可能会超出数组的长度，所以要对数组长度取余。（数字可能是负数，补上一个n，使其变为正数） 检查：如果 next 和 cur 相等，说明此时是一个数字的循环，弃掉 如果一个循环中不全是负数或正数，也要弃掉
+实现 Go 版本 func circularArrayLoop(nums []int) bool { m := make(map[int]int) n := len(nums) v := make([]bool, n) for i := 0; i &amp;lt; n; i++ { if v[i] { continue } cur := i for { v[cur] = true next := (cur + nums[cur]) % n if next &amp;lt; 0 { next += n } if next == cur || nums[next]*nums[cur] &amp;lt; 0 { break } if m[next] !</description>
+    </item>
+    
+    <item>
+      <title>搜索旋转排序数组</title>
+      <link>https://blog.abser.top/blog/%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84/</link>
+      <pubDate>Sun, 09 Dec 2018 17:00:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84/</guid>
+      <description> 问题描述 假设按照升序排序的数组在预先未知的某个点上进行了旋转。
+( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。
+搜索一个给定的目标值，如果数组中存在这个目标值，则返回它的索引，否则返回 -1 。
+你可以假设数组中不存在重复的元素。
+你的算法时间复杂度必须是 O(log n) 级别。
+示例 1 输入: nums = [4,5,6,7,0,1,2], target = 0 输出: 4  示例 2 输入: nums = [4,5,6,7,0,1,2], target = 3 输出: -1  思路 二分
+实现 二分法 func search(nums []int, target int) int { left, right := 0, len(nums) - 1 for left &amp;lt;= right { mid := (left + right) / 2 if nums[mid] == target { return mid } // 左边部分数组递增 if nums[mid] &amp;gt;= nums[left] { // target在递增数组中 if nums[left] &amp;lt;= target &amp;amp;&amp;amp; target &amp;lt; nums[mid] { right = mid - 1 } else { left = mid + 1 } } else { if nums[mid] &amp;lt; target &amp;amp;&amp;amp; target &amp;lt;= nums[right] { left = mid + 1 } else { right = mid - 1 } } } return -1 }  </description>
+    </item>
+    
+    <item>
+      <title>打家劫舍II</title>
+      <link>https://blog.abser.top/blog/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Dii/</link>
+      <pubDate>Sun, 09 Dec 2018 16:58:37 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Dii/</guid>
+      <description> 问题描述 你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都围成一圈，这意味着第一个房屋和最后一个房屋是紧挨着的。同时，相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
+给定一个代表每个房屋存放金额的非负整数数组，计算你在不触动警报装置的情况下，能够偷窃到的最高金额。
+示例 1 输入: [2,3,2] 输出: 3 解释: 你不能先偷窃 1 号房屋（金额 = 2），然后偷窃 3 号房屋（金额 = 2）, 因为他们是相邻的。  示例 2 输入: [1,2,3,1] 输出: 4 解释: 你可以先偷窃 1 号房屋（金额 = 1），然后偷窃 3 号房屋（金额 = 3）。 偷窃到的最高金额 = 1 + 3 = 4 。  思路 分两种情况讨论，数组第一个偷的情况和第一个不偷的情况
+实现 方法一 func rob(nums []int) int { switch size { case 0: return 0 case 1: return nums[0] } m := make([]int, 2) m[0] = nums[0] m[1] = max(nums[0], nums[1]) for i := 2; i &amp;lt; len(nums)-1; i++ { m = append(m, max(m[i-1], m[i-2]+nums[i])) } n := make([]int, 2) nums[0] = 0 n[0] = nums[0] n[1] = max(nums[1], nums[0]) for j := 2; j &amp;lt; len(nums); j++ { n = append(n, max(n[j-1], n[j-2]+nums[j])) } return max(m[len(nums)-2], n[len(nums)-1]) } func max(a, b int) int { if a &amp;gt; b { return a } return b }  </description>
+    </item>
+    
+    <item>
+      <title>打家劫舍III</title>
+      <link>https://blog.abser.top/blog/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Diii/</link>
+      <pubDate>Sun, 09 Dec 2018 16:58:30 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Diii/</guid>
+      <description>问题描述 在上次打劫完一条街道之后和一圈房屋后，小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为“根”。 除了“根”之外，每栋房子有且只有一个“父“房子与之相连。一番侦察之后，聪明的小偷意识到“这个地方的所有房屋的排列类似于一棵二叉树”。 如果两个直接相连的房子在同一天晚上被打劫，房屋将自动报警。
+计算在不触动警报的情况下，小偷一晚能够盗取的最高金额。
+示例 1 输入: [3,2,3,null,3,null,1] 3 / \ 2 3 \ \ 3 1 输出: 7 解释: 小偷一晚能够盗取的最高金额 = 3 + 3 + 1 = 7.  示例 2 输入: [3,4,5,1,3,null,1] 3 / \ 4 5 / \ \ 1 3 1 输出: 9 解释: 小偷一晚能够盗取的最高金额 = 4 + 5 = 9.  思路 回溯 每一个根节点讨论是否选与不选，比较左右孩子节点值之和 和 没有左右孩子节点之和，选取大的计入 这种方法重复计算了很多地方，比如要完成一个节点的计算，就得一直找左右子节点计算，消耗时间过多
+所以使用一个 map 存储已经算过的节点
+实现 回溯 func rob(root *TreeNode) int { m := make(map[*TreeNode]int) return dfs(root, m) } func dfs(root *TreeNode, m map[*TreeNode]int) int { if root == nil { return 0 } if m[root] !</description>
+    </item>
+    
+    <item>
+      <title>移动K位数字</title>
+      <link>https://blog.abser.top/blog/%E7%A7%BB%E5%8A%A8k%E4%BD%8D%E6%95%B0%E5%AD%97/</link>
+      <pubDate>Sun, 09 Dec 2018 16:57:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E7%A7%BB%E5%8A%A8k%E4%BD%8D%E6%95%B0%E5%AD%97/</guid>
+      <description>问题描述 给定一个以字符串表示的非负整数 *num*，移除这个数中的 *k *位数字，使得剩下的数字最小。
+注意:
+ *num* 的长度小于 10002 且 ≥ k。 *num* 不会包含任何前导零。  __示例 1 __ 输入: num = &amp;quot;1432219&amp;quot;, k = 3 输出: &amp;quot;1219&amp;quot; 解释: 移除掉三个数字 4, 3, 和 2 形成一个新的最小的数字 1219。  __示例 2 __ 输入: num = &amp;quot;10200&amp;quot;, k = 1 输出: &amp;quot;200&amp;quot; 解释: 移掉首位的 1 剩下的数字为 200. 注意输出不能有任何前导零。  示例__ 3 __ 输入: num = &amp;quot;10&amp;quot;, k = 2 输出: &amp;quot;0&amp;quot; 解释: 从原数字移除所有的数字，剩余为空就是0。  思路 贪心</description>
+    </item>
+    
+    <item>
+      <title>Pow(x,n)</title>
+      <link>https://blog.abser.top/blog/pow/</link>
+      <pubDate>Sun, 09 Dec 2018 16:56:56 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/pow/</guid>
+      <description>问题描述 给定一个非负整数数组，你最初位于数组的第一个位置。
+数组中的每个元素代表你在该位置可以跳跃的最大长度。
+判断你是否能够到达最后一个位置。
+示例 1 输入: [2,3,1,1,4] 输出: true 解释: 从位置 0 到 1 跳 1 步, 然后跳 3 步到达最后一个位置。  示例 2 输入: [3,2,1,0,4] 输出: false 解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。  思路 动规 假设位置i(0≤i≤A.length)i(0≤i≤A.length)能够跳跃的最大长度为dp[i]。 对于数组A = [2,3,1,1,4]， 则有： i = 0, dp[0] = A[0] + 0 = 2 i = 1, if dp[i-1] ≥ i then dp[1] = max{A[1]+1,dp[0]} else dp[1] = 0 i = 2, if dp[i-1] ≥ i then dp[2] = max{A[2]+2,dp[1]} else dp[2] = 0 类推</description>
+    </item>
+    
+    <item>
+      <title>跳跃游戏</title>
+      <link>https://blog.abser.top/blog/%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/</link>
+      <pubDate>Sun, 09 Dec 2018 16:54:49 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/</guid>
+      <description>问题描述 给定一个非负整数数组，你最初位于数组的第一个位置。
+数组中的每个元素代表你在该位置可以跳跃的最大长度。
+判断你是否能够到达最后一个位置。
+示例 1 输入: [2,3,1,1,4] 输出: true 解释: 从位置 0 到 1 跳 1 步, 然后跳 3 步到达最后一个位置。  示例 2 输入: [3,2,1,0,4] 输出: false 解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。  思路 动规 假设位置i(0≤i≤A.length)i(0≤i≤A.length)能够跳跃的最大长度为dp[i]。 对于数组A = [2,3,1,1,4]， 则有： i = 0, dp[0] = A[0] + 0 = 2 i = 1, if dp[i-1] ≥ i then dp[1] = max{A[1]+1,dp[0]} else dp[1] = 0 i = 2, if dp[i-1] ≥ i then dp[2] = max{A[2]+2,dp[1]} else dp[2] = 0 类推</description>
+    </item>
+    
+    <item>
+      <title>Z字形变换</title>
+      <link>https://blog.abser.top/blog/z%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/</link>
+      <pubDate>Sun, 09 Dec 2018 16:52:40 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/z%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/</guid>
+      <description>问题描述 将字符串 &amp;quot;PAYPALISHIRING&amp;quot; 以Z字形排列成给定的行数：
+P A H N A P L S I I G Y I R  之后从左往右，逐行读取字符：&amp;quot;PAHNAPLSIIGYIR&amp;quot;
+实现一个将字符串进行指定行数变换的函数:
+string convert(string s, int numRows);  示例 1 输入: s = &amp;quot;PAYPALISHIRING&amp;quot;, numRows = 3 输出: &amp;quot;PAHNAPLSIIGYIR&amp;quot;  示例 2 输入: s = &amp;quot;PAYPALISHIRING&amp;quot;, numRows = 4 输出: &amp;quot;PINALSIGYAHRPI&amp;quot; 解释: P I N A L S I G Y A H R P I  思路 方法一 按照与逐行读取 Z 字形图案相同的顺序访问字符串。 首先访问 行 0中的所有字符，接着访问 行 1，然后 行 2，依此类推&amp;hellip; 对于所有整数 k， * 行 0 中的字符位于索引k(2⋅numRows−2) 处; * 行 numRows−1 中的字符位于索引 k(2⋅numRows−2)+numRows−1 处; * 内部的行 i 中的字符位于索引k(2⋅numRows−2)+i 以及 (k+1)(2⋅numRows−2)−i 处;</description>
+    </item>
+    
+    <item>
+      <title>最小路径和</title>
+      <link>https://blog.abser.top/blog/%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</link>
+      <pubDate>Sun, 09 Dec 2018 16:51:58 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</guid>
+      <description> 问题描述 给定一个包含非负整数的 *m* x *n* 网格，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。
+说明：每次只能向下或者向右移动一步。
+示例 输入: [ [1,3,1], [1,5,1], [4,2,1] ] 输出: 7 解释: 因为路径 1→3→1→1→1 的总和最小。  实现 func minPathSum(grid [][]int) int { m := len(grid) n := len(grid[0]) for i,rows := range grid { for j := range rows { if i == 0 { if j != 0 { grid[i][j] += grid[i][j - 1] } } else if j == 0 { grid[i][j] += grid[i-1][j] } else { if grid[i][j-1] &amp;lt; grid[i-1][j] { grid[i][j] += grid[i][j-1] } else { grid[i][j] += grid[i-1][j] } } } } return grid[m-1][n-1] }  </description>
+    </item>
+    
+    <item>
+      <title>最长回文子串</title>
+      <link>https://blog.abser.top/blog/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</link>
+      <pubDate>Sun, 09 Dec 2018 16:51:09 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</guid>
+      <description> 问题描述 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000。
+示例 1 输入: &amp;quot;babad&amp;quot; 输出: &amp;quot;bab&amp;quot; 注意: &amp;quot;aba&amp;quot;也是一个有效答案。  示例 2 输入: &amp;quot;cbbd&amp;quot; 输出: &amp;quot;bb&amp;quot;  思路 回文中心的两侧互为镜像。回文可以从它的中心展开，并且只有2n-1个这样的中心。
+实现 func longestPalindrome(s string) string { lenS := len(s) if lenS &amp;lt;= 1 { return s } minStart, maxLen, i := 0, 1, 0 for i &amp;lt; lenS { if lenS-i &amp;lt;= maxLen/2 { break } j, k := i, i for k &amp;lt; lenS-1 &amp;amp;&amp;amp; s[k] == s[k+1] { k += 1 } i = k + 1 for k &amp;lt; lenS-1 &amp;amp;&amp;amp; j &amp;gt; 0 &amp;amp;&amp;amp; s[k+1] == s[j-1] { k, j = k+1, j-1 } if k-j+1 &amp;gt; maxLen { minStart, maxLen = j, k-j+1 } } return s[minStart : minStart+maxLen] }  </description>
+    </item>
+    
+    <item>
+      <title>字符串转整数 Atoi</title>
+      <link>https://blog.abser.top/blog/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B4%E6%95%B0-atoi/</link>
+      <pubDate>Sun, 09 Dec 2018 16:50:05 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B4%E6%95%B0-atoi/</guid>
+      <description>问题描述 请你来实现一个 atoi 函数，使其能将字符串转换成整数。
+首先，该函数会根据需要丢弃无用的开头空格字符，直到寻找到第一个非空格的字符为止。
+当我们寻找到的第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字组合起来，作为该整数的正负号；假如第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成整数。
+该字符串除了有效的整数部分之后也可能会存在多余的字符，这些字符可以被忽略，它们对于函数不应该造成影响。
+注意：假如该字符串中的第一个非空格字符不是一个有效整数字符、字符串为空或字符串仅包含空白字符时，则你的函数不需要进行转换。
+在任何情况下，若函数不能进行有效的转换时，请返回 0。
+说明：
+假设我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 [−2^31^, 2^31 ^− 1]。如果数值超过这个范围，qing返回 INT_MAX (2^31 ^− 1) 或 INT_MIN (−2^31^) 。
+示例 1 输入: &amp;quot;42&amp;quot; 输出: 42  示例 2 输入: &amp;quot; -42&amp;quot; 输出: -42 解释: 第一个非空白字符为 &#39;-&#39;, 它是一个负号。 我们尽可能将负号与后面所有连续出现的数字组合起来，最后得到 -42 。  示例 3 输入: &amp;quot;4193 with words&amp;quot; 输出: 4193 解释: 转换截止于数字 &#39;3&#39; ，因为它的下一个字符不为数字。  示例 4 输入: &amp;quot;words and 987&amp;quot; 输出: 0 解释: 第一个非空字符是 &#39;w&#39;, 但它不是数字或正、负号。 因此无法执行有效的转换。  示例 5 输入: &amp;quot;-91283472332&amp;quot; 输出: -2147483648 解释: 数字 &amp;quot;-91283472332&amp;quot; 超过 32 位有符号整数范围。 因此返回 INT_MIN (−231) 。  思路 注意越界即可</description>
+    </item>
+    
+    <item>
+      <title>从排序数组中删除重复项</title>
+      <link>https://blog.abser.top/blog/%E4%BB%8E%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D%E9%A1%B9/</link>
+      <pubDate>Sat, 08 Dec 2018 12:53:52 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E4%BB%8E%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D%E9%A1%B9/</guid>
+      <description>问题描述 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
+不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。
+示例 1 给定数组 nums = [1,1,2], 函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 你不需要考虑数组中超出新长度后面的元素。  示例 2 给定 nums = [0,0,1,1,1,2,2,3,3,4], 函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。 你不需要考虑数组中超出新长度后面的元素。  实现 C++ 版本 使用了 stl 库中的方法 unique 和 erase，最后使用 size 方法返回长度
+unique 的是实现原理是，比较两个相邻的元素，如果元素相同则将它移到最后去，并且最后返回一个非冗余元素的迭代器
+然后用 erase 删除冗余的元素。
+static bool init = []() { ios::sync_with_stdio(false); cin.tie(nullptr); return true; }(); class Solution { public: int removeDuplicates(vector&amp;lt;int&amp;gt;&amp;amp; nums) { nums.</description>
+    </item>
+    
+    <item>
+      <title>买卖股票的最佳时机-II</title>
+      <link>https://blog.abser.top/blog/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA-ii/</link>
+      <pubDate>Sat, 08 Dec 2018 12:43:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA-ii/</guid>
+      <description> 问题描述 给定一个数组，它的第 *i* 个元素是一支给定股票第 *i* 天的价格。
+设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。
+注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
+示例 1 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。  示例 2 输入: [1,2,3,4,5] 输出: 4 解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。 注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。 因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。  示例 3 输入: [7,6,4,3,1] 输出: 0 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。  实现 Go 版本 func maxProfit(prices []int) int { var max int for i := 1; i &amp;lt; len(prices); i++ { if prices[i] &amp;gt; prices[i-1] { max += prices[i] - prices[i-1] } } return max }  Go 测试 </description>
+    </item>
+    
+    <item>
+      <title>位1的个数</title>
+      <link>https://blog.abser.top/blog/%E4%BD%8D1%E7%9A%84%E4%B8%AA%E6%95%B0/</link>
+      <pubDate>Sat, 08 Dec 2018 12:43:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E4%BD%8D1%E7%9A%84%E4%B8%AA%E6%95%B0/</guid>
+      <description>问题描述 编写一个函数，输入是一个无符号整数，返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为汉明重量）。
+示例 1 输入: 11 输出: 3 解释: 整数 11 的二进制表示为 00000000000000000000000000001011  示例 2 输入: 128 输出: 1 解释: 整数 128 的二进制表示为 00000000000000000000000010000000  解法 bits.OnesCount 注意到 Go 的 bits 包提供了 OnesCount 方法，即返回参数的二进制表示中 1 的个数
+func hanmingWeight(n uint) int { return bits.OnesCount(n) }  普通计数 按位与操作(&amp;amp;)，按二进制位进行“与”运算，运算规则： 0 &amp;amp; 0 = 0; 0 &amp;amp; 1 = 0; 1 &amp;amp; 0 = 0; 1 &amp;amp; 1 = 1;</description>
+    </item>
+    
+    <item>
+      <title>分发饼干</title>
+      <link>https://blog.abser.top/blog/%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/</link>
+      <pubDate>Sat, 08 Dec 2018 12:43:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/</guid>
+      <description> 问题描述 假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。对每个孩子 i ，都有一个胃口值 g~i ，~这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j ，都有一个尺寸 s~j ~。如果 s~j~ &amp;gt;= g~i ~，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。
+注意：
+你可以假设胃口值为正。 一个小朋友最多只能拥有一块饼干。
+示例 1 输入: [1,2,3], [1,1] 输出: 1 解释: 你有三个孩子和两块小饼干，3个孩子的胃口值分别是：1,2,3。 虽然你有两块小饼干，由于他们的尺寸都是1，你只能让胃口值是1的孩子满足。 所以你应该输出1。  示例 2 输入: [1,2], [1,2,3] 输出: 2 解释: 你有两个孩子和三块小饼干，2个孩子的胃口值分别是1,2。 你拥有的饼干数量和尺寸都足以让所有孩子满足。 所以你应该输出2.  实现 import ( &amp;quot;sort&amp;quot; ) func findContentChildren(g []int, s []int) int { sort.Ints(g) sort.Ints(s) var i, j, res int for i &amp;lt; len(g) &amp;amp;&amp;amp; j &amp;lt; len(s) { if g[i] &amp;lt;= s[j] { res++ i++ } j++ } return res }  </description>
+    </item>
+    
+    <item>
+      <title>删除链表中的节点</title>
+      <link>https://blog.abser.top/blog/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/</link>
+      <pubDate>Sat, 08 Dec 2018 12:43:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/</guid>
+      <description>问题描述 请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。
+现有一个链表 &amp;ndash; head = [4,5,1,9]，它可以表示为:
+ 4 -&amp;gt; 5 -&amp;gt; 1 -&amp;gt; 9  示例 1 输入: head = [4,5,1,9], node = 5 输出: [4,1,9] 解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&amp;gt; 1 -&amp;gt; 9.  示例 2 输入: head = [4,5,1,9], node = 1 输出: [4,5,9] 解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&amp;gt; 5 -&amp;gt; 9.  思路1 &amp;quot;Dummy node&amp;quot; 节点 能大大简化链接列表问题。但是该题是一个单向链表
+故不能使用删除目标的前驱节点的后继改为目标节点的后继，思考一下，可以把要删除的节点直接赋值后继节点值然后直接删除其后继节点，可以达到相同的目的。
+例子：ABCDE，删除C，我们就先用D占C的位置，变成ABDDE，然后把后面那个D删除，就可以得到ABDE
+思路2 直接把给定的节点B替换成其后的节点C
+实现 Go 版本1 /** * Definition for singly-linked list.</description>
+    </item>
+    
+    <item>
+      <title>打家劫舍</title>
+      <link>https://blog.abser.top/blog/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</link>
+      <pubDate>Sat, 08 Dec 2018 12:43:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</guid>
+      <description>问题描述 你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
+给定一个代表每个房屋存放金额的非负整数数组，计算你在不触动警报装置的情况下，能够偷窃到的最高金额。
+示例 1 输入: [1,2,3,1] 输出: 4 解释: 偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。 偷窃到的最高金额 = 1 + 3 = 4 。  示例 2 输入: [2,7,9,3,1] 输出: 12 解释: 偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。 偷窃到的最高金额 = 2 + 9 + 1 = 12 。  思路 先分析，原子问题就是这个房间是否要偷。 两种情况，（设收益f（n）为前n个房间的最高收益） 1.</description>
+    </item>
+    
+    <item>
+      <title>旋转数组</title>
+      <link>https://blog.abser.top/blog/%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84/</link>
+      <pubDate>Sat, 08 Dec 2018 12:43:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84/</guid>
+      <description> 问题描述 给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
+示例 1 输入: [1,2,3,4,5,6,7] 和 k = 3 输出: [5,6,7,1,2,3,4] 解释: 向右旋转 1 步: [7,1,2,3,4,5,6] 向右旋转 2 步: [6,7,1,2,3,4,5] 向右旋转 3 步: [5,6,7,1,2,3,4]  示例 2 输入: [-1,-100,3,99] 和 k = 2 输出: [3,99,-1,-100] 解释: 向右旋转 1 步: [99,-1,-100,3] 向右旋转 2 步: [3,99,-1,-100]  思路 对应的两数互换即可
+实现 Go 版本 func rotate(nums []int, k int) { if len(nums) &amp;lt;= 1 || k &amp;lt;= 0 || k%len(nums) == 0 { return } length := len(nums) k = k % length tmp := nums[0] index := 0 start := 0 for i := 0; i &amp;lt; length; i++ { index = (index + k) % length tmp, nums[index] = nums[index], tmp if start == index { start += 1 index = start tmp = nums[start] } } return }  </description>
+    </item>
+    
+    <item>
+      <title>求众数</title>
+      <link>https://blog.abser.top/blog/%E6%B1%82%E4%BC%97%E6%95%B0/</link>
+      <pubDate>Sat, 08 Dec 2018 12:43:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%B1%82%E4%BC%97%E6%95%B0/</guid>
+      <description> 问题描述 给定一个大小为 *n *的数组，找到其中的众数。众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
+你可以假设数组是非空的，并且给定的数组总是存在众数。
+示例 1 输入: [3,2,3] 输出: 3  示例 2 输入: [2,2,1,1,1,2,2] 输出: 2  实现 Go 版本 func majorityElement(nums []int) int { standard := len(nums)/2 record := make(map[int]int) for i := 0; i &amp;lt; len(nums); i++{ record[nums[i]]++ if record[nums[i]] &amp;gt; standard{ return nums[i] } } return 0 }  </description>
+    </item>
+    
+    <item>
+      <title>长度最小的子数组</title>
+      <link>https://blog.abser.top/blog/%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/</link>
+      <pubDate>Sat, 08 Dec 2018 12:43:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/</guid>
+      <description> 问题描述 给定一个含有 n 个正整数的数组和一个正整数 s ，找出该数组中满足其和 ≥ s 的长度最小的连续子数组。如果不存在符合条件的连续子数组，返回 0。
+示例  输入: s = 7, nums = [2,3,1,2,4,3] 输出: 2 解释: 子数组 [4,3] 是该条件下的长度最小的连续子数组。  思路 使用一个可以扩张收缩的窗口来实现 窗口使用两个索引 l 和 r ，相当与一个滑块，滑块包含 nums[l&amp;hellip;r] 这些元素，如果 nums[l..r] 的和小于目标值 s，那么 r 向后移一位，再次比较，直到大于目标值 s 之后，l 向前移动一位，缩小数组的长度。 遍历直到 right 到达数组末端。
+实现 Go 版本 func minSubArrayLen(s int, nums []int) int { n := len(nums) result := n + 1 sum := 0 l, r := 0, -1 for l &amp;lt; n { if r+1 &amp;lt; n &amp;amp;&amp;amp; sum &amp;lt; s { r++ sum += nums[r] } else { sum -= nums[l] l++ } if sum &amp;gt;= s { if r-l+1 &amp;lt; result { result = r - l + 1 } } } if result == n+1 { result = 0 } return result }  </description>
+    </item>
+    
+    <item>
+      <title>到最近的人的最大距离</title>
+      <link>https://blog.abser.top/blog/%E5%88%B0%E6%9C%80%E8%BF%91%E7%9A%84%E4%BA%BA%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%9D%E7%A6%BB/</link>
+      <pubDate>Sat, 08 Dec 2018 12:41:53 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E5%88%B0%E6%9C%80%E8%BF%91%E7%9A%84%E4%BA%BA%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%9D%E7%A6%BB/</guid>
+      <description> 问题描述 在一排座位（ seats）中，1 代表有人坐在座位上，0 代表座位上是空的。
+至少有一个空座位，且至少有一人坐在座位上。
+亚历克斯希望坐在一个能够使他与离他最近的人之间的距离达到最大化的座位上。
+返回他到离他最近的人的最大距离。
+示例 1 输入：[1,0,0,0,1,0,1] 输出：2 解释： 如果亚历克斯坐在第二个空位（seats[2]）上，他到离他最近的人的距离为 2 。 如果亚历克斯坐在其它任何一个空位上，他到离他最近的人的距离为 1 。 因此，他到离他最近的人的最大距离是 2  示例 2 输入：[1,0,0,0] 输出：3 解释： 如果亚历克斯坐在最后一个座位上，他离最近的人有 3 个座位远。 这是可能的最大距离，所以答案是 3 。  思路 考虑三种情况，根据 0 个数来计算，最左边或最右边有最多的连续 0 ，那么结果就是相应 0 的个数，如果连续 0 在中间，考虑到连续 0 数量的奇偶，加上 1 再整除 2 。
+实现 Go 版本 func maxDistToClosest(seats []int) int { maxDist, cnt := 0, 0 for i := 0; i &amp;lt; len(seats) &amp;amp;&amp;amp; seats[i] == 0; i++ { cnt++ } maxDist = cnt for i := 0; i &amp;lt; len(seats); i++ { if seats[i] == 0 { cnt++ } else { if maxDist &amp;lt; (cnt+1)/2 { maxDist = (cnt + 1) / 2 } cnt = 0 } } if maxDist &amp;lt; cnt { maxDist = cnt } return maxDist }  </description>
+    </item>
+    
+    <item>
+      <title>有效的括号</title>
+      <link>https://blog.abser.top/blog/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</link>
+      <pubDate>Sat, 08 Dec 2018 12:41:16 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</guid>
+      <description>问题描述 给定一个只包括 &#39;(&#39;，&#39;)&#39;，&#39;{&#39;，&#39;}&#39;，&#39;[&#39;，&#39;]&#39; 的字符串，判断字符串是否有效。
+有效字符串需满足：
+ 左括号必须用相同类型的右括号闭合。 左括号必须以正确的顺序闭合。  注意空字符串可被认为是有效字符串。
+示例 1 输入: &amp;quot;()&amp;quot; 输出: true  示例 2 输入: &amp;quot;()[]{}&amp;quot; 输出: true  示例 3 输入: &amp;quot;(]&amp;quot; 输出: false  示例 4 输入: &amp;quot;([)]&amp;quot; 输出: false  示例 5 输入: &amp;quot;{[]}&amp;quot; 输出: true  思路 初始化栈 stack 一次处理表达式的每个括号，遍历给定的 string 如果遇到左括号，推到栈上稍后处理它， 遇到一个右括号，检查栈顶的元素。如果栈顶的元素是一个相同类型的左括号，则从栈中弹出并继续处理。 否则返回 false 最后检查栈中是否有元素，可以判断是否无效
+实现 栈方法 func isValid(s string) bool { stack := make([]byte, 0) config := map[byte]byte{ &#39;)&#39;: &#39;(&#39;, &#39;}&#39;: &#39;{&#39;, &#39;]&#39;: &#39;[&#39;, } for i := 0; i &amp;lt; len(s); i++ { b := s[i] if config[b] !</description>
+    </item>
+    
+    <item>
+      <title>两数之和</title>
+      <link>https://blog.abser.top/blog/%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</link>
+      <pubDate>Sat, 08 Dec 2018 12:40:07 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</guid>
+      <description> 问题描述 给定一个整数数列，找出其中和为特定值的那两个数。
+你可以假设每个输入都只会有一种答案，同样的元素不能被重用。
+示例 1 给定 nums = [2, 7, 11, 15], target = 9 因为 nums[0] + nums[1] = 2 + 7 = 9 所以返回 [0, 1]  思路 1.遍历每个元素 x，并查找是否存在一个值与 target−x相等的目标元素。 2.在进行迭代并将元素插入到表中的同时，检查表中是否已经存在当前元素所对应的目标元素。如果它存在立即将其返回
+实现 暴力法 哈希法 func twoSum(nums []int, target int) []int { m := make(map[int]int) for i := 0; i &amp;lt; len(nums); i++ { another := target - nums[i] if _, ok := m[another]; ok { return []int{m[another], i} } m[nums[i]] = i } return nil }  </description>
+    </item>
+    
+    <item>
+      <title>设计链表</title>
+      <link>https://blog.abser.top/blog/%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Fri, 07 Dec 2018 11:21:45 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/</guid>
+      <description>问题描述 设计链表的实现。您可以选择使用单链表或双链表。单链表中的节点应该具有两个属性：val 和 next。val 是当前节点的值，next 是指向下一个节点的指针/引用。如果要使用双向链表，则还需要一个属性 prev 以指示链表中的上一个节点。假设链表中的所有节点都是 0-index 的。
+在链表类中实现这些功能：
+ get(index)：获取链表中第 index 个节点的值。如果索引无效，则返回-1。 addAtHead(val)：在链表的第一个元素之前添加一个值为 val 的节点。插入后，新节点将成为链表的第一个节点。 addAtTail(val)：将值为 val 的节点追加到链表的最后一个元素。 addAtIndex(index,val)：在链表中的第 index 个节点之前添加值为 val 的节点。如果 index 等于链表的长度，则该节点将附加到链表的末尾。如果 index 大于链表长度，则不会插入节点。 deleteAtIndex(index)：如果索引 index 有效，则删除链表中的第 index 个节点。  示例 MyLinkedList linkedList = new MyLinkedList(); linkedList.addAtHead(1); linkedList.addAtTail(3); linkedList.addAtIndex(1,2); //链表变为1-&amp;gt; 2-&amp;gt; 3 linkedList.get(1); //返回2 linkedList.deleteAtIndex(1); //现在链表是1-&amp;gt; 3 linkedList.get(1); //返回3  提示  所有值都在 [1, 1000] 之内。 操作次数将在 [1, 1000] 之内。 请不要使用内置的 LinkedList 库。  思路 实现很简单，ac有很多坑</description>
+    </item>
+    
+    <item>
+      <title>回文数</title>
+      <link>https://blog.abser.top/blog/%E5%9B%9E%E6%96%87%E6%95%B0/</link>
+      <pubDate>Wed, 28 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E5%9B%9E%E6%96%87%E6%95%B0/</guid>
+      <description>问题描述 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
+示例 1 输入: 121 输出: true  示例 2 输入: -121 输出: false 解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。  示例 3 输入: 10 输出: false 解释: 从右向左读, 为 01 。因此它不是一个回文数。  进阶:
+你能不将整数转为字符串来解决这个问题吗？
+思路 将数字一半反转，然后将反转后的数字与原始数字另一半进行比较，如果它们是相同的，那么这个数字就是回文。  例如，输入 1221，我们可以将数字“1221”的后半部分从“21”反转为“12”，并将其与前半部分“12”进行比较即可。 负数不是回文。
+实现 func isPalindrome(x int) bool { if x &amp;lt; 0 { return false } if (x &amp;lt; 10) { return true } p, k := 0, x for k!</description>
+    </item>
+    
+  </channel>
+</rss>

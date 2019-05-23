@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>TokenBucket - Wound:Abser&#39;s Blog</title>
+<meta name="description" content="一个微服务限流的算法">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=1">
+  <link rel="manifest" href="/favicon/site.webmanifest?v=1">
+  
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg?v=1" color="#ffffff">
+    <link rel="shortcut icon" href="/favicon/favicon.ico?v=1">
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml?v=1">
+  
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+
+  <meta name="generator" content="Hugo 0.55.6" />
+  
+<meta itemprop="name" content="TokenBucket">
+<meta itemprop="description" content="一个微服务限流的算法">
+
+
+<meta itemprop="datePublished" content="2018-12-19T17:38:01&#43;08:00" />
+<meta itemprop="dateModified" content="2018-12-19T17:38:01&#43;08:00" />
+<meta itemprop="wordCount" content="56">
+
+
+
+<meta itemprop="keywords" content="Algorithm,ratelimit," />
+
+  <meta property="og:title" content="TokenBucket" />
+<meta property="og:description" content="一个微服务限流的算法" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.abser.top/blog/tokenbucket/" />
+<meta property="article:published_time" content="2018-12-19T17:38:01&#43;08:00"/>
+<meta property="article:modified_time" content="2018-12-19T17:38:01&#43;08:00"/>
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="TokenBucket"/>
+<meta name="twitter:description" content="一个微服务限流的算法"/>
+<meta name="twitter:site" content="@example"/>
+
+  
+
+  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+  
+    
+      <link rel="stylesheet" href="/css/normalize.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+      <link rel="stylesheet" href="/css/main.min.css">
+      <link rel="stylesheet" href="/css/add-on.css">
+    
+  
+  
+</head>
+
+  <body>
+    
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/">
+        
+          
+            Blog
+          
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu">
+      
+        <a href="/" class="link"><i class="fas fa-home">&nbsp;</i>Home</a>
+      
+        <a href="/about/" class="link"><i class="far fa-id-card">&nbsp;</i>About</a>
+      
+        <a href="/categories/" class="link"><i class="fas fa-sitemap">&nbsp;</i>Categories</a>
+      
+        <a href="/tags/" class="link"><i class="far fa-newspaper">&nbsp;</i>Tag</a>
+      
+      <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      
+
+    </menu>
+    
+
+    <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="lang-toggle" lang="en"><span class="flag-icon flag-icon-en" alt="en"></span></a>
+    <a href="#site-nav" class="nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="lang-menu" class="flyout-menu">
+  <a href="#" lang="en" class="active"><span class="flag-icon flag-icon-en" alt="en"></span></a>
+  
+    
+      
+    
+      
+        <a href="/ch" lang="ch" class="no-lang"><span class="flag-icon flag-icon-ch" alt="ch"></span></a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu">
+      <h1>Share Post</h1>
+      
+
+
+
+  
+    <a href="//twitter.com/share?url=&amp;text=&amp" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//reddit.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=&amp;title=" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.stumbleupon.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn stumbleupon">
+          <i class="fab fa-stumbleupon"></i><p>&nbsp;StumbleUpon</p>
+        </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=&amp;description=" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by &amp;body=" target="_blank" class="share-btn email">
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro">
+  <a href="/"><img src="/img/avator/logo.png" class="hexagon" width="100" alt="abser" /></a>
+  <header>
+    <h1>Abser 杨鼎睿</h1>
+  </header>
+  <main>
+    <p>A PUNK Hacker,Artist.</p>
+  </main>
+  
+    <footer>
+      <ul class="social-icons">
+        
+
+        <li><a href="//github.com/yhyddr" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="weixin://contacts/profile/abser9216" target="_blank" rel="noopener" title="WeChat" class="fab fa-weixin"></a></li>
+<li><a href="//wpa.qq.com/msgrd?v=3&amp;uin=349037616&amp;site=qq&amp;menu=yes" target="_blank" rel="noopener" title="QQ" class="fab fa-qq"></a></li>
+
+
+<li><a href="//twitter.com/example" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+<li><a href="//telegram.me/example" target="_blank" rel="noopener" title="telegram" class="fab fa-telegram"></a></li>
+
+
+
+
+<li><a href="mailto:abserari@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        <article class="post">
+  <header>
+  <div class="title">
+    
+        <h2><a href="/blog/tokenbucket/">TokenBucket</a></h2>
+    
+    
+        <p>一个微服务限流的算法</p>
+    
+</div>
+  <div class="meta">
+    <time class="published" datetime="2018-12-19 17:38:01 &#43;0800 CST">
+      December 19, 2018
+    </time>
+    <span class="author">Abser</span>
+    
+        <p>1 minute read</p>
+    
+  </div>
+</header>
+
+  <section id="social-share">
+    
+
+
+
+  
+    <a href="//twitter.com/share?url=&amp;text=&amp" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//reddit.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=&amp;title=" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.stumbleupon.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn stumbleupon">
+          <i class="fab fa-stumbleupon"></i><p>&nbsp;StumbleUpon</p>
+        </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=&amp;description=" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by &amp;body=" target="_blank" class="share-btn email">
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+  </section>
+  
+<a href="/blog/tokenbucket/" class="image featured">
+  <img src="/img/2018/12/pic02.jpg" alt="xixi">
+</a>
+
+
+  <div class="content">
+    
+
+<h1 id="tokenbucket">TokenBucket</h1>
+
+<h2 id="规则">规则</h2>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2018/jpeg/176280/1545212178266-d31f3e97-98a4-4715-b6b9-80ee9b9a16c6.jpeg" alt="TokenBucket.jpg | center | 691x436" /></p>
+
+<ol>
+<li>每秒会有 <code>Limit</code>个令牌放入桶中，或者说，每过 <code>1/Limit</code> 秒桶中增加一个令牌</li>
+<li>桶中最多存放 <code>burst</code> 个令牌，如果桶满了，新放入的令牌会被丢弃</li>
+<li>当一个 <code>n</code> 单元的数据包到达时，消耗 <code>n</code> 个令牌，然后发送该数据包</li>
+<li>如果桶中可用令牌小于 <code>n</code>，则该数据包将被缓存或丢弃</li>
+</ol>
+
+<h2 id="令牌桶算法">令牌桶算法</h2>
+
+<p>令牌桶算法是网络流量整形（Traffic Shaping）和速率限制（Rate Limiting）中最常使用的一种算法。典型情况下，令牌桶算法用来控制发送到网络上的数据的数目，并允许突发数据的发送。</p>
+
+<h2 id="ratelimiter中的令牌桶算法">RateLimiter中的令牌桶算法</h2>
+
+<h3 id="简介">简介</h3>
+
+<p>该包基于令牌桶算法(Token Bucket)来完成限流,非常易于使用.RateLimiter经常用于限制对一些物理资源或者逻辑资源的访问速率.它支持三种方式,：
+·<code>AllowN()</code>是如果拿不到立刻返回。
+·<code>WaitN()</code>是暂时排队，等到足够的令牌再出发，中途可能因为context的cancel而cancel，同时归还占位。
+·<code>ReserveN()</code>是直接出发，但是前人挖坑后人填，下一次请求将为此付出代价，一直等到令牌亏空补上，并且桶中有足够本次请求使用的令牌为止。</p>
+
+<h3 id="工作实例">工作实例</h3>
+
+<p>假设正在工作的一个<code>RateLimiter</code></p>
+
+<h4 id="allow和wait">allow和wait</h4>
+
+<p>对一个每秒产生一个令牌的<code>RateLimiter</code>,每有一个没有使用令牌的一秒,我们就将<code>tokens</code>加 1 ,如果<code>RateLimiter</code>在 10 秒都没有使用,则<code>tokens</code>变成10.0.这个时候,一个请求到来并请求三个令牌,我们将从<code>RateLimiter</code>中的令牌为其服务,<code>tokens</code>变为7.0.这个请求之后立马又有一个请求到来并请求10个令牌,我们将从<code>RateLimiter</code>剩余的 7 个令牌给这个请求,剩下还需要三个令牌,我们将从<code>RateLimiter</code>新产生的令牌中获取.我们已经知道,<code>RateLimiter</code>每秒新产生 1 个令牌,就是说上面这个请求还需要的 3 个令牌就要求其等待 3 秒.</p>
+
+<h4 id="reserve">reserve</h4>
+
+<p>想象一个<code>RateLimiter</code>每秒产生一个令牌,现在完全没有使用(处于初始状态),如果一个昂贵的请求要求 100 个令牌.如果我们选择让这个请求等待100秒再允许其执行,这显然很荒谬.我们为什么什么也不做而只是傻傻的等待100秒,一个更好的做法是允许这个请求立即执行(和<code>allow</code>没有区别),然后将随后到来的请求推迟到正确的时间点.这种策略,我们允许这个昂贵的任务立即执行,并将随后到来的请求推迟100秒.这种策略就是让任务的执行和等待同时进行.</p>
+
+<h4 id="关于timetoact">关于timeToAct</h4>
+
+<p>一个重要的结论:<code>RateLimiter</code>不会记最后一个请求,而是即下一个请求允许执行的时间.这也可以很直白的告诉我们到达下一个调度时间点的时间间隔.然后定一个一段时间未使用的<code>Ratelimiter</code>也很简单:下一个调度时间点已经过去,这个时间点和现在时间的差就是<code>Ratelimiter</code>多久没有被使用,我们会将这一段时间翻译成<code>tokens</code>.所有,如果每秒钟产生一个令牌(<code>Limit==1</code>),并且正好每秒来一个请求,那么<code>tokens</code>就不会增长.</p>
+
+<h4 id="burst">burst</h4>
+
+<p><code>RateLimiter</code>有一个桶容量，当请求大于这个桶容量时，直接丢弃。</p>
+
+<h3 id="链接">链接</h3>
+
+<h4 id="golang实现ratelimiter源码导航-https-github-com-golang-time-blob-master-rate-rate-go">·__ __<a href="https://github.com/golang/time/blob/master/rate/rate.go">Golang实现RateLimiter源码导航</a></h4>
+
+<h4 id="ratelimiter语雀阅读-https-www-yuque-com-hx8m0t-go-code-ko1zq4">· <a href="https://www.yuque.com/hx8m0t/go-code/ko1zq4">RateLimiter语雀阅读</a></h4>
+
+  </div>
+  <footer>
+    <ul class="stats">
+  
+    
+    
+      <li class="categories">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://blog.abser.top/categories/learn">learn</a></li>
+          
+        </ul>
+      </li>
+    
+  
+  
+    
+    
+      <li class="tags">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://blog.abser.top/tags/algorithm">Algorithm</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://blog.abser.top/tags/ratelimit">ratelimit</a></li>
+          
+        </ul>
+      </li>
+    
+  
+</ul>
+
+  </footer>
+</article>
+<article class="post">
+  
+    <article class="post">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "blog-abser-top" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </article>
+
+
+</article>
+<div class="pagination">
+  
+    <a href="/blog/produce-consume/" class="button big previous"><i class="fas fa-angle-left"></i> Produce Consume</a>
+  
+  
+    <a href="/blog/%E4%BD%BF%E7%94%A8go%E8%BF%9B%E8%A1%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E7%9A%84mysql-docker%E5%AE%B9%E5%99%A8/" class="button big next">使用Go进行集成测试的MySQL Docker容器 <i class="fas fa-angle-right"></i></a>
+  
+</div>
+
+
+      </main>
+      <section id="site-sidebar">
+  <section id="recent-posts">
+    <header>
+      <h1>Recent posts</h1>
+    </header>
+    
+    <article class="mini-post">
+      <section>
+        
+<a href="/blog/bytes%E5%8C%85%E9%98%85%E8%AF%BB/" class="image featured">
+  <img src="/img/2019/03/1.jpg" alt="">
+</a>
+
+
+      </section>
+      <header>
+        <h1><a href="/blog/bytes%E5%8C%85%E9%98%85%E8%AF%BB/">Bytes包阅读</a></h1>
+        <time class="published" datetime="">March 19, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+
+      </section>
+      <header>
+        <h1><a href="/blog/studycoding/">Studycoding</a></h1>
+        <time class="published" datetime="">March 12, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+
+      </section>
+      <header>
+        <h1><a href="/blog/%E5%AD%A6%E4%B9%A0%E5%9E%8B%E7%BB%84%E7%BB%87%E6%A6%82%E5%BF%B5/">学习型组织概念</a></h1>
+        <time class="published" datetime="">March 1, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+<a href="/blog/kickstart%E6%8C%87%E5%8D%97/" class="image featured">
+  <img src="/img/2019/01/pic04.jpg" alt="pic 3">
+</a>
+
+
+      </section>
+      <header>
+        <h1><a href="/blog/kickstart%E6%8C%87%E5%8D%97/">Kickstart指南</a></h1>
+        <time class="published" datetime="">January 24, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+<a href="/blog/ipfs%E8%AE%B2%E8%A7%A3/" class="image featured">
+  <img src="/img/2019/01/pic02.jpg" alt="pic02">
+</a>
+
+
+      </section>
+      <header>
+        <h1><a href="/blog/ipfs%E8%AE%B2%E8%A7%A3/">IPFS讲解</a></h1>
+        <time class="published" datetime="">January 19, 2019</time>
+      </header>
+    </article>
+    
+    
+      <a href="/blog/" class="button">See more</a>
+    
+  </section>
+
+  
+    
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+            
+          
+          
+          <li>
+            
+              <a href="/categories/learn/">learn<span class="count">51</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/essays/">essays<span class="count">2</span></a>
+            
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  <section id="mini-bio">
+    <header>
+      <h1>About</h1>
+    </header>
+    <p>欢迎来到这里</p>
+    <footer>
+      <a href="/about" class="button">Learn More</a>
+    </footer>
+  </section>
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="social-icons">
+        
+
+        <li><a href="//github.com/yhyddr" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="weixin://contacts/profile/abser9216" target="_blank" rel="noopener" title="WeChat" class="fab fa-weixin"></a></li>
+<li><a href="//wpa.qq.com/msgrd?v=3&amp;uin=349037616&amp;site=qq&amp;menu=yes" target="_blank" rel="noopener" title="QQ" class="fab fa-qq"></a></li>
+
+
+<li><a href="//twitter.com/example" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+<li><a href="//telegram.me/example" target="_blank" rel="noopener" title="telegram" class="fab fa-telegram"></a></li>
+
+
+
+
+<li><a href="mailto:abserari@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    
+      &copy; 2019
+      
+        Wound:Abser&#39;s Blog
+      
+    .
+    Powered by <a href="//gohugo.io" target="_blank" rel="noopener">Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/html.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/css.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/js.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/toml.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/go.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/bash.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+  <script src=/js/util.js></script>
+  <script src=/js/main.js></script>
+  <script src=/js/add-on.js></script>
+  
+
+
+
+    </div>
+  </body>
+</html>

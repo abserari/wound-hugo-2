@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hugo on Wound:Abser&#39;s Blog</title>
+    <link>https://blog.abser.top/tags/hugo/</link>
+    <description>Recent content in hugo on Wound:Abser&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 25 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.abser.top/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hugo&#43;Github搭建个人博客</title>
+      <link>https://blog.abser.top/blog/hugo-github-blog/</link>
+      <pubDate>Sun, 25 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.abser.top/blog/hugo-github-blog/</guid>
+      <description>前言介绍  Hugo是什么?   Hugo是一种通用的网站框架。严格来说，Hugo应该被称作静态页面生成引擎。
+ 官网https://gohugo.io/
+ 静态页面生成引擎又是什么?   静态页面生成引擎从字面上来理解，就是将你的内容生成静态网站。所谓“静态”的含义其实反映在网站页面的生成的时间。一般的web服务器（WordPress, Ghost, Drupal等等）在收到页面请求时，需要调用数据库生成页面（也就是HTML代码），再返回给用户请求。而静态网站则不需要在收到请求后生成页面，而是在整个网站建立起之前就将所有的页面全部生成完成，页面一经生成便称为静态文件，访问时直接返回现成的静态页面，不需要数据库的参与。
+  那么我采用Hugo来搭建博客优点有哪些?
+ 访问快速.因为不需要每次访问生成页面当然，一旦网站有任何更改，静态网站生成器需要重新生成所有的与更改相关的页面。然后由于Hugo是用Go语言编写的在生成速度这方面做的非常好.5000篇文章的博客生成时间只需要6秒钟.对比其他的静态页面生成引擎动不动几分钟的时间优势非常明显 采用静态页面搭建博客,维护起来非常简单.事实上根本不需要什么维护，完全不用考虑复杂的运行时间，依赖和数据库的问题。再有也不用担心安全性的问题，没有数据库，网站注入什么的也无从下手 无依赖.低消耗资源. 专注于写作.我认为对于个人博客来说，应该将时间花在内容上而不是各种折腾网站。Hugo会将Markdown格式的内容和设置好模版一起，生成漂亮干净的页面。你只需要把Markdown文件放在content文件夹下面.一切水到渠成  听起来很棒的样子那搭建起来会不会非常复杂?
+  不会.跟着教程走下来.只需要十分钟.
+开始 需求 1.Hugo工具 2.GitHub个人账号 3.Git工具  安装 如果说速度快是Hugo的第一大优点，那么安装简单应该就是Hugo的第二大优点。对于Mac用户，没有brew的话先安装brew，在命令行里敲：
+$ ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;  然后再敲一行安装Hugo:
+$ brew new Hugo  当然你也可以在这里直接下载对应系统的binary文件，解压就行了。
+生成 site 目录 hugo new site blog cd blog git init #Congratulations! Your new Hugo site is created in /Users/steven/MyProjects/Demo/blog.</description>
+    </item>
+    
+  </channel>
+</rss>

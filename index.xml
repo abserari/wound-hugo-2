@@ -1,14 +1,822 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hugo Future Imperfect Slim</title>
+    <title>Wound:Abser&#39;s Blog</title>
     <link>https://blog.abser.top/</link>
-    <description>Recent content on Hugo Future Imperfect Slim</description>
+    <description>Recent content on Wound:Abser&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <lastBuildDate>Tue, 19 Mar 2019 14:34:55 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.abser.top/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Bytes包阅读</title>
+      <link>https://blog.abser.top/blog/bytes%E5%8C%85%E9%98%85%E8%AF%BB/</link>
+      <pubDate>Tue, 19 Mar 2019 14:34:55 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/bytes%E5%8C%85%E9%98%85%E8%AF%BB/</guid>
+      <description>bytes 笔记 
+byte.go 
+Overview 操作字节切片的函数，与字符串 strings 包类似。
+
+核心函数 
+genSplit(s, sep []byte, sepSave, n int) [][]byte 切分切片使用的最核心的函数。
+有四个参数，第一个是被切切片，第二个是分隔符，第三个是选择包含分隔符在内往后几个字节一起作为子切片，最后一个是最多通过n个分隔符来切分 // Generic split: splits after each instance of sep, // including sepSave bytes of sep in the subslices. // 将含有 sep 的字节切片全部单独切开，最多切 n 个，同时 匹配到时候多切 sepSave 个字节一起切进同一个切片 func genSplit(s, sep []byte, sepSave, n int) [][]byte { if n == 0 { return nil } if len(sep) == 0 { return explode(s, n) } if n &amp;lt; 0 { n = Count(s, sep) + 1 } a := make([][]byte, n) n-- i := 0 for i &amp;lt; n { m := Index(s, sep) if m &amp;lt; 0 { break } a[i] = s[: m+sepSave : m+sepSave] s = s[m+len(sep):] i++ } a[i] = s return a[:i+1] }</description>
+    </item>
+    
+    <item>
+      <title>Studycoding</title>
+      <link>https://blog.abser.top/blog/studycoding/</link>
+      <pubDate>Tue, 12 Mar 2019 12:06:38 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/studycoding/</guid>
+      <description>我是如何开始学习编码的：前三个月我用过的资源 想学习如何编程？本文将指导你经过技术和资源的丛林，帮助你从无知识到构建快速、互动、现代的编码知识，沿着我走过的林间小径。
+从八月底到十二月初
+我花了三个月的时间学习编码，虽然有时候很有挑战性，但这是一次非常有益的体验。
+最棘手的一个挑战是选择_什么样_的学习和_在那里_学习它。有这么多的语言，框架和库 - 以及许多相互矛盾的建议。
+此外，一些学习资源比其他学习资源要好得多。如果我知道要关注哪些资源，我的进展可能会更快。
+本着这种精神，我想我会分享对我有用的东西。如果感觉很多，我很幸运，我每天可以花几个小时学习这些材料。你做得多快并不代表你作为开发者的潜力，所以不要担心是否需要更长的时间来完成这些材料。但是，如果你能投入时间，可以在半个月内完成。
+这些是我经历过的路程，并不代表你需要全部走过
+
+第一部分：HTML，CSS和JavaScript 这些是所有Web应用程序的三种核心语言，并且（几乎）不可能在不使用它们的情况下在Internet上构建任何内容。 
+HTML 如果你以前从未做过任何编码，那么HTML就是一个很好的起点。它是互联网的核心构建块，与大多数其他语言不同，它为学习者提供了他们正在编写的代码的即时可视反馈。
+
+CSS CSS是HTML的自然伴侣。从表面上看，它非常简单，虽然有一些概念 - 特别是与布局和定位有关 - 可能需要一些时间来解决问题。
+CSS最困难的部分是理解布局。用户在StackOverflow上询问了我的大多数布局问题，因此快速的Google搜索解决了我的大多数问题。
+H5 和 CSS 大概花去了我两天时间，通常你想了解一个编码方面的事物时，直接上手总是最快捷的方式。 
+JavaScript HTML和CSS不是完全成熟的编程语言，因此在开始学习编程语言之前，您将无法完全了解编程。JavaScript是Web的编程语言。
+平心而论，虽然我在初中时期尝试过 js 编程，然而连真正的编码都算不上，直至现在我也是 JavaScript 的菜鸟，所以这上面我并不能给予一些帮助建议
+由于我开始学习后端，js 从熟悉拼写到知道历史花了我一小段时间。
+
+GO Go 是极其酷的语言，尤其是在现代进行高效的 Web 编程方面
+Go 是我学习后端被选择的语言，同时也是我越学越看好的语言。作为语言初学者的时候我还无法分辨各种语言的特性和好坏，这通常需要多年的编码经验或者有过使用多种语言的经历才能清楚。我经历过 C++ STL 的使用和一定的 Java 编码，但是从过来的眼光看待，不过是十数天就能达到的程度。
+在 《The Way To Go》上我花费了大概三天时间，在此之前我阅读了菜鸟教程上关于 Go 语言的入门指南。虽然这本书对于 Go 语言的高级特性讲的比较简略，作为入门无疑是够的。即使我看的是英文，或许你也更喜欢拿着中文书籍看，但是作为编码人员，无疑英语才是必须学习的语言。
+之后我进行了一个小爬虫的练习，涉及到 goquery，gocolly 先爬取的飞卢的小说网站，之后爬取的各个地区的各种商业信息。这大概花费了我一天的时间。（从这里学会的阅读文档的知识）
+随后我开始了 Go 源码包的阅读，将每一个包的每一个函数遍历了一下他们的 godoc ，在我开始每一个函数的内在逻辑阅读时，我被中止了，由于庞大的知识体系。这大概花费了我三到四天。（从这里学会的画图技巧）
+我这个时候开始使用社团的 Mac 电脑，开始了一个关于发送短信的云API接入服务的开发。当时了解并接入阿里云市场给我带来了麻烦，从需求找到解决方法向来非易事。这大概使用了一个星期，了解了关于 go 与 mysql 的接入，和不同终端的 HTTP 通信</description>
+    </item>
+    
+    <item>
+      <title>学习型组织概念</title>
+      <link>https://blog.abser.top/blog/%E5%AD%A6%E4%B9%A0%E5%9E%8B%E7%BB%84%E7%BB%87%E6%A6%82%E5%BF%B5/</link>
+      <pubDate>Fri, 01 Mar 2019 17:19:45 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E5%AD%A6%E4%B9%A0%E5%9E%8B%E7%BB%84%E7%BB%87%E6%A6%82%E5%BF%B5/</guid>
+      <description>学习型组织 释疑 
+学习型组织的艺术与实践  以下大量原文引用自第五项修炼
+ 
+学习型组织的真谛：活出生命的意义  许多人被问起，作为伟大团体一分子的经验是什么时，最引人深思的回答是：觉得自己属于一个比自我强大的事物的感觉，也就是大伙儿心手相连，共创未来的那种经验。对他们来说，作为真正伟大团体一分子的体验，是他们一生中最突出、生命力完全发挥的一段岁月。有些人竟其余生，希望寻求重温此种经历。
+ 在过去数百年来的西方文化中，有一个字很少被使用，但却可表达学习型组织的精神，这个字是metanoia，意思是心灵的转变。这十多年来在辅导企业时，我们私底下原先是用metanoic organization来形容学习型组织的。希腊文这个字的意思是心灵意念的根本改变，一种“超觉”的经验。在早期基督徒的传统中，这个字特指醒悟而直接觉知至高无上的、属于上帝的事物。在夭主教的经论中，这个字被翻译成“体悟生命的真义”。
+ 堂握metanoia的意义，等于掌握“学习”的更深层的意义，因为学习也包括心灵的根本转变或运作。然而学习在目前的用法上已经失去了它的核心意义。在日常用语上，学习已经变成吸收知识，或者是获得信息，然而这和真正的学习还有好大一段距离。
+ 真正的学习，涉及人之所以为人此一意义的核心。透过学习，我们重新创造自我。透过学习，我们能够做到从未能做到的事情，重新认知这个世界及我们跟它的关系，以及扩展创造未来的能量。事实上你我心底都深深地渴望这种真正的学习。
+ 这就是学习型组织的真谛。对这样的组织而言，单是适应与生存是不能满足它的。组织为适应与生存而学习，虽然是基本而必要的，但必须与开创性的学习结合起来，才能让大家在组织内由工作中活出生命的意义。
+ 目前，有些组织已扮演拓荒先锋的角色，朝这条路上走去。但学习型组织的领域，仍然大部分有待开垦。我衷心地期望这本书能加快开垦的速度。
+
+学习型组织的五项修炼  今天，在学习型组织的领域里，也有五项新技术正逐渐汇聚起来，使学习型组织演变成一项创新。虽然，它们的发展是分开的，但都紧密相关，对学习型组织之建立，每一项都不可或缺。我们称这五项学习型组织的技能为五项修炼。以下，我们刻意将其中的核心“第五项修炼”先行介绍。
+
+第五项修炼：系统思考（Systems Thinking）  当乌云密布、天色昏暗，我们便知道快要下雨了。我们也知道在暴风雨过后，地面的流水将渗入好几英里以外的地下水中，明日天空又要放晴。这一切的事件虽有时空的差距，然而事实上它们都息息相关，且每次运行的模式相同，每个环节都相互影响，这些影响通常是隐匿而不易被察觉的。惟有对整体、而不是对任何单独部分深入地加以思考，你才能够了解暴风雨的系统。
+ 企业和人类其他活动，也是一种“系统”，也都受到细微且息息相关的行动所牵连，彼此影响着，这种影响往往要经年累月才完全展现出来。身为群体中的一小部分，置身其中而想要看清整体变化，更是加倍的困难。我们因而倾向于将焦点放在系统中某一片段，但总想不通为什么有些最根本的问题似乎从来得不到解决。经过五十年的发展，系统思考已发展出一套思考的架构，它既具备完整的知识体系，也拥有实用的工具，可帮助我们认清整个变化形态，并了解应如何有效地掌握变化，开创新局。
+ 虽然工具是新的，系统思考的基本观念却是非常浅显的。我们的实验显示，小孩子学习系统思考时非常迅速。
+
+第一项修炼：自我超越（Personal Mastery）  “自我超越”的修炼是学习不断厘清并加深个人的真正愿望，集中精力，培养耐心，并客观地观察现实。它是学习型组织的精神基础。精熟“自我超越”的人，能够不断实现他们内心深处最想实现的愿望，他们对生命的态度就如同艺术家对艺术作品一般，全心投入、不断创造和超越，是一种真正的终身“学习”。组织整体对于学习的意愿与能力，植基于个别成员对于学习的意愿与能力。此项修炼兼容并蓄了东方和西方的精神传统。
+ 遗憾的是，几乎没有任何组织鼓励他们的成员以这种方式成长。这个领域是一片庞大而尚未开发的处女地。汉诺瓦公司的欧白恩说：“企业的员工多半聪明、受过良好的教育、充满活力、全心全力渴望出人头地。但他们到了三十多岁时，通常只有少数平步青云，其余大多数人都失掉了开始时所有的企图心、使命感与兴奋感，对于工作，他们只投入些许精力，心灵几乎完全不在工作上。”这种组织设计所造成的个人生涯是多么可悲！
+ 而且令人惊讶的是，就个人而言，也只有少数的成年人努力发展本身，超越自我。当你询问成年人的愿望是什么，通常他们首先提到较负面的、想要除掉的人或事。例如他们说：“我想要我的岳母搬走”，或“我想要彻底治好背痛”。然而自我超越的修炼坝，是以厘清对我们真心向往的事情为起点，让我们为自己的最高愿望而活。
+ 这里，最有趣的部分是：个人学习与组织学习之间的关系、个人与组织之间的相互承诺，以及由一群“学习者”组成的企业所特有的精神。
+
+第二项修炼：改善心智模式（Improving Mental Models）  “心智模式”是根深蒂固于心中，影响我们如何了解这个世界，以及如何采取行动的许多假设、成见，或甚至图象、印象。我们通常不易察觉自己的心智模式，以及它对行为的影响。例如，对于常说笑话的人，我们可能认为他乐观豁达；对于不修边幅的人，我们可能觉得他不在乎别人的想法。在管理的许多决策模式中，决定什么可以做或不可以做，也常是一种根深蒂固的心智模式。如果你无法掌握市场的契机和推行组织中的兴革，很可能是因为它们与我们心中隐藏的、强而有力的心智模式相抵触。
+ 壳牌石油公司是第一家了解加速组织学习好处的大企业，他们发现隐藏的心智模式影响既深且广，尤其是当它成为共有的心智模式时。壳牌石油公司之所以能成功地度过1970和八十年代石油危机的巨大冲击，主要归功于学习如何浮现管理者的心智模式，并加以改善。（在七十年代初期，壳牌石油在世界七大石油公司中敬陪末座；到八十年代末，它已经成了最强的一家）。最近刚由壳牌石油公司退休的企画主任德格说：“要在变动的企业环境中持续调适与成长，有赖组织化的学习，这是管理团体改变对公司、市场与竞争者的共有心智模式的过程。因此我们把企画看成学习，而把公司整体企画看作组织化的学习。”
+ 把镜子转向自己，是心智模式修炼的起步；借此，我们学习发掘内心世界的图象，使这些图象浮上表面，并严加审视。它还包活进行一种有学习效果的、兼顾质疑与表达的交谈能力——有效地表达自己的想法，并以开放的心灵容纳别人的想法。
+
+第三项修炼：建立并同愿景（Building Shared Vision） _
+如果有任何一项领导的理念，几千年来一直能在组织中鼓舞人心，那就是拥有＿种能够凝聚、并坚持实现共同的愿景的能力。一个缺少全体衷心共有的目标、价值观与使命的组织，必定难成大器。IBM公司以“服务”，拍立得公司以“立即摄影”；福特汽车公司以“提供大众公共运输”；苹果电脑公司以“提供大众强大的计算能力”为组织共同努力的最高鹄的。这些组织都在设法以共同的愿景把大家凝聚在一起。
+ 有了衷心渴望实现的目标，大家会努力学习、追求卓越，不是因为他们被要求这样做，而是因为衷心想要如此。但是许多领导者从未尝试将个人的愿景，转化为能够鼓舞组织的共同愿景。共同的愿景也常以一个伟大的领袖为中心，或激发自一件共同的危机。但是，如果有选择的余地，大多数的人会选择追求更高的目标，而并非只暂时解决危机。组织所缺少的，是将个人的愿景整合为共同愿景的修炼——注意我指的不是一本按部执行的手册，而是一套引导学习的原则。
+ 共同愿景的整合，涉及发掘共有“未来景象”的技术，它帮助组织培养成员主动而真诚地奉献和投入，而非被动的遵从。领导者在精熟此项修炼的过程中，会得到同样的教训：一味试图主导共同愿景（无论多么的有善意）会产生反效果。
+
+第四项修炼：团体学习（Teaml，Learing）  在一个管理团体中，大家都认真参与，每个人的智商都在一百二十以上，何以集体的智商只有六十二？团体学习的修炼即在处理这种困境。然而我们知道团体确实能够共同学习；在运动、表演艺术、科学界，甚至企业中，有不少惊人的实例显示，团体的集体智慧高干个人智慧，团体拥有整体搭配的行动能力。当团体真正在学习的时候，不仅团体整体产生出色的成果，个别成员成长的速度也比其他的学习方式为快。</description>
+    </item>
+    
+    <item>
+      <title>Kickstart指南</title>
+      <link>https://blog.abser.top/blog/kickstart%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Thu, 24 Jan 2019 15:43:05 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/kickstart%E6%8C%87%E5%8D%97/</guid>
+      <description>Kick Start快速入门 Background Code Jam Kickstart 为同学们提供向 Google 展现自己专业能力以及走近 Google 的机会。在家就可以参加由 Google 的工程师们设计的算法题。通过参加线上测试，同学们可以直观地了解 Google 技术性岗位对编程能力的要求，也是参与 Google 校园招聘的入场券。
+Requirement  G家邮箱一枚 科学上网工具 地址传送门（如果从codejam进入的话，选择分类中的kickstart）  Quickstart-Overview G家鼓励灵活的解决方案，所以施行的输入输出方案和其他的ACM在线测评不一样。
+不是让你不断提交代码然后系统给你测试，而是给你数据集让你自己测试后在本地生成输出文件进行上传。
+1. 下载题目数据集 .in 文件（小数据集4分钟变一次，大数据集8分钟变一次） 1. 解题并生成输出 .out 文件 1. 提交输出文件 和 代码源文件（练习测试不用提交）
+PS. 每一道题都有小数据集和大数据集两个.in文件可供下载，大数据集的数据范围一般都比小数据集的范围更广，有更多的困难情况。
+QuickStart 必要点  如果你想参加比赛，请在比赛期间访问你的比赛主页。如果您想练习，请访问“过去的问题”页面并选择一个回合。然后选择一个问题。
+读问题，前面几段话将精确描述您的程序需要解决的问题。仔细注意极限部分。这些限制将帮助您确定处理大小数据集所需的解决方案类型。（通常会说明一些无解的数据不用考虑）
+编写一个程序，在不到3分钟的时间内用所描述的小限制解决问题。确保您的程序接受输入并以给定的格式输出;如果您使用示例输入作为输入运行它，它应该准确地生成示例输出(包括“Case #”文本)。如果您不确定如何处理输入和输出，请参阅下面的标准I/O教程，了解可行的做法。
+在页面顶部，单击以 solve A-small 并下载输入文件。在真正的比赛中，我们一收到下载请求就会启动一个4分钟的计时器。如果你在练习，就不会有计时器。
+在该输入文件上运行程序，并将结果保存到文件中。将该文件作为输出文件提交。(在真正的比赛中，你还需要提交你的源代码。)服务器的响应方式有以下几种:
+ 正确示例:您提交的每个案例都完全正确!
+ 拒绝:您的提交被拒绝的原因与您的答案的正确性或不正确性无关。例如，您可能上传了一个输入文件或源代码，而不是您自己的输出文件。时钟仍然在运行，所以需要考虑您能否在超时之前修复这个问题(在这种情况下，您的提交将被视为不正确)。
+ 不正确：我们不会告诉您哪些情况是错误较小**的时间惩罚(但是解决问题总比不解决好，即使有惩罚!)
+  在您解决小数据集之后，大数据集将变得可用。一旦您的程序准备好处理更高的限制，下载大型数据集。(参赛者通常只编写一个解决方案来解决两个数据集。)我们一收到下载请求就会启动一个8分钟的计时器。
+与小数据集一样运行程序并提交，直到比赛结束你才知道你是否正确地解决了问题。如果您的提交被拒绝或您想提交另一个答案，您可以在8分钟的时间限制内再次尝试，但只有最后一次提交将被判定。
+接着看另一个问题(左边有一个列表)。您正确解出的每个数据集都值下载链接旁边所写的点数。比赛结束时得分最多的选手排名最高。在一个小数据集上，每一次错误的提交最终被正确的回答，将会有4分钟的惩罚时间。为了引人注目，记分牌将显示“乐观”的初步结果,也就是说，它将假设每个大型提交都是正确的。比赛结束后，记分牌将显示真实的结果，包括哪些大的提交是错误的。
+教程 我们现在只有一个教程，但我们将来可能会添加更多教程。虽然阅读理论很好，但我们强烈建议您练习解决实际问题以使其变得更好。您可以访问我们的 过去问题部分来完成此操作。For Fun！
+“标准”解决方案：使用标准输入和输出 Kickstart鼓励灵活解决问题：我们会为您提供输入文件，并让您以自己喜欢的方式解决问题。您可以选择语言，开发环境，体系结构，库等。</description>
+    </item>
+    
+    <item>
+      <title>IPFS讲解</title>
+      <link>https://blog.abser.top/blog/ipfs%E8%AE%B2%E8%A7%A3/</link>
+      <pubDate>Sat, 19 Jan 2019 15:37:49 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/ipfs%E8%AE%B2%E8%A7%A3/</guid>
+      <description>IPFS普及知识 行星际文件系统任务 InterPlanetary文件系统（IPFS）的目标是创建分布式Web。一种点对点超媒体协议，使网络更快，更安全，更开放。
+两个&amp;rsquo;中心&amp;rsquo;问题 集中化带来了几个主要问题。第一个是当你有一个控制大量数据的中央公司时，如果无法访问这些服务器会发生什么？控制存储大量有价值和有用数据的服务器的中央公司单点故障导致完全无法访问。这种失败可能是由于攻击造成的，也可能是因为服务器离线了。
+将数据存储在中心位置的第二个问题是审查。当大多数数据托管在几个主要服务器上时，政府更容易阻止对它们的访问。2017年，土耳其居民无法访问Wikipedia.com。土耳其政府禁止该网站称其为“国家安全威胁”。这也发生在2011年1月的埃及，当时政府为95％以上的公民切断了互联网和手机接入。
+为什么我们使用有缺陷的系统？ 我们继续接受这种模式的真正原因是我们已经因为接入互联网而受到损害。我们希望网页以毫秒为单位加载，图像和视频无延迟地显示，当然，这一切都必须具有最高的HD或4K质量。集中服务器使公司可以完全控制他们提供此内容的速度，并相应地收取费用。我们继续这种方法的另一个原因是，确实没有一个好的选择。
+IPFS→好的选择 InterPlanetary文件系统（也称为IPFS）是一种使Internet完全分布的想法。该概念将传统的“HTTP”互联网转变为对等网络，类似于BitTorrent的工作方式。
+Juan Benet是IPFS的创建者和Protocol Labs的创始人。Protocol Labs是一家负责IPFS的技术研发实验室，他们还开发了Filecoin和IPLD（以及其他）。Benet在斯坦福大学学习计算机科学，并且非常关注与知识，科学和技术有关的任何事情。
+Juan Benets最初的目标并不是在制作这个概念时必然会创建IPFS。他想要做的是找到一种有效的方法来移动科学数据集，这意味着数据大小可能是10-100 + GB。IPFS的设计看起来像Git和BitTorrent一起生孩子时会发生什么。BitTorrent使您能够快速地在网络上移动大型文件，Git为您提供内置的数据版本。
+在创建此协议之后，Benet很快意识到其影响远大于移动大型数据集。他实际上创建了一个协议，可以取代其他流行的协议，以便我们今天通过网络访问信息。
+InterPlanetary文件系统的名称来自哪里？ 当他们提出行星际文件系统（IPFS）的命名时，其想法是向互联网如何命名致敬。JCR Licklider是Arpanet（互联网的前身）的创造者，其目标是建立一个星际网络。因此，互联网对于星际网络而言确实很短。InterPlanetary采用相同的命名约定，此外，IPFS旨在成为Internet协议（IP）的文件系统（FS）。当把它们放在一起时，便有了IPFS，即互联网文件系统。我将深入探讨IPFS如何作为文件系统。但首先，了解我们今天如何从网络访问文件非常重要。
+当您想从互联网上下载图像时，您可以告诉您的计算机确切地找到您要求的图像的位置。此位置通常采用URL的形式，其中包含存储照片的公司的域名，后面跟着指定文件内容的扩展名。此博客文章的示例请求如下所示：https://achainofblocks.com/ipfs-simple-guide.jpg。这种访问资源的方法称为“基于位置的寻址”，您告诉计算机他们可以访问信息的位置，并且计算机检索信息。此方法的一个问题是，如果位置不可访问（可能服务器处于脱机状态），则用户的计算机无法检索所需的信息。
+服务器关闭，我们都倒闭了 使用服务器关闭时基于位置的寻址，无法通过Internet访问该服务器中包含的所有内容。但是，当服务器发生故障时，另一个用户很可能已下载该图像，并将其本地存储在其计算机上。但即使另一台计算机确实有此文件，您的计算机也无法与这些计算机连接以传输该文件。
+关于内容 为了帮助解决这个问题，IPFS引入了“基于内容的寻址”的概念。在请求特定资源时使用基于内容的寻址时，您无需指定位置，只需指定所需内容即可。
+每个文件都有一个唯一的哈希值，可以将其视为文件的指纹或标识。如果要访问特定文件，只需向网络询问具有指定哈希值的文件副本即可。请求完成后，IPFS网络上的某个人将提供您请求的资源。您将下载该资源，并将副本保存到您的IPFS缓存中。现在，当另一个人来并请求相同的文件时，您将能够提供给他们。这创建了一个系统，随着它的使用速度越来越快，因为共享的文件越多，它们就越容易获得，它们就是一组节点。
+有改变是好事… 在这一点上，我和你有同样的问题：这个行为正确吗？我怎么知道提供给我文件的人或节点没有以某种方式篡改它？因为您使用哈希函数来检索文件，所以您可以验证收到的内容。更改文件的哈希值与更改区块链中的事务同样困难。请求具有特定散列的文件，因此在收到文件时，请确保散列与请求匹配。这与您用于验证亚马逊购买的方法相同。如果您订购了Green Socks，并且Red Socks出现，您将拒绝它们并等待您的Green Socks出现。
+IPFS的另一个功能是重复数据删除，这意味着当多个用户发布同一文件时，它只在网络上创建一次。这有助于提高网络效率。
+IPFS如何真正起作用 现在您已经了解了IPFS与当今传统方法的比较基础，让我们更深入地了解IPFS如何实际存储数据并使其可供用户访问。
+在IPFS中，文件存储在IPFS对象中，每个Object可以存储256 kb的数据。对象还可以包含指向另一个IPFS对象的链接，链接可以存储大于256 kb的数据。例如，如果您只上传一个小文本文件，那么一个256 kb的对象应该适合您的少量文本。
+但是，如果要存储图片，则会将其分解为多个对象，每个对象最大为256 kb。然后，IPFS系统将创建一个空对象，该对象将链接到构成该图片的所有对象。
+这种架构非常简单，但它也非常强大，该架构真正使IPFS能够用作文件系统。如果你看一下下面的简单文件目录结构，我将解释如何将其转换为IPFS结构：
+通过为每个文件和每个文件夹/目录创建1个对象，然后将文件链接到指定的目录，可以将其转换为IPFS。如果考虑到IPFS使用基于内容的寻址的话会变得更好。这意味着添加的文件是不可变的，它们永远不会被更改，非常像区块链。这意味着访问的资源是正确的数据，并且从未被更改过。
+我如何更新我的数据？ IPFS支持文件版本控制，这与Git如何作为开源代码库一样工作。例如，您正在处理名为“Important Document – v1.doc”的文本文件，并且您希望与使用IFPS的人共享此文档。当您将此文件添加到IPFS时，幕后发生的事情是，IPFS将创建一个新的Commit对象。这个Object是非常基本的，它只是告诉IPFS哪个Commit在此之前，它链接到与文件相关的IPFS对象，&amp;rsquo;Important Document – v1.doc&amp;rsquo;。
+现在让我们假设已经过了一段时间，你的&amp;rsquo;Important Document.doc&amp;rsquo;需要修改。只需将新文件添加到IPFS“Important Document – v2.doc”即可完成此操作，软件将为更新的文件创建新的提交对象（与原始进程相同）。此提交对象现在链接到先前的提交对象，第一个提交用作父对象。这个过程可以无休止地重复，创建一个链接的相同数据版本，所有这些都引用整个链。IPFS确保您的文件以及整个文件版本控制历史记录可供网络上的所有其他节点访问。
+没有系统是完美的 到目前为止，我们已经讨论了InterPlanetary文件系统的许多有用功能和关键概念。但是，所有协议都有局限性和缺点。正如您可能想象的那样，IPFS目前面临的最大问题是保持文件可用。网络上的每个节点都保留了已下载文件的缓存，并有助于使其可用，因为其他用户需要它们。但是，在一个简单的情况下，如果一个Document由4个节点托管，并且它们全部脱机，则该文档不再可访问。
+有几种方法可以解决上述问题。一种方法是激励节点保持在线并使文件可供社区使用。对可以提交给网络的存储空间的奖励，这将确保文件很可能在需要时可用。另一种方法是主动在整个网络中分发文件，确保在任何给定时间总是有足够的在线副本。你可以把它想象成大规模的冗余。
+Filecoin 这个问题是Filecoin旨在解决的确切问题。Filecoin由创建IPFS的同一组创建。Filecoin是一个建立在IPFS之上的区块链，其目标是创建一个分散的存储市场。这意味着在硬盘上有额外存储空间的用户可以将其出租用作IPFS存储，并在此过程中从中赚取一些钱。您可以将Filecoin视为与Airbnb类似的服务，而不是租用您家中的可用空间，您可以租用计算机上的可用空间进行存储。Filecoin为节点创建了一种激励，使数据保持在线并尽可能长时间保留。除了保持节点在线的激励之外，它还可以跨多个节点复制数据，使其高度可用且易于访问（即使少数节点处于脱机状态）。Filecoin和IPFS具有相同的目标，即脱机优先，这意味着他们不断努力获得更好的体验，而无需调用服务器来访问资源。
+这是Filecoin的一个非常高级的快速摘要。我将在未来的文章中深入研究Filecoin以及Protocol实验室中的一些其他伟大项目。
+行星际关联数据（IPLD） 根据https://ipld.io：
+“IPLD是内容可寻址网络的数据模型。它允许我们将所有与哈希相关的数据结构视为统一信息空间的子集，统一所有将数据与哈希作为IPLD实例链接的数据模型。“
+这意味着IPLD旨在成为可互操作协议的数据模型。这种技术有很多用例。这使得能够在IPFS上运行智能合约。关键是IPLD提供的库使底层数据可以跨工具和协议进行互操作。
+IPLD和Fileco都是非常复杂的项目，需要他们自己的专门文章才能完全理解。
+额外的想法 我希望通过阅读本文显而易见，IPFS是一个非常雄心勃勃的项目。以权力下放为重点的大多数早期项目主要涉及货币和财务方面。IPFS实际上是建立一种更好的共享数据的方式。之前有过HTTP的挑战。然而，IPFS显然是最成熟的，并且被视为可以在未来几年中大规模采用的系统。我绝不暗示HTTP正在消失，Juan Benet自己也承认HTTP是一个很棒的协议，它仍然非常有用。但是，它是一个超过25年的协议，随着IPFS在采用中的不断增长，用例将随着技术的发展而扩展。在IPFS最终接管之前，我们很有可能会同时使用这两种协议。</description>
+    </item>
+    
+    <item>
+      <title>Http权威指南阅读</title>
+      <link>https://blog.abser.top/blog/http%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E9%98%85%E8%AF%BB/</link>
+      <pubDate>Fri, 04 Jan 2019 16:52:25 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/http%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E9%98%85%E8%AF%BB/</guid>
+      <description>《HTTP 权威指南》阅读 Overview 说实话，看这本书的时候是2019年，我认为她的部分信息已经过时了，或者说是完全没有意义了。
+但是作为现在网络传输信息的核心，总有一些东西是一直贯彻了几十年直到今日的。所以在这里写下读后感。
+包括有哪些是我认为还能读的以及我的感受
+Part One 这是关于 HTTP 的概述，是现在web的基础，只要现在还是使用这个协议，那么这一块一定是有价值的。只是说这部分有价值的东西其实日常的网络工程中能了解到，或者在一些百科上也能知道 * 关于URL的定义 * 资源定位 * 关于TCP/IP的使用 * 链接的建立 * 关于Web使用的组件 * 代理 * 缓存 * 网关 * 隧道 * Agent代理 * 关于报文的组成结构和C/S模式下的报文交互 * 方法 * 状态码
+Part Two 这一部分是关于HTTP的结构，关于HTTP各种情况下是怎样交互的&amp;ndash;使用不同的组件是什么情况
+主要用一些网络知识的拓扑图让你理解了你从客户端发出的请求是经历的怎样的过程到达服务端又是怎样回来的。这对理解网络之间的文件传输概念提供了很好的构建方式。
+Part Three 这一部分讲了怎样在交互中保证隐私，即安全。实际上是怎样在HTTP传输的时候能够识别出来谁是谁来保护信息。
+讲到了Cookie和基本认证和摘要认证、HTTPS。
+其中最重要的应为Cookies和HTTPS。Cookies实际上就是存储一些信息来帮助认证客户端属性。而HTTPS则是在HTTP和TCP两层之间加了一层SSL加密，使得信息通过加密传输
+Part Four 这部分是关于协议和标准的事情，我个人认为有些过时同时也是我们现在不需要了解的一段。正如图灵图书上写的
+站在巨人的肩膀上
+我们不应该注重于已经规范好的细枝末节上的实现，而是根据认真的使用他们，整合他们或者创新出的新的方式。
+当然建立新标准也是很重要的事情
+Part Five 这是关于网页内容方面的部分。
+从这里你可以了解到网络上经常说到的重定向，DNS ，CDN 等各种名词其含义和起源，它们为什么要被这样设定，希望达到的是什么效果。
+和日志监控，用来分析网站&amp;ndash;实际上现在我们只需要用别人的网站分析服务就好，没有必要和精力去自己耗力。
+最后附录里说明了一些规定
+如什么状态码代表什么情况，首部即header中的信息通常可以从名字判断出他们的信息是用来做什么的，然后是一些编码，语言和认证标识
+拓展 HTTP或许以后会被取代，或者说被分掉大量的市场份额，比如这个
+星际文件传输网络：https://achainofblocks.com/2018/10/05/ipfs-interplanetary-file-system-simply-explained/</description>
+    </item>
+    
+    <item>
+      <title>使用Go进行集成测试的MySQL Docker容器</title>
+      <link>https://blog.abser.top/blog/%E4%BD%BF%E7%94%A8go%E8%BF%9B%E8%A1%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E7%9A%84mysql-docker%E5%AE%B9%E5%99%A8/</link>
+      <pubDate>Tue, 01 Jan 2019 12:27:27 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E4%BD%BF%E7%94%A8go%E8%BF%9B%E8%A1%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E7%9A%84mysql-docker%E5%AE%B9%E5%99%A8/</guid>
+      <description>使用Go进行集成测试的MySQL Docker容器 原文链接 作者：Mitesh 翻译整理 翻译整理：Abser
+Overview Bug在实际生产中常常代价高昂。我们可以使用测试用例来在开发过程中捕获它们，以降低我们的成本。测试在所有软件中都非常重要。这有助于确保代码的正确性并有助于防止恶化。单元测试有助于隔离测试组件，而无需任何外部依赖。但是单元测试不足以确保我们能够拥有经过良好测试的稳定系统。实际上，在集成不同组件的过程中会发生故障。如果我们不在真实的环境上测试数据库后端的应用程序将面临的问题，我们可能永远不会注意到由于事务未提交，数据库的错误版本等问题。集成测试在端到端测试中扮演了重要角色。
+在当今世界，我们编写了许多软件应用程序，其中包含数据库作为存储后端。模拟这些数据库调用以进行单元测试可能很麻烦。在纲要中进行小的更改可能会导致重写部分或全部。因为查询不会连接到实际的数据库引擎，因此不会验证查询的语法或约束。模拟每个查询都可能导致重复工作。为避免这种情况，我们应该测试一个真正的数据库，在测试完成后可以将其销毁。Docker非常适合运行测试用例，因为我们可以在几秒钟内运行容器并在完成后终止它们。
+安装docker 让我们了解如何启动MySQL docker容器并使用它来使用go代码进行测试。我们首先需要确保运行我们的测试用例的系统安装了docker，可以通过运行命令“ docker ps ” 来检查。如果未安装docker，请从此处安装docker 。
+func（d * Docker）isInstalled（）bool { command：= exec.Command（“docker”，“ps”） err：= command.Run（） if err！= nil { return false } return true }  运行容器 安装docker之后，我们需要使用用户和密码运行MySQL容器，该用户和密码可用于连接MySQL服务器。
+docker run --name our-mysql-container -e MYSQL_ROOT_PASSWORD = root -e MYSQL_USER = gouser -e MYSQL_PASSWORD = gopassword -e MYSQL_DATABASE = godb -p 3306：3306 --tmpfs / var / lib / mysql mysql：5.7  这将运行MySQL版本5.</description>
+    </item>
+    
+    <item>
+      <title>TokenBucket</title>
+      <link>https://blog.abser.top/blog/tokenbucket/</link>
+      <pubDate>Wed, 19 Dec 2018 17:38:01 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/tokenbucket/</guid>
+      <description> TokenBucket 规则  每秒会有 Limit个令牌放入桶中，或者说，每过 1/Limit 秒桶中增加一个令牌 桶中最多存放 burst 个令牌，如果桶满了，新放入的令牌会被丢弃 当一个 n 单元的数据包到达时，消耗 n 个令牌，然后发送该数据包 如果桶中可用令牌小于 n，则该数据包将被缓存或丢弃  令牌桶算法 令牌桶算法是网络流量整形（Traffic Shaping）和速率限制（Rate Limiting）中最常使用的一种算法。典型情况下，令牌桶算法用来控制发送到网络上的数据的数目，并允许突发数据的发送。
+RateLimiter中的令牌桶算法 简介 该包基于令牌桶算法(Token Bucket)来完成限流,非常易于使用.RateLimiter经常用于限制对一些物理资源或者逻辑资源的访问速率.它支持三种方式,： ·AllowN()是如果拿不到立刻返回。 ·WaitN()是暂时排队，等到足够的令牌再出发，中途可能因为context的cancel而cancel，同时归还占位。 ·ReserveN()是直接出发，但是前人挖坑后人填，下一次请求将为此付出代价，一直等到令牌亏空补上，并且桶中有足够本次请求使用的令牌为止。
+工作实例 假设正在工作的一个RateLimiter
+allow和wait 对一个每秒产生一个令牌的RateLimiter,每有一个没有使用令牌的一秒,我们就将tokens加 1 ,如果RateLimiter在 10 秒都没有使用,则tokens变成10.0.这个时候,一个请求到来并请求三个令牌,我们将从RateLimiter中的令牌为其服务,tokens变为7.0.这个请求之后立马又有一个请求到来并请求10个令牌,我们将从RateLimiter剩余的 7 个令牌给这个请求,剩下还需要三个令牌,我们将从RateLimiter新产生的令牌中获取.我们已经知道,RateLimiter每秒新产生 1 个令牌,就是说上面这个请求还需要的 3 个令牌就要求其等待 3 秒.
+reserve 想象一个RateLimiter每秒产生一个令牌,现在完全没有使用(处于初始状态),如果一个昂贵的请求要求 100 个令牌.如果我们选择让这个请求等待100秒再允许其执行,这显然很荒谬.我们为什么什么也不做而只是傻傻的等待100秒,一个更好的做法是允许这个请求立即执行(和allow没有区别),然后将随后到来的请求推迟到正确的时间点.这种策略,我们允许这个昂贵的任务立即执行,并将随后到来的请求推迟100秒.这种策略就是让任务的执行和等待同时进行.
+关于timeToAct 一个重要的结论:RateLimiter不会记最后一个请求,而是即下一个请求允许执行的时间.这也可以很直白的告诉我们到达下一个调度时间点的时间间隔.然后定一个一段时间未使用的Ratelimiter也很简单:下一个调度时间点已经过去,这个时间点和现在时间的差就是Ratelimiter多久没有被使用,我们会将这一段时间翻译成tokens.所有,如果每秒钟产生一个令牌(Limit==1),并且正好每秒来一个请求,那么tokens就不会增长.
+burst RateLimiter有一个桶容量，当请求大于这个桶容量时，直接丢弃。
+链接 ·__ __Golang实现RateLimiter源码导航 · RateLimiter语雀阅读 </description>
+    </item>
+    
+    <item>
+      <title>Produce Consume</title>
+      <link>https://blog.abser.top/blog/produce-consume/</link>
+      <pubDate>Fri, 14 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.abser.top/blog/produce-consume/</guid>
+      <description>__ Processes Programming__ Task description: Create 3 processes to handle data. One process *PGone* generates int numbers and stores them in a loop array including 10 elements. One process *PGtwo* also generates int numbers and stores them in the same loop array. One process *PS* stores the generated numbers into a txt file in hard disk. Requests: 1. The 3 processes should work concurrently. 2. *PGone and PGtwo *can generate numbers at any time as long as the array is not occupied by the other processes, and there still remains spaces or there exists elements that have been stored by PS.</description>
+    </item>
+    
+    <item>
+      <title>Example ACL</title>
+      <link>https://blog.abser.top/blog/example-acl/</link>
+      <pubDate>Thu, 13 Dec 2018 18:41:35 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/example-acl/</guid>
+      <description>项目简介 TL;DR; acl is a lightweight acl manager for go.
+Features  Design simple &amp;amp; reusable roles to empower your application. Acquire the rights of other roles to build a powerful set of permissions. Resolve possible roles by examine them in an unified way.  Example type User struct { isAdmin bool } func main() { // first of all: create a new manager instance to register all your roles in one place manager := acl.</description>
+    </item>
+    
+    <item>
+      <title>三数之和</title>
+      <link>https://blog.abser.top/blog/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</link>
+      <pubDate>Wed, 12 Dec 2018 13:09:34 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</guid>
+      <description> 问题描述 给定一个包含 *n* 个整数的数组 nums，判断 nums 中是否存在三个元素 *a，b，c ，*使得 *a + b + c = *0 ？找出所有满足条件且不重复的三元组。
+注意：答案中不可以包含重复的三元组。
+示例 例如, 给定数组 nums = [-1, 0, 1, 2, -1, -4]， 满足要求的三元组集合为： [ [-1, 0, 1], [-1, -1, 2] ]  思路及实现 func threeSum(nums []int) [][]int { // 排序后，可以按规律查找 sort.Ints(nums) res := [][]int{} for i := range nums { // 避免添加重复的结果 // i&amp;gt;0 是为了防止nums[i-1]溢出 if i &amp;gt; 0 &amp;amp;&amp;amp; nums[i] == nums[i-1] { continue } l, r := i+1, len(nums)-1 for l &amp;lt; r { s := nums[i] + nums[l] + nums[r] switch { case s &amp;lt; 0: // 较小的 l 需要变大 l++ case s &amp;gt; 0: // 较大的 r 需要变小 r-- default: res = append(res, []int{nums[i], nums[l], nums[r]}) // 为避免重复添加，l 和 r 都需要移动到不同的元素上。 l, r = next(nums, l, r) } } } return res } func next(nums []int, l, r int) (int, int) { for l &amp;lt; r { switch { case nums[l] == nums[l+1]: l++ case nums[r] == nums[r-1]: r-- default: l++ r-- return l, r } } return l, r } } else { j++ for j &amp;lt; k &amp;amp;&amp;amp; nums[j-1] == nums[j] { j++ } } } } return result }  </description>
+    </item>
+    
+    <item>
+      <title>两个排序数组的中位数</title>
+      <link>https://blog.abser.top/blog/%E4%B8%A4%E4%B8%AA%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0/</link>
+      <pubDate>Sun, 09 Dec 2018 17:07:54 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E4%B8%A4%E4%B8%AA%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0/</guid>
+      <description>问题描述 给定两个大小为 m 和 n 的有序数组 nums1 和 nums2 。
+请找出这两个有序数组的中位数。要求算法的时间复杂度为 O(log (m+n)) 。
+你可以假设 nums1 和 nums2 不同时为空。
+示例 1 nums1 = [1, 3] nums2 = [2] 中位数是 2.0  示例 2 nums1 = [1, 2] nums2 = [3, 4] 中位数是 (2 + 3)/2 = 2.5  思路 给出两个有序数组，假设两个数组的长度和是 len，如果 len 为奇数，那么我们求的就是两个数组合并后的第 (len &amp;gt;&amp;gt; 1) + 1 大的数，如果 len 为偶数，就是第 (len &amp;gt;&amp;gt; 1) 和 (len &amp;gt;&amp;gt; 1) + 1 两个数的平均数。</description>
+    </item>
+    
+    <item>
+      <title>最长有效括号</title>
+      <link>https://blog.abser.top/blog/%E6%9C%80%E9%95%BF%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7/</link>
+      <pubDate>Sun, 09 Dec 2018 17:07:24 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%9C%80%E9%95%BF%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7/</guid>
+      <description>问题描述 给定一个只包含 &#39;(&#39; 和 &#39;)&#39; 的字符串，找出最长的包含有效括号的子串的长度。
+示例 1 输入: &amp;quot;(()&amp;quot; 输出: 2 解释: 最长有效括号子串为 &amp;quot;()&amp;quot;  示例 2 输入: &amp;quot;)()())&amp;quot; 输出: 4 解释: 最长有效括号子串为 &amp;quot;()()&amp;quot;  思路 遍历 1.record 记录每个符号的状态，如果能够和前面的配上对，就记录为2，否则，记录为0
+输入：) ( ( ) ( ) ) ) ( ( ( ( ( ) ) ) ) ( 记录：0 0 0 2 0 2 2 0 0 0 0 0 0 2 2 2 2 0 检查：0 1 1 1 1 1 1 0 0 1 1 1 1 1 1 1 1 0  2.</description>
+    </item>
+    
+    <item>
+      <title>正则表达式匹配</title>
+      <link>https://blog.abser.top/blog/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/</link>
+      <pubDate>Sun, 09 Dec 2018 17:06:43 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/</guid>
+      <description>问题描述 给定一个字符串 (s) 和一个字符模式 (p)。实现支持 &#39;.&#39; 和 &#39;*&#39; 的正则表达式匹配。
+&#39;.&#39; 匹配任意单个字符。 &#39;*&#39; 匹配零个或多个前面的元素。  匹配应该覆盖整个字符串 (s) ，而不是部分字符串。
+说明  s 可能为空，且只包含从 a-z 的小写字母。 p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。  示例 1 输入: s = &amp;quot;aa&amp;quot; p = &amp;quot;a&amp;quot; 输出: false 解释: &amp;quot;a&amp;quot; 无法匹配 &amp;quot;aa&amp;quot; 整个字符串。  示例 2 输入: s = &amp;quot;aa&amp;quot; p = &amp;quot;a*&amp;quot; 输出: true 解释: &#39;*&#39; 代表可匹配零个或多个前面的元素, 即可以匹配 &#39;a&#39; 。因此, 重复 &#39;a&#39; 一次, 字符串可变为 &amp;quot;aa&amp;quot;。  示例 3 输入: s = &amp;quot;ab&amp;quot; p = &amp;quot;.</description>
+    </item>
+    
+    <item>
+      <title>字符串的排列</title>
+      <link>https://blog.abser.top/blog/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97/</link>
+      <pubDate>Sun, 09 Dec 2018 17:06:03 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97/</guid>
+      <description> 问题描述 给定两个字符串 s1 和 s2，写一个函数来判断 s2 是否包含 s1 的排列。
+换句话说，第一个字符串的排列之一是第二个字符串的子串。
+示例1 输入: s1 = &amp;quot;ab&amp;quot; s2 = &amp;quot;eidbaooo&amp;quot; 输出: True 解释: s2 包含 s1 的排列之一 (&amp;quot;ba&amp;quot;).  示例2 输入: s1= &amp;quot;ab&amp;quot; s2 = &amp;quot;eidboaoo&amp;quot; 输出: False  注意：
+ 输入的字符串只包含小写字母 两个字符串的长度都在 [1, 10,000] 之间  思路 滑动窗口 实现 func checkInclusion(s1 string, s2 string) bool { n1 := len(s1) n2 := len(s2) if n1 &amp;gt; n2 { return false } h1 := 0 h2 := 0 for i := 0; i &amp;lt; n1; i++ { c1 := s1[i] - &#39;a&#39; c2 := s2[i] - &#39;a&#39; h1 += 1 &amp;lt;&amp;lt; c1 h2 += 1 &amp;lt;&amp;lt; c2 } if h1 == h2 { return true } for i := n1; i &amp;lt; n2; i++ { cb := s2[i-n1] - &#39;a&#39; ce := s2[i] - &#39;a&#39; h2 += (1 &amp;lt;&amp;lt; ce) - (1 &amp;lt;&amp;lt; cb) if h1 == h2 { return true } } return false }  </description>
+    </item>
+    
+    <item>
+      <title>两数相加</title>
+      <link>https://blog.abser.top/blog/%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</link>
+      <pubDate>Sun, 09 Dec 2018 17:05:31 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</guid>
+      <description>问题描述 给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
+如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
+您可以假设除了数字 0 之外，这两个数都不会以 0 开头。
+示例：
+输入：(2 -&amp;gt; 4 -&amp;gt; 3) + (5 -&amp;gt; 6 -&amp;gt; 4) 输出：7 -&amp;gt; 0 -&amp;gt; 8 原因：342 + 465 = 807  思路 我们使用变量来跟踪进位，并从包含最低有效位的表头开始模拟逐位相加的过程。
+图1，对两数相加方法的可视化: 342 + 465 = 807342+465=807， 每个结点都包含一个数字，并且数字按位逆序存储。
+请特别注意以下情况      测试用例  说明    l1=[0,1]l1=[0,1] l2=[0,1,2]l2=[0,1,2]   当一个列表比另一个列表长时。    l1=[]l1=[] l2=[0,1]l2=[0,1]   当一个列表为空时，即出现空列表。    l1=[9,9]l1=[9,9] l2=[1]l2=[1]   求和运算最后可能出现额外的进位，这一点很容易被遗忘      实现 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode { resPre := &amp;amp;ListNode{} cur := resPre carry := 0 for l1 !</description>
+    </item>
+    
+    <item>
+      <title>盛最多水的容器</title>
+      <link>https://blog.abser.top/blog/%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/</link>
+      <pubDate>Sun, 09 Dec 2018 17:04:59 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/</guid>
+      <description> 问题描述 给定 *n* 个非负整数 a~1~，a~2，~&amp;hellip;，a~n，~每个数代表坐标中的一个点 (i, ai) 。在坐标内画 *n* 条垂直线，垂直线 *i* 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 *x* 轴共同构成的容器可以容纳最多的水。
+说明：你不能倾斜容器，且 *n* 的值至少为 2。
+图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。
+示例 1 输入: [1,8,6,2,5,4,8,3,7] 输出: 49  思路 遍历 直接遍历每对可能出现的线段组合并找出这些情况之下的最大面积。
+双指针 两线段之间形成的区域总是会受到其中较短那条长度的限制。此外，两线段距离越远，得到的面积就越大。 在线段长度构成的数组中使用两个指针，一个放在开始，一个置于末尾。 此外，我们会使用变量 maxArea来持续存储到目前为止所获得的最大面积。 找出指针所指向的两条线段形成的区域，更新 maxArea，并将指向较短线段的指针向较长线段那端移动一步。
+实现 遍历 func maxArea(height []int) int { var maxArea int var curArea int for i := 0; i &amp;lt; len(height)-1; i++ { for j := 0; j &amp;lt; len(height); j++ { if height[i]&amp;gt;height[j] { curArea = (j-i)*height[j] }else { curArea = (j-i)*height[i] } if curArea &amp;gt; maxArea { maxArea = curArea } } } return maxArea }  双指针 func maxArea(height []int) int { maxArea := 0 for i, j := 0, len(height)-1; i &amp;lt; j; { if height[i] &amp;lt;= height[j] { curArea := height[i] * (j - i) if curArea &amp;gt; maxArea { maxArea = curArea } i++ } else { curArea := height[j] * (j - i) if curArea &amp;gt; maxArea { maxArea = curArea } j-- } } return area }  </description>
+    </item>
+    
+    <item>
+      <title>旋转图像</title>
+      <link>https://blog.abser.top/blog/%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/</link>
+      <pubDate>Sun, 09 Dec 2018 17:04:02 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/</guid>
+      <description>问题描述 给定一个 *n *× *n* 的二维矩阵表示一个图像。
+将图像顺时针旋转 90 度。
+说明 你必须在原地旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要使用另一个矩阵来旋转图像。
+示例 1 给定 matrix = [ [1,2,3], [4,5,6], [7,8,9] ], 原地旋转输入矩阵，使其变为: [ [7,4,1], [8,5,2], [9,6,3] ]  示例 2 给定 matrix = [ [ 5, 1, 9,11], [ 2, 4, 8,10], [13, 3, 6, 7], [15,14,12,16] ], 原地旋转输入矩阵，使其变为: [ [15,13, 2, 5], [14, 3, 4, 1], [12, 6, 8, 9], [16, 7,10,11] ]  思路 分治法（可能） 该题意，可以把一个四边形框四个角上的元素逐个交换，顺序调整框的大小和位置，进行操作
+数学法（？） 可以看出，旋转90度实际上是将矩阵先转置，然后进行列的交换</description>
+    </item>
+    
+    <item>
+      <title>无重复字符的最长字串</title>
+      <link>https://blog.abser.top/blog/%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%97%E4%B8%B2/</link>
+      <pubDate>Sun, 09 Dec 2018 17:03:34 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%97%E4%B8%B2/</guid>
+      <description>问题描述 给定一个字符串，找出不含有重复字符的最长子串的长度。
+示例 1 输入: &amp;quot;abcabcbb&amp;quot; 输出: 3 解释: 无重复字符的最长子串是 &amp;quot;abc&amp;quot;，其长度为 3。  示例 2 输入: &amp;quot;bbbbb&amp;quot; 输出: 1 解释: 无重复字符的最长子串是 &amp;quot;b&amp;quot;，其长度为 1。  示例 3 输入: &amp;quot;pwwkew&amp;quot; 输出: 3 解释: 无重复字符的最长子串是 &amp;quot;wke&amp;quot;，其长度为 3。 请注意，答案必须是一个子串，&amp;quot;pwke&amp;quot; 是一个子序列 而不是子串。  思路 滑动窗口 使用 整数数组用asc2码表示字符 将字符存储在当前窗口 [i,j)（最初 j=i）中。 滑动索引 j，如果它不在 整数数组标记中，继续滑动 j 向后查找 如果 s[j]在 [i,j)范围内有与 j′重复的字符， 直接跳过 [i，j′]范围内的所有元素，并将 i变为 j′+1。
+实现 滑动窗口 func lengthOfLongestSubstring(s string) int { length := len(s) num := 0 ascii := [128]int{} i := 0 for j := 0; j &amp;lt; length; j++ { tmp := ascii[s[j]] if tmp &amp;gt; i { i = tmp } tmp = j - i + 1 if tmp &amp;gt; num { num = tmp } ascii[s[j]] = j + 1 } return num }  滑动二 func lengthOfLongestSubstring(s string) int { // location[s[i]] == j 表示： // s中第i个字符串，上次出现在s的j位置，所以，在s[j+1:i]中没有s[i] // location[s[i]] == -1 表示： s[i] 在s中第一次出现 location := [256]int{} // 只有256长是因为，假定输入的字符串只有ASCII字符 for i := range location { location[i] = -1 // 先设置所有的字符都没有见过 } maxLen, left := 0, 0 for i := 0; i &amp;lt; len(s); i++ { // 说明s[i]已经在s[left:i+1]中重复了 // 并且s[i]上次出现的位置在location[s[i]] if location[s[i]] &amp;gt;= left { left = location[s[i]] + 1 // 在s[left:i+1]中去除s[i]字符及其之前的部分 } else if i+1-left &amp;gt; maxLen { // fmt.</description>
+    </item>
+    
+    <item>
+      <title>删除链表中的倒数第N个节点</title>
+      <link>https://blog.abser.top/blog/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/</link>
+      <pubDate>Sun, 09 Dec 2018 17:02:34 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/</guid>
+      <description>问题描述 给定一个链表，删除链表的倒数第 *n *个节点，并且返回链表的头结点。
+示例 1 给定一个链表: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5, 和 n = 2. 当删除了倒数第二个节点后，链表变为 1-&amp;gt;2-&amp;gt;3-&amp;gt;5.  说明 给定的 *n* 保证是有效的。
+进阶 你能尝试使用一趟扫描实现吗？
+思路 一趟扫描，通过使用两个相距定长 n 的指针，同时向后移动，当后面的指针指到链表的尾部的时候，该指针正好指向需要删除的倒数第 n 个节点
+实现 Go 版本 /** * Definition for singly-linked list. * type ListNode struct { * Val int * Next *ListNode * } */ func removeNthFromEnd(head *ListNode, n int) *ListNode { p := &amp;amp;ListNode{Val: 0, Next: head} q := p qhead := q for i := 0; i &amp;lt; n; i++ { p = p.</description>
+    </item>
+    
+    <item>
+      <title>岛屿的个数</title>
+      <link>https://blog.abser.top/blog/%E5%B2%9B%E5%B1%BF%E7%9A%84%E4%B8%AA%E6%95%B0/</link>
+      <pubDate>Sun, 09 Dec 2018 17:01:51 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E5%B2%9B%E5%B1%BF%E7%9A%84%E4%B8%AA%E6%95%B0/</guid>
+      <description> 问题描述 给定一个由 &#39;1&#39;（陆地）和 &#39;0&#39;（水）组成的的二维网格，计算岛屿的数量。一个岛被水包围，并且它是通过水平方向或垂直方向上相邻的陆地连接而成的。你可以假设网格的四个边均被水包围。
+示例 1 输入: 11110 11010 11000 00000 输出: 1  示例 2 输入: 11000 11000 00100 00011 输出: 3  思路 遍历每一个网格，如果存在，则以此为起点，向4个方向扩张，如果是岛屿&amp;rsquo;1&amp;rsquo;就置为&amp;rsquo;0&amp;rsquo;，表示这个岛屿是刚才的岛屿的一部分。最后返回 island 的个数
+实现 Go 版本 func numIslands(grid [][]byte) int { islands := 0 for i,_ := range grid { for j,_ := range grid[i]{ if grid[i][j] == &#39;1&#39; { islands++ expandIsland(grid, i, j) } } } return islands } func expandIsland(grid [][]byte, m int, n int){ if m &amp;gt;= 0 &amp;amp;&amp;amp; m &amp;lt; len(grid) &amp;amp;&amp;amp; n &amp;gt;= 0 &amp;amp;&amp;amp; n &amp;lt; len(grid[m]) &amp;amp;&amp;amp; grid[m][n] == &#39;1&#39; { grid[m][n] = &#39;0&#39; expandIsland(grid, m-1, n) expandIsland(grid, m+1, n) expandIsland(grid, m, n-1) expandIsland(grid, m, n+1) } }  </description>
+    </item>
+    
+    <item>
+      <title>环形数组循环</title>
+      <link>https://blog.abser.top/blog/%E7%8E%AF%E5%BD%A2%E6%95%B0%E7%BB%84%E5%BE%AA%E7%8E%AF/</link>
+      <pubDate>Sun, 09 Dec 2018 17:01:20 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E7%8E%AF%E5%BD%A2%E6%95%B0%E7%BB%84%E5%BE%AA%E7%8E%AF/</guid>
+      <description>问题描述 给定一组含有正整数和负整数的数组。如果某个索引中的 n 是正数的，则向前移动 n 个索引。相反，如果是负数(-n)，则向后移动 n 个索引。
+假设数组首尾相接。判断数组中是否有环。环中至少包含 2 个元素。环中的元素一律“向前”或者一律“向后”。
+注意：给定数组保证不包含元素&amp;rdquo;0&amp;rdquo;。
+示例 1 给定数组[-1, 2], 没有循环。  示例 2 给定数组 [2, -1, 1, 2, 2], 有一个循环，从索引 0 -&amp;gt; 2 -&amp;gt; 3 -&amp;gt; 0。  思路 这里的循环必须是只向前或者只向后形成循环，即一个循环中，都是正数或者负数。 根据坐标建立一对一的映射，一旦某个达到的坐标已经有映射了，说明环存在。 建立一个 v 数组，来记录访问过的数字，然后遍历原数组，如果当前数字已经访问过了，直接跳过，否则就以当前位置坐标为起始点开始查找 将当前位置在 v 数组中标记 true ，然后查找当前位置坐标加上对应的数字的新索引，由于是循环数组，所以结果可能会超出数组的长度，所以要对数组长度取余。（数字可能是负数，补上一个n，使其变为正数） 检查：如果 next 和 cur 相等，说明此时是一个数字的循环，弃掉 如果一个循环中不全是负数或正数，也要弃掉
+实现 Go 版本 func circularArrayLoop(nums []int) bool { m := make(map[int]int) n := len(nums) v := make([]bool, n) for i := 0; i &amp;lt; n; i++ { if v[i] { continue } cur := i for { v[cur] = true next := (cur + nums[cur]) % n if next &amp;lt; 0 { next += n } if next == cur || nums[next]*nums[cur] &amp;lt; 0 { break } if m[next] !</description>
+    </item>
+    
+    <item>
+      <title>搜索旋转排序数组</title>
+      <link>https://blog.abser.top/blog/%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84/</link>
+      <pubDate>Sun, 09 Dec 2018 17:00:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84/</guid>
+      <description> 问题描述 假设按照升序排序的数组在预先未知的某个点上进行了旋转。
+( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。
+搜索一个给定的目标值，如果数组中存在这个目标值，则返回它的索引，否则返回 -1 。
+你可以假设数组中不存在重复的元素。
+你的算法时间复杂度必须是 O(log n) 级别。
+示例 1 输入: nums = [4,5,6,7,0,1,2], target = 0 输出: 4  示例 2 输入: nums = [4,5,6,7,0,1,2], target = 3 输出: -1  思路 二分
+实现 二分法 func search(nums []int, target int) int { left, right := 0, len(nums) - 1 for left &amp;lt;= right { mid := (left + right) / 2 if nums[mid] == target { return mid } // 左边部分数组递增 if nums[mid] &amp;gt;= nums[left] { // target在递增数组中 if nums[left] &amp;lt;= target &amp;amp;&amp;amp; target &amp;lt; nums[mid] { right = mid - 1 } else { left = mid + 1 } } else { if nums[mid] &amp;lt; target &amp;amp;&amp;amp; target &amp;lt;= nums[right] { left = mid + 1 } else { right = mid - 1 } } } return -1 }  </description>
+    </item>
+    
+    <item>
+      <title>打家劫舍II</title>
+      <link>https://blog.abser.top/blog/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Dii/</link>
+      <pubDate>Sun, 09 Dec 2018 16:58:37 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Dii/</guid>
+      <description> 问题描述 你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都围成一圈，这意味着第一个房屋和最后一个房屋是紧挨着的。同时，相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
+给定一个代表每个房屋存放金额的非负整数数组，计算你在不触动警报装置的情况下，能够偷窃到的最高金额。
+示例 1 输入: [2,3,2] 输出: 3 解释: 你不能先偷窃 1 号房屋（金额 = 2），然后偷窃 3 号房屋（金额 = 2）, 因为他们是相邻的。  示例 2 输入: [1,2,3,1] 输出: 4 解释: 你可以先偷窃 1 号房屋（金额 = 1），然后偷窃 3 号房屋（金额 = 3）。 偷窃到的最高金额 = 1 + 3 = 4 。  思路 分两种情况讨论，数组第一个偷的情况和第一个不偷的情况
+实现 方法一 func rob(nums []int) int { switch size { case 0: return 0 case 1: return nums[0] } m := make([]int, 2) m[0] = nums[0] m[1] = max(nums[0], nums[1]) for i := 2; i &amp;lt; len(nums)-1; i++ { m = append(m, max(m[i-1], m[i-2]+nums[i])) } n := make([]int, 2) nums[0] = 0 n[0] = nums[0] n[1] = max(nums[1], nums[0]) for j := 2; j &amp;lt; len(nums); j++ { n = append(n, max(n[j-1], n[j-2]+nums[j])) } return max(m[len(nums)-2], n[len(nums)-1]) } func max(a, b int) int { if a &amp;gt; b { return a } return b }  </description>
+    </item>
+    
+    <item>
+      <title>打家劫舍III</title>
+      <link>https://blog.abser.top/blog/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Diii/</link>
+      <pubDate>Sun, 09 Dec 2018 16:58:30 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Diii/</guid>
+      <description>问题描述 在上次打劫完一条街道之后和一圈房屋后，小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为“根”。 除了“根”之外，每栋房子有且只有一个“父“房子与之相连。一番侦察之后，聪明的小偷意识到“这个地方的所有房屋的排列类似于一棵二叉树”。 如果两个直接相连的房子在同一天晚上被打劫，房屋将自动报警。
+计算在不触动警报的情况下，小偷一晚能够盗取的最高金额。
+示例 1 输入: [3,2,3,null,3,null,1] 3 / \ 2 3 \ \ 3 1 输出: 7 解释: 小偷一晚能够盗取的最高金额 = 3 + 3 + 1 = 7.  示例 2 输入: [3,4,5,1,3,null,1] 3 / \ 4 5 / \ \ 1 3 1 输出: 9 解释: 小偷一晚能够盗取的最高金额 = 4 + 5 = 9.  思路 回溯 每一个根节点讨论是否选与不选，比较左右孩子节点值之和 和 没有左右孩子节点之和，选取大的计入 这种方法重复计算了很多地方，比如要完成一个节点的计算，就得一直找左右子节点计算，消耗时间过多
+所以使用一个 map 存储已经算过的节点
+实现 回溯 func rob(root *TreeNode) int { m := make(map[*TreeNode]int) return dfs(root, m) } func dfs(root *TreeNode, m map[*TreeNode]int) int { if root == nil { return 0 } if m[root] !</description>
+    </item>
+    
+    <item>
+      <title>移动K位数字</title>
+      <link>https://blog.abser.top/blog/%E7%A7%BB%E5%8A%A8k%E4%BD%8D%E6%95%B0%E5%AD%97/</link>
+      <pubDate>Sun, 09 Dec 2018 16:57:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E7%A7%BB%E5%8A%A8k%E4%BD%8D%E6%95%B0%E5%AD%97/</guid>
+      <description>问题描述 给定一个以字符串表示的非负整数 *num*，移除这个数中的 *k *位数字，使得剩下的数字最小。
+注意:
+ *num* 的长度小于 10002 且 ≥ k。 *num* 不会包含任何前导零。  __示例 1 __ 输入: num = &amp;quot;1432219&amp;quot;, k = 3 输出: &amp;quot;1219&amp;quot; 解释: 移除掉三个数字 4, 3, 和 2 形成一个新的最小的数字 1219。  __示例 2 __ 输入: num = &amp;quot;10200&amp;quot;, k = 1 输出: &amp;quot;200&amp;quot; 解释: 移掉首位的 1 剩下的数字为 200. 注意输出不能有任何前导零。  示例__ 3 __ 输入: num = &amp;quot;10&amp;quot;, k = 2 输出: &amp;quot;0&amp;quot; 解释: 从原数字移除所有的数字，剩余为空就是0。  思路 贪心</description>
+    </item>
+    
+    <item>
+      <title>Pow(x,n)</title>
+      <link>https://blog.abser.top/blog/pow/</link>
+      <pubDate>Sun, 09 Dec 2018 16:56:56 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/pow/</guid>
+      <description>问题描述 给定一个非负整数数组，你最初位于数组的第一个位置。
+数组中的每个元素代表你在该位置可以跳跃的最大长度。
+判断你是否能够到达最后一个位置。
+示例 1 输入: [2,3,1,1,4] 输出: true 解释: 从位置 0 到 1 跳 1 步, 然后跳 3 步到达最后一个位置。  示例 2 输入: [3,2,1,0,4] 输出: false 解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。  思路 动规 假设位置i(0≤i≤A.length)i(0≤i≤A.length)能够跳跃的最大长度为dp[i]。 对于数组A = [2,3,1,1,4]， 则有： i = 0, dp[0] = A[0] + 0 = 2 i = 1, if dp[i-1] ≥ i then dp[1] = max{A[1]+1,dp[0]} else dp[1] = 0 i = 2, if dp[i-1] ≥ i then dp[2] = max{A[2]+2,dp[1]} else dp[2] = 0 类推</description>
+    </item>
+    
+    <item>
+      <title>跳跃游戏</title>
+      <link>https://blog.abser.top/blog/%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/</link>
+      <pubDate>Sun, 09 Dec 2018 16:54:49 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/</guid>
+      <description>问题描述 给定一个非负整数数组，你最初位于数组的第一个位置。
+数组中的每个元素代表你在该位置可以跳跃的最大长度。
+判断你是否能够到达最后一个位置。
+示例 1 输入: [2,3,1,1,4] 输出: true 解释: 从位置 0 到 1 跳 1 步, 然后跳 3 步到达最后一个位置。  示例 2 输入: [3,2,1,0,4] 输出: false 解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。  思路 动规 假设位置i(0≤i≤A.length)i(0≤i≤A.length)能够跳跃的最大长度为dp[i]。 对于数组A = [2,3,1,1,4]， 则有： i = 0, dp[0] = A[0] + 0 = 2 i = 1, if dp[i-1] ≥ i then dp[1] = max{A[1]+1,dp[0]} else dp[1] = 0 i = 2, if dp[i-1] ≥ i then dp[2] = max{A[2]+2,dp[1]} else dp[2] = 0 类推</description>
+    </item>
+    
+    <item>
+      <title>Z字形变换</title>
+      <link>https://blog.abser.top/blog/z%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/</link>
+      <pubDate>Sun, 09 Dec 2018 16:52:40 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/z%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/</guid>
+      <description>问题描述 将字符串 &amp;quot;PAYPALISHIRING&amp;quot; 以Z字形排列成给定的行数：
+P A H N A P L S I I G Y I R  之后从左往右，逐行读取字符：&amp;quot;PAHNAPLSIIGYIR&amp;quot;
+实现一个将字符串进行指定行数变换的函数:
+string convert(string s, int numRows);  示例 1 输入: s = &amp;quot;PAYPALISHIRING&amp;quot;, numRows = 3 输出: &amp;quot;PAHNAPLSIIGYIR&amp;quot;  示例 2 输入: s = &amp;quot;PAYPALISHIRING&amp;quot;, numRows = 4 输出: &amp;quot;PINALSIGYAHRPI&amp;quot; 解释: P I N A L S I G Y A H R P I  思路 方法一 按照与逐行读取 Z 字形图案相同的顺序访问字符串。 首先访问 行 0中的所有字符，接着访问 行 1，然后 行 2，依此类推&amp;hellip; 对于所有整数 k， * 行 0 中的字符位于索引k(2⋅numRows−2) 处; * 行 numRows−1 中的字符位于索引 k(2⋅numRows−2)+numRows−1 处; * 内部的行 i 中的字符位于索引k(2⋅numRows−2)+i 以及 (k+1)(2⋅numRows−2)−i 处;</description>
+    </item>
+    
+    <item>
+      <title>最小路径和</title>
+      <link>https://blog.abser.top/blog/%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</link>
+      <pubDate>Sun, 09 Dec 2018 16:51:58 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</guid>
+      <description> 问题描述 给定一个包含非负整数的 *m* x *n* 网格，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。
+说明：每次只能向下或者向右移动一步。
+示例 输入: [ [1,3,1], [1,5,1], [4,2,1] ] 输出: 7 解释: 因为路径 1→3→1→1→1 的总和最小。  实现 func minPathSum(grid [][]int) int { m := len(grid) n := len(grid[0]) for i,rows := range grid { for j := range rows { if i == 0 { if j != 0 { grid[i][j] += grid[i][j - 1] } } else if j == 0 { grid[i][j] += grid[i-1][j] } else { if grid[i][j-1] &amp;lt; grid[i-1][j] { grid[i][j] += grid[i][j-1] } else { grid[i][j] += grid[i-1][j] } } } } return grid[m-1][n-1] }  </description>
+    </item>
+    
+    <item>
+      <title>最长回文子串</title>
+      <link>https://blog.abser.top/blog/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</link>
+      <pubDate>Sun, 09 Dec 2018 16:51:09 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</guid>
+      <description> 问题描述 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000。
+示例 1 输入: &amp;quot;babad&amp;quot; 输出: &amp;quot;bab&amp;quot; 注意: &amp;quot;aba&amp;quot;也是一个有效答案。  示例 2 输入: &amp;quot;cbbd&amp;quot; 输出: &amp;quot;bb&amp;quot;  思路 回文中心的两侧互为镜像。回文可以从它的中心展开，并且只有2n-1个这样的中心。
+实现 func longestPalindrome(s string) string { lenS := len(s) if lenS &amp;lt;= 1 { return s } minStart, maxLen, i := 0, 1, 0 for i &amp;lt; lenS { if lenS-i &amp;lt;= maxLen/2 { break } j, k := i, i for k &amp;lt; lenS-1 &amp;amp;&amp;amp; s[k] == s[k+1] { k += 1 } i = k + 1 for k &amp;lt; lenS-1 &amp;amp;&amp;amp; j &amp;gt; 0 &amp;amp;&amp;amp; s[k+1] == s[j-1] { k, j = k+1, j-1 } if k-j+1 &amp;gt; maxLen { minStart, maxLen = j, k-j+1 } } return s[minStart : minStart+maxLen] }  </description>
+    </item>
+    
+    <item>
+      <title>字符串转整数 Atoi</title>
+      <link>https://blog.abser.top/blog/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B4%E6%95%B0-atoi/</link>
+      <pubDate>Sun, 09 Dec 2018 16:50:05 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B4%E6%95%B0-atoi/</guid>
+      <description>问题描述 请你来实现一个 atoi 函数，使其能将字符串转换成整数。
+首先，该函数会根据需要丢弃无用的开头空格字符，直到寻找到第一个非空格的字符为止。
+当我们寻找到的第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字组合起来，作为该整数的正负号；假如第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成整数。
+该字符串除了有效的整数部分之后也可能会存在多余的字符，这些字符可以被忽略，它们对于函数不应该造成影响。
+注意：假如该字符串中的第一个非空格字符不是一个有效整数字符、字符串为空或字符串仅包含空白字符时，则你的函数不需要进行转换。
+在任何情况下，若函数不能进行有效的转换时，请返回 0。
+说明：
+假设我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 [−2^31^, 2^31 ^− 1]。如果数值超过这个范围，qing返回 INT_MAX (2^31 ^− 1) 或 INT_MIN (−2^31^) 。
+示例 1 输入: &amp;quot;42&amp;quot; 输出: 42  示例 2 输入: &amp;quot; -42&amp;quot; 输出: -42 解释: 第一个非空白字符为 &#39;-&#39;, 它是一个负号。 我们尽可能将负号与后面所有连续出现的数字组合起来，最后得到 -42 。  示例 3 输入: &amp;quot;4193 with words&amp;quot; 输出: 4193 解释: 转换截止于数字 &#39;3&#39; ，因为它的下一个字符不为数字。  示例 4 输入: &amp;quot;words and 987&amp;quot; 输出: 0 解释: 第一个非空字符是 &#39;w&#39;, 但它不是数字或正、负号。 因此无法执行有效的转换。  示例 5 输入: &amp;quot;-91283472332&amp;quot; 输出: -2147483648 解释: 数字 &amp;quot;-91283472332&amp;quot; 超过 32 位有符号整数范围。 因此返回 INT_MIN (−231) 。  思路 注意越界即可</description>
+    </item>
+    
+    <item>
+      <title>Pod处于containercreating状态</title>
+      <link>https://blog.abser.top/blog/pod%E5%A4%84%E4%BA%8Econtainercreating%E7%8A%B6%E6%80%81/</link>
+      <pubDate>Sat, 08 Dec 2018 13:45:31 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/pod%E5%A4%84%E4%BA%8Econtainercreating%E7%8A%B6%E6%80%81/</guid>
+      <description>问题 用k8s创建完pod后，查了一下pods状态，发现都在containercreationg状态中
+==&amp;gt; kubectl get pods
+原因分析 用kubectl describe查看 pods的详情,发现 registry.access.redhat.com/rhel7/pod-infrastructure:latest 镜像报错
+==&amp;gt; kubectl describe pod mysql
+使用docker pull 拉取镜像，提示缺失rhsm 文件
+==&amp;gt; docker pull registry.access.redhat.com/rhel7/pod-infrastructure:latest
+##解决方案
+yum 安装 rhsm，发现 python-rhsm-certificates 已被 subscription-manager-rhsm-certificates 替换，无法yum 成功
+==&amp;gt; yum install *rhsm*
+使用 wget 获取python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm rpm包并安装 python-rhsm-certificates
+==&amp;gt;wget http://mirror.centos.org/centos/7/os/x86_64/Packages/python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm
+==&amp;gt;rpm2cpio python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm | cpio -iv --to-stdout ./etc/rhsm/ca/redhat-uep.pem | tee /etc/rhsm/ca/redhat-uep.pem
+再次使用使用docker pull 拉取镜像
+==&amp;gt; docker pull registry.access.redhat.com/rhel7/pod-infrastructure:latest
+成功 pods 已成功 在Running 状态中
+==&amp;gt; kubectl get pods</description>
+    </item>
+    
+    <item>
+      <title>最长公共前缀</title>
+      <link>https://blog.abser.top/blog/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/</link>
+      <pubDate>Sat, 08 Dec 2018 12:55:29 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/</guid>
+      <description> 问题描述 编写一个函数来查找字符串数组中的最长公共前缀。
+如果不存在公共前缀，返回空字符串 &amp;quot;&amp;quot;。
+示例 1 输入: [&amp;quot;flower&amp;quot;,&amp;quot;flow&amp;quot;,&amp;quot;flight&amp;quot;] 输出: &amp;quot;fl&amp;quot;  示例 2 输入: [&amp;quot;dog&amp;quot;,&amp;quot;racecar&amp;quot;,&amp;quot;car&amp;quot;] 输出: &amp;quot;&amp;quot; 解释: 输入不存在公共前缀。  说明 所有输入只包含小写字母 a-z 。
+思路 按需匹配即可，遇到不符即可立即返回
+实现 func longestCommonPrefix(strs []string) string { short := shortest(strs) for i, r := range short { for j := 0; j &amp;lt; len(strs); j++ { if strs[j][i] != byte(r) { return strs[j][:i] } } } return short } func shortest(strs []string) string { if len(strs) == 0 { return &amp;quot;&amp;quot; } res := strs[0] for _, s := range strs { if len(res) &amp;gt; len(s) { res = s } } return res }  </description>
+    </item>
+    
+    <item>
+      <title>从排序数组中删除重复项</title>
+      <link>https://blog.abser.top/blog/%E4%BB%8E%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D%E9%A1%B9/</link>
+      <pubDate>Sat, 08 Dec 2018 12:53:52 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E4%BB%8E%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D%E9%A1%B9/</guid>
+      <description>问题描述 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
+不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。
+示例 1 给定数组 nums = [1,1,2], 函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 你不需要考虑数组中超出新长度后面的元素。  示例 2 给定 nums = [0,0,1,1,1,2,2,3,3,4], 函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。 你不需要考虑数组中超出新长度后面的元素。  实现 C++ 版本 使用了 stl 库中的方法 unique 和 erase，最后使用 size 方法返回长度
+unique 的是实现原理是，比较两个相邻的元素，如果元素相同则将它移到最后去，并且最后返回一个非冗余元素的迭代器
+然后用 erase 删除冗余的元素。
+static bool init = []() { ios::sync_with_stdio(false); cin.tie(nullptr); return true; }(); class Solution { public: int removeDuplicates(vector&amp;lt;int&amp;gt;&amp;amp; nums) { nums.</description>
+    </item>
+    
+    <item>
+      <title>买卖股票的最佳时机-II</title>
+      <link>https://blog.abser.top/blog/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA-ii/</link>
+      <pubDate>Sat, 08 Dec 2018 12:43:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA-ii/</guid>
+      <description> 问题描述 给定一个数组，它的第 *i* 个元素是一支给定股票第 *i* 天的价格。
+设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。
+注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
+示例 1 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。  示例 2 输入: [1,2,3,4,5] 输出: 4 解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。 注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。 因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。  示例 3 输入: [7,6,4,3,1] 输出: 0 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。  实现 Go 版本 func maxProfit(prices []int) int { var max int for i := 1; i &amp;lt; len(prices); i++ { if prices[i] &amp;gt; prices[i-1] { max += prices[i] - prices[i-1] } } return max }  Go 测试 </description>
+    </item>
+    
+    <item>
+      <title>位1的个数</title>
+      <link>https://blog.abser.top/blog/%E4%BD%8D1%E7%9A%84%E4%B8%AA%E6%95%B0/</link>
+      <pubDate>Sat, 08 Dec 2018 12:43:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E4%BD%8D1%E7%9A%84%E4%B8%AA%E6%95%B0/</guid>
+      <description>问题描述 编写一个函数，输入是一个无符号整数，返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为汉明重量）。
+示例 1 输入: 11 输出: 3 解释: 整数 11 的二进制表示为 00000000000000000000000000001011  示例 2 输入: 128 输出: 1 解释: 整数 128 的二进制表示为 00000000000000000000000010000000  解法 bits.OnesCount 注意到 Go 的 bits 包提供了 OnesCount 方法，即返回参数的二进制表示中 1 的个数
+func hanmingWeight(n uint) int { return bits.OnesCount(n) }  普通计数 按位与操作(&amp;amp;)，按二进制位进行“与”运算，运算规则： 0 &amp;amp; 0 = 0; 0 &amp;amp; 1 = 0; 1 &amp;amp; 0 = 0; 1 &amp;amp; 1 = 1;</description>
+    </item>
+    
+    <item>
+      <title>分发饼干</title>
+      <link>https://blog.abser.top/blog/%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/</link>
+      <pubDate>Sat, 08 Dec 2018 12:43:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/</guid>
+      <description> 问题描述 假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。对每个孩子 i ，都有一个胃口值 g~i ，~这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j ，都有一个尺寸 s~j ~。如果 s~j~ &amp;gt;= g~i ~，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。
+注意：
+你可以假设胃口值为正。 一个小朋友最多只能拥有一块饼干。
+示例 1 输入: [1,2,3], [1,1] 输出: 1 解释: 你有三个孩子和两块小饼干，3个孩子的胃口值分别是：1,2,3。 虽然你有两块小饼干，由于他们的尺寸都是1，你只能让胃口值是1的孩子满足。 所以你应该输出1。  示例 2 输入: [1,2], [1,2,3] 输出: 2 解释: 你有两个孩子和三块小饼干，2个孩子的胃口值分别是1,2。 你拥有的饼干数量和尺寸都足以让所有孩子满足。 所以你应该输出2.  实现 import ( &amp;quot;sort&amp;quot; ) func findContentChildren(g []int, s []int) int { sort.Ints(g) sort.Ints(s) var i, j, res int for i &amp;lt; len(g) &amp;amp;&amp;amp; j &amp;lt; len(s) { if g[i] &amp;lt;= s[j] { res++ i++ } j++ } return res }  </description>
+    </item>
+    
+    <item>
+      <title>删除链表中的节点</title>
+      <link>https://blog.abser.top/blog/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/</link>
+      <pubDate>Sat, 08 Dec 2018 12:43:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/</guid>
+      <description>问题描述 请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。
+现有一个链表 &amp;ndash; head = [4,5,1,9]，它可以表示为:
+ 4 -&amp;gt; 5 -&amp;gt; 1 -&amp;gt; 9  示例 1 输入: head = [4,5,1,9], node = 5 输出: [4,1,9] 解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&amp;gt; 1 -&amp;gt; 9.  示例 2 输入: head = [4,5,1,9], node = 1 输出: [4,5,9] 解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&amp;gt; 5 -&amp;gt; 9.  思路1 &amp;quot;Dummy node&amp;quot; 节点 能大大简化链接列表问题。但是该题是一个单向链表
+故不能使用删除目标的前驱节点的后继改为目标节点的后继，思考一下，可以把要删除的节点直接赋值后继节点值然后直接删除其后继节点，可以达到相同的目的。
+例子：ABCDE，删除C，我们就先用D占C的位置，变成ABDDE，然后把后面那个D删除，就可以得到ABDE
+思路2 直接把给定的节点B替换成其后的节点C
+实现 Go 版本1 /** * Definition for singly-linked list.</description>
+    </item>
+    
+    <item>
+      <title>打家劫舍</title>
+      <link>https://blog.abser.top/blog/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</link>
+      <pubDate>Sat, 08 Dec 2018 12:43:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</guid>
+      <description>问题描述 你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
+给定一个代表每个房屋存放金额的非负整数数组，计算你在不触动警报装置的情况下，能够偷窃到的最高金额。
+示例 1 输入: [1,2,3,1] 输出: 4 解释: 偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。 偷窃到的最高金额 = 1 + 3 = 4 。  示例 2 输入: [2,7,9,3,1] 输出: 12 解释: 偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。 偷窃到的最高金额 = 2 + 9 + 1 = 12 。  思路 先分析，原子问题就是这个房间是否要偷。 两种情况，（设收益f（n）为前n个房间的最高收益） 1.</description>
+    </item>
+    
+    <item>
+      <title>旋转数组</title>
+      <link>https://blog.abser.top/blog/%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84/</link>
+      <pubDate>Sat, 08 Dec 2018 12:43:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84/</guid>
+      <description> 问题描述 给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
+示例 1 输入: [1,2,3,4,5,6,7] 和 k = 3 输出: [5,6,7,1,2,3,4] 解释: 向右旋转 1 步: [7,1,2,3,4,5,6] 向右旋转 2 步: [6,7,1,2,3,4,5] 向右旋转 3 步: [5,6,7,1,2,3,4]  示例 2 输入: [-1,-100,3,99] 和 k = 2 输出: [3,99,-1,-100] 解释: 向右旋转 1 步: [99,-1,-100,3] 向右旋转 2 步: [3,99,-1,-100]  思路 对应的两数互换即可
+实现 Go 版本 func rotate(nums []int, k int) { if len(nums) &amp;lt;= 1 || k &amp;lt;= 0 || k%len(nums) == 0 { return } length := len(nums) k = k % length tmp := nums[0] index := 0 start := 0 for i := 0; i &amp;lt; length; i++ { index = (index + k) % length tmp, nums[index] = nums[index], tmp if start == index { start += 1 index = start tmp = nums[start] } } return }  </description>
+    </item>
+    
+    <item>
+      <title>求众数</title>
+      <link>https://blog.abser.top/blog/%E6%B1%82%E4%BC%97%E6%95%B0/</link>
+      <pubDate>Sat, 08 Dec 2018 12:43:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%B1%82%E4%BC%97%E6%95%B0/</guid>
+      <description> 问题描述 给定一个大小为 *n *的数组，找到其中的众数。众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
+你可以假设数组是非空的，并且给定的数组总是存在众数。
+示例 1 输入: [3,2,3] 输出: 3  示例 2 输入: [2,2,1,1,1,2,2] 输出: 2  实现 Go 版本 func majorityElement(nums []int) int { standard := len(nums)/2 record := make(map[int]int) for i := 0; i &amp;lt; len(nums); i++{ record[nums[i]]++ if record[nums[i]] &amp;gt; standard{ return nums[i] } } return 0 }  </description>
+    </item>
+    
+    <item>
+      <title>长度最小的子数组</title>
+      <link>https://blog.abser.top/blog/%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/</link>
+      <pubDate>Sat, 08 Dec 2018 12:43:36 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/</guid>
+      <description> 问题描述 给定一个含有 n 个正整数的数组和一个正整数 s ，找出该数组中满足其和 ≥ s 的长度最小的连续子数组。如果不存在符合条件的连续子数组，返回 0。
+示例  输入: s = 7, nums = [2,3,1,2,4,3] 输出: 2 解释: 子数组 [4,3] 是该条件下的长度最小的连续子数组。  思路 使用一个可以扩张收缩的窗口来实现 窗口使用两个索引 l 和 r ，相当与一个滑块，滑块包含 nums[l&amp;hellip;r] 这些元素，如果 nums[l..r] 的和小于目标值 s，那么 r 向后移一位，再次比较，直到大于目标值 s 之后，l 向前移动一位，缩小数组的长度。 遍历直到 right 到达数组末端。
+实现 Go 版本 func minSubArrayLen(s int, nums []int) int { n := len(nums) result := n + 1 sum := 0 l, r := 0, -1 for l &amp;lt; n { if r+1 &amp;lt; n &amp;amp;&amp;amp; sum &amp;lt; s { r++ sum += nums[r] } else { sum -= nums[l] l++ } if sum &amp;gt;= s { if r-l+1 &amp;lt; result { result = r - l + 1 } } } if result == n+1 { result = 0 } return result }  </description>
+    </item>
+    
+    <item>
+      <title>到最近的人的最大距离</title>
+      <link>https://blog.abser.top/blog/%E5%88%B0%E6%9C%80%E8%BF%91%E7%9A%84%E4%BA%BA%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%9D%E7%A6%BB/</link>
+      <pubDate>Sat, 08 Dec 2018 12:41:53 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E5%88%B0%E6%9C%80%E8%BF%91%E7%9A%84%E4%BA%BA%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%9D%E7%A6%BB/</guid>
+      <description> 问题描述 在一排座位（ seats）中，1 代表有人坐在座位上，0 代表座位上是空的。
+至少有一个空座位，且至少有一人坐在座位上。
+亚历克斯希望坐在一个能够使他与离他最近的人之间的距离达到最大化的座位上。
+返回他到离他最近的人的最大距离。
+示例 1 输入：[1,0,0,0,1,0,1] 输出：2 解释： 如果亚历克斯坐在第二个空位（seats[2]）上，他到离他最近的人的距离为 2 。 如果亚历克斯坐在其它任何一个空位上，他到离他最近的人的距离为 1 。 因此，他到离他最近的人的最大距离是 2  示例 2 输入：[1,0,0,0] 输出：3 解释： 如果亚历克斯坐在最后一个座位上，他离最近的人有 3 个座位远。 这是可能的最大距离，所以答案是 3 。  思路 考虑三种情况，根据 0 个数来计算，最左边或最右边有最多的连续 0 ，那么结果就是相应 0 的个数，如果连续 0 在中间，考虑到连续 0 数量的奇偶，加上 1 再整除 2 。
+实现 Go 版本 func maxDistToClosest(seats []int) int { maxDist, cnt := 0, 0 for i := 0; i &amp;lt; len(seats) &amp;amp;&amp;amp; seats[i] == 0; i++ { cnt++ } maxDist = cnt for i := 0; i &amp;lt; len(seats); i++ { if seats[i] == 0 { cnt++ } else { if maxDist &amp;lt; (cnt+1)/2 { maxDist = (cnt + 1) / 2 } cnt = 0 } } if maxDist &amp;lt; cnt { maxDist = cnt } return maxDist }  </description>
+    </item>
+    
+    <item>
+      <title>有效的括号</title>
+      <link>https://blog.abser.top/blog/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</link>
+      <pubDate>Sat, 08 Dec 2018 12:41:16 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</guid>
+      <description>问题描述 给定一个只包括 &#39;(&#39;，&#39;)&#39;，&#39;{&#39;，&#39;}&#39;，&#39;[&#39;，&#39;]&#39; 的字符串，判断字符串是否有效。
+有效字符串需满足：
+ 左括号必须用相同类型的右括号闭合。 左括号必须以正确的顺序闭合。  注意空字符串可被认为是有效字符串。
+示例 1 输入: &amp;quot;()&amp;quot; 输出: true  示例 2 输入: &amp;quot;()[]{}&amp;quot; 输出: true  示例 3 输入: &amp;quot;(]&amp;quot; 输出: false  示例 4 输入: &amp;quot;([)]&amp;quot; 输出: false  示例 5 输入: &amp;quot;{[]}&amp;quot; 输出: true  思路 初始化栈 stack 一次处理表达式的每个括号，遍历给定的 string 如果遇到左括号，推到栈上稍后处理它， 遇到一个右括号，检查栈顶的元素。如果栈顶的元素是一个相同类型的左括号，则从栈中弹出并继续处理。 否则返回 false 最后检查栈中是否有元素，可以判断是否无效
+实现 栈方法 func isValid(s string) bool { stack := make([]byte, 0) config := map[byte]byte{ &#39;)&#39;: &#39;(&#39;, &#39;}&#39;: &#39;{&#39;, &#39;]&#39;: &#39;[&#39;, } for i := 0; i &amp;lt; len(s); i++ { b := s[i] if config[b] !</description>
+    </item>
+    
+    <item>
+      <title>两数之和</title>
+      <link>https://blog.abser.top/blog/%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</link>
+      <pubDate>Sat, 08 Dec 2018 12:40:07 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</guid>
+      <description> 问题描述 给定一个整数数列，找出其中和为特定值的那两个数。
+你可以假设每个输入都只会有一种答案，同样的元素不能被重用。
+示例 1 给定 nums = [2, 7, 11, 15], target = 9 因为 nums[0] + nums[1] = 2 + 7 = 9 所以返回 [0, 1]  思路 1.遍历每个元素 x，并查找是否存在一个值与 target−x相等的目标元素。 2.在进行迭代并将元素插入到表中的同时，检查表中是否已经存在当前元素所对应的目标元素。如果它存在立即将其返回
+实现 暴力法 哈希法 func twoSum(nums []int, target int) []int { m := make(map[int]int) for i := 0; i &amp;lt; len(nums); i++ { another := target - nums[i] if _, ok := m[another]; ok { return []int{m[another], i} } m[nums[i]] = i } return nil }  </description>
+    </item>
+    
+    <item>
+      <title>Ssh连接</title>
+      <link>https://blog.abser.top/blog/ssh%E8%BF%9E%E6%8E%A5/</link>
+      <pubDate>Fri, 07 Dec 2018 12:27:27 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/ssh%E8%BF%9E%E6%8E%A5/</guid>
+      <description> 问题 ssh远程连接服务器
+提示：Permission denied (publickey,gssapi-keyex,gssapi-with-mic)
+原因分析 参数 PasswordAuthentication 的默认值为 yes，SSH服务将其值置为 no 以禁用密码验证登录，导致此类故障。需要修改 PasswordAuthentication 配置解决此问题。
+解决方法 ###在服务端执行
+ 执行命令 vi /etc/ssh/sshd_config，按下 i 编辑SSH服务配置文件，将参数 PasswordAuthentication 设置为 yes，或者在 PasswordAuthentication 参数前添加井号（#），按下 Esc 退出编辑模式，并输入 :wq 保存退出。  
+ 执行命令 service ssh restart 重启SSH服务。   说明：如果您使用CentOS 7及以上，执行命令 systemctl restart sshd 重启SSH服务。
+ 在使用端执行  记得删除之前连接时添加的known_host记录   说明：通常在 &amp;lt;用户名&amp;gt;/.ssh/ 目录下
+ </description>
+    </item>
+    
+    <item>
+      <title>设计链表</title>
+      <link>https://blog.abser.top/blog/%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Fri, 07 Dec 2018 11:21:45 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/</guid>
+      <description>问题描述 设计链表的实现。您可以选择使用单链表或双链表。单链表中的节点应该具有两个属性：val 和 next。val 是当前节点的值，next 是指向下一个节点的指针/引用。如果要使用双向链表，则还需要一个属性 prev 以指示链表中的上一个节点。假设链表中的所有节点都是 0-index 的。
+在链表类中实现这些功能：
+ get(index)：获取链表中第 index 个节点的值。如果索引无效，则返回-1。 addAtHead(val)：在链表的第一个元素之前添加一个值为 val 的节点。插入后，新节点将成为链表的第一个节点。 addAtTail(val)：将值为 val 的节点追加到链表的最后一个元素。 addAtIndex(index,val)：在链表中的第 index 个节点之前添加值为 val 的节点。如果 index 等于链表的长度，则该节点将附加到链表的末尾。如果 index 大于链表长度，则不会插入节点。 deleteAtIndex(index)：如果索引 index 有效，则删除链表中的第 index 个节点。  示例 MyLinkedList linkedList = new MyLinkedList(); linkedList.addAtHead(1); linkedList.addAtTail(3); linkedList.addAtIndex(1,2); //链表变为1-&amp;gt; 2-&amp;gt; 3 linkedList.get(1); //返回2 linkedList.deleteAtIndex(1); //现在链表是1-&amp;gt; 3 linkedList.get(1); //返回3  提示  所有值都在 [1, 1000] 之内。 操作次数将在 [1, 1000] 之内。 请不要使用内置的 LinkedList 库。  思路 实现很简单，ac有很多坑</description>
+    </item>
+    
+    <item>
+      <title>回文数</title>
+      <link>https://blog.abser.top/blog/%E5%9B%9E%E6%96%87%E6%95%B0/</link>
+      <pubDate>Wed, 28 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E5%9B%9E%E6%96%87%E6%95%B0/</guid>
+      <description>问题描述 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
+示例 1 输入: 121 输出: true  示例 2 输入: -121 输出: false 解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。  示例 3 输入: 10 输出: false 解释: 从右向左读, 为 01 。因此它不是一个回文数。  进阶:
+你能不将整数转为字符串来解决这个问题吗？
+思路 将数字一半反转，然后将反转后的数字与原始数字另一半进行比较，如果它们是相同的，那么这个数字就是回文。  例如，输入 1221，我们可以将数字“1221”的后半部分从“21”反转为“12”，并将其与前半部分“12”进行比较即可。 负数不是回文。
+实现 func isPalindrome(x int) bool { if x &amp;lt; 0 { return false } if (x &amp;lt; 10) { return true } p, k := 0, x for k!</description>
+    </item>
+    
+    <item>
+      <title>Hugo&#43;Github搭建个人博客</title>
+      <link>https://blog.abser.top/blog/hugo-github-blog/</link>
+      <pubDate>Sun, 25 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.abser.top/blog/hugo-github-blog/</guid>
+      <description>前言介绍  Hugo是什么?   Hugo是一种通用的网站框架。严格来说，Hugo应该被称作静态页面生成引擎。
+ 官网https://gohugo.io/
+ 静态页面生成引擎又是什么?   静态页面生成引擎从字面上来理解，就是将你的内容生成静态网站。所谓“静态”的含义其实反映在网站页面的生成的时间。一般的web服务器（WordPress, Ghost, Drupal等等）在收到页面请求时，需要调用数据库生成页面（也就是HTML代码），再返回给用户请求。而静态网站则不需要在收到请求后生成页面，而是在整个网站建立起之前就将所有的页面全部生成完成，页面一经生成便称为静态文件，访问时直接返回现成的静态页面，不需要数据库的参与。
+  那么我采用Hugo来搭建博客优点有哪些?
+ 访问快速.因为不需要每次访问生成页面当然，一旦网站有任何更改，静态网站生成器需要重新生成所有的与更改相关的页面。然后由于Hugo是用Go语言编写的在生成速度这方面做的非常好.5000篇文章的博客生成时间只需要6秒钟.对比其他的静态页面生成引擎动不动几分钟的时间优势非常明显 采用静态页面搭建博客,维护起来非常简单.事实上根本不需要什么维护，完全不用考虑复杂的运行时间，依赖和数据库的问题。再有也不用担心安全性的问题，没有数据库，网站注入什么的也无从下手 无依赖.低消耗资源. 专注于写作.我认为对于个人博客来说，应该将时间花在内容上而不是各种折腾网站。Hugo会将Markdown格式的内容和设置好模版一起，生成漂亮干净的页面。你只需要把Markdown文件放在content文件夹下面.一切水到渠成  听起来很棒的样子那搭建起来会不会非常复杂?
+  不会.跟着教程走下来.只需要十分钟.
+开始 需求 1.Hugo工具 2.GitHub个人账号 3.Git工具  安装 如果说速度快是Hugo的第一大优点，那么安装简单应该就是Hugo的第二大优点。对于Mac用户，没有brew的话先安装brew，在命令行里敲：
+$ ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;  然后再敲一行安装Hugo:
+$ brew new Hugo  当然你也可以在这里直接下载对应系统的binary文件，解压就行了。
+生成 site 目录 hugo new site blog cd blog git init #Congratulations! Your new Hugo site is created in /Users/steven/MyProjects/Demo/blog.</description>
+    </item>
+    
+    <item>
+      <title>HyperLogLog</title>
+      <link>https://blog.abser.top/blog/hyperloglog%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Sun, 25 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.abser.top/blog/hyperloglog%E7%AE%97%E6%B3%95/</guid>
+      <description>更好的阅读参见我的语雀
+基数计数基本概念 基数计数(cardinality counting)通常用来统计一个集合中不重复的元素个数，例如统计某个网站的UV，或者用户搜索网站的关键词数量。数据分析、网络监控及数据库优化等领域都会涉及到基数计数的需求。 要实现基数计数，最简单的做法是记录集合中所有不重复的元素集合，当新来一个元素，若中不包含元素​，则将加入，否则不加入，计数值就是​的元素数量。这种做法存在两个问题：
+ 当统计的数据量变大时，相应的存储内存也会线性增长 当集合变大，判断其是否包含新加入元素​的成本变大  概率算法 实际上目前还没有发现更好的在大数据场景中准确计算基数的高效算法，因此在不追求绝对准确的情况下，使用概率算法算是一个不错的解决方案。概率算法不直接存储数据集合本身，通过一定的概率统计方法预估基数值，这种方法可以大大节省内存，同时保证误差控制在一定范围内。目前用于基数计数的概率算法包括:
+ Linear Counting(LC)：早期的基数估计算法，LC在空间复杂度方面并不算优秀，实际上LC的空间复杂度与简单bitmap方法是一样的（但是有个常数项级别的降低），都是O(N​max​​)； LogLog Counting(LLC)：LogLog Counting相比于LC更加节省内存，空间复杂度只有O(log​2​​(log​2​​(N​max​​))) HyperLogLog Counting(HLL)：HyperLogLog Counting是基于LLC的优化和改进，在同样空间复杂度情况下，能够比LLC的基数估计误差更小。  HLL 直观演示 HLLDEMO
+HLL的实际步骤  通过hash函数计算输入值对应的比特串 比特串的低 位对应的数字用来找到数组S中对应的位置 i t+1位开始找到第一个1出现的位置 k，将 k 记入数组位置 基于数组S记录的所有数据的统计值，计算整体的基数值，计算公式可以简单表示为：  HLL是LLC的误差改进，实际是基于LLC。
+算法来源（N次伯努利过程） 下面非正式的从直观角度描述LLC算法的思想来源。
+设a为待估集合（哈希后）中的一个元素，由上面对H的定义可知，a可以看做一个长度固定的比特串（也就是a的二进制表示），设H哈希后的结果长度为L比特，我们将这L个比特位从左到右分别编号为1、2、…、L：
+又因为a是从服从均与分布的样本空间中随机抽取的一个样本，因此a每个比特位服从如下分布且相互独立。
+ 通俗说就是a的每个比特位为0和1的概率各为0.5，且相互之间是独立的。 设 ρ(a)为a的比特串中第一个“1”出现的位置，显然1≤ρ(a)≤L，这里我们忽略比特串全为0的情况（概率为）。如果我们遍历集合中所有元素的比特串，取为所有ρ(a)的最大值。 此时我们可以将作为基数的一个粗糙估计，即：  解释 注意如下事实：
+由于比特串每个比特都独立且服从0-1分布，因此从左到右扫描上述某个比特串寻找第一个“1”的过程从统计学角度看是一个伯努利过程，例如，可以等价看作不断投掷一个硬币（每次投掷正反面概率皆为0.5），直到得到一个正面的过程。在一次这样的过程中，投掷一次就得到正面的概率为1/2，投掷两次得到正面的概率是，…，投掷k次才得到第一个正面的概率为。
+现在考虑如下两个问题：
+1、进行n次伯努利过程，所有投掷次数都不大于k的概率是多少？
+2、进行n次伯努利过程，至少有一次投掷次数等于k的概率是多少？
+首先看第一个问题，在一次伯努利过程中，投掷次数大于k的概率为，即连续掷出k个反面的概率。因此，在一次过程中投掷次数不大于k的概率为。因此，n次伯努利过程投掷次数均不大于k的概率为：
+ 显然第二个问题的答案是：
+ 从以上分析可以看出，当时，Pn(X≥k)的概率几乎为0，同时，当时，Pn(X≤k)的概率也几乎为0。用自然语言概括上述结论就是：当伯努利过程次数远远小于时，至少有一次过程投掷次数等于k的概率几乎为0；当伯努利过程次数远远大于时，没有一次过程投掷次数大于k的概率也几乎为0。
+如果将上面描述做一个对应：一次伯努利过程对应一个元素的比特串，反面对应0，正面对应1，投掷次数k对应第一个“1”出现的位置，我们就得到了下面结论：
+设一个集合的基数为n，为所有元素中首个“1”的位置最大的那个元素的“1”的位置，如果n远远小于，则我们得到为当前值的概率几乎为0（它应该更小），同样的，如果n远远大于，则我们得到为当前值的概率也几乎为0（它应该更大），因此可以作为基数n的一个粗糙估计。
+以上结论可以总结为：进行了n次进行抛硬币实验，每次分别记录下第一次抛到正面的抛掷次数kk，那么可以用n次实验中最大的抛掷次数来预估实验组数量n： 
+回到基数统计的问题，我们需要统计一组数据中不重复元素的个数，集合中每个元素的经过hash函数后可以表示成0和1构成的二进制数串，一个二进制串可以类比为一次抛硬币实验，1是抛到正面，0是反面。二进制串中从低位开始第一个1出现的位置可以理解为抛硬币试验中第一次出现正面的抛掷次数k，那么基于上面的结论，我们可以通过多次抛硬币实验的最大抛到正面的次数来预估总共进行了多少次实验，同样可以可以通过第一个1出现位置的最大值​来预估总共有多少个不同的数字（整体基数）。
+LogLogCounting 均匀随机化 与LC一样，在使用LLC之前需要选取一个哈希函数H应用于所有元素，然后对哈希值进行基数估计。H必须满足如下条件（定性的）：
+1、H的结果具有很好的均匀性，也就是说无论原始集合元素的值分布如何，其哈希结果的值几乎服从均匀分布（完全服从均匀分布是不可能的，D. Knuth已经证明不可能通过一个哈希函数将一组不服从均匀分布的数据映射为绝对均匀分布，但是很多哈希函数可以生成几乎服从均匀分布的结果，这里我们忽略这种理论上的差异，认为哈希结果就是服从均匀分布）。
+2、H的碰撞几乎可以忽略不计。也就是说我们认为对于不同的原始值，其哈希结果相同的概率非常小以至于可以忽略不计。</description>
+    </item>
+    
+    <item>
+      <title>Create A Service By Gin-Gorm</title>
+      <link>https://blog.abser.top/blog/gin-grom%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Sun, 11 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.abser.top/blog/gin-grom%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1/</guid>
+      <description>原文链接：https://medium.com/@cgrant/developing-a-simple-crud-api-with-go-gin-and-gorm-df87d98e6ed1 翻译：devabel 整理：abser
+入门 这个例子假设你已经安装并运行go语言的环境。如果您还没有安装，请转到http://cgrant.io/tutorials/go/getting-started-with-go/获取快速入门。
+Gin Web框架 由于我们将通过HTTP提供我们的API，因此我们需要一个Web框架来处理路由并提供请求。有许多框架可用，具有不同的功能和性能指标。在这个例子中，我们将使用Gin框架https://github.com/gin-gonic/gin 。由于速度和简单性，Gin是API开发的一个很好的框架。
+首先，让我们在$ GOPATH / src / simple-api中为我们的服务创建一个新文件夹，然后添加一个main.go文件，如下所示
+package main import “fmt” func main() { fmt.Println(“Hello World”) }  在我们继续学习前，让我们测试一下，确保一切正常运行。
+$ go run main.go Hello World  程序运行正常。现在让我们使用Gin框架将它变成一个Web应用程序。
+package main import “github.com/gin-gonic/gin” func main() { r := gin.Default() r.GET(“/”, func(c *gin.Context) { c.String(200, “Hello World”) }) r.Run() }  保存并运行它
+$ go run main.go [GIN-debug] [WARNING] Running in “debug” mode. Switch to “release” mode in production.</description>
+    </item>
+    
+    <item>
+      <title>Learn Gorm</title>
+      <link>https://blog.abser.top/blog/gorm-%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Sun, 11 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.abser.top/blog/gorm-%E5%85%A5%E9%97%A8/</guid>
+      <description>ORM（Object Relation Mapping），对象关系映射，实际上就是对数据库的操作进行封装，对上层开发人员屏蔽数据操作的细节，开发人员看到的就是一个个对象，大大简化了开发工作，提高了生产效率
+好了，下面我以这个点赞评论系统为例，介绍一下 gorm 的简单用法，以下使用的完整代码：https://github.com/hatlonely/...
+#gorm 用法介绍 ##库安装 go get -u github.com/jinzhu/gorm ##数据库连接
+import ( &amp;quot;github.com/jinzhu/gorm&amp;quot; _ &amp;quot;github.com/jinzhu/gorm/dialects/mysql&amp;quot; ） var db *gorm.DB func init() { var err error db, err = gorm.Open(&amp;quot;mysql&amp;quot;, &amp;quot;&amp;lt;user&amp;gt;:&amp;lt;password&amp;gt;/&amp;lt;database&amp;gt;?charset=utf8&amp;amp;parseTime=True&amp;amp;loc=Local&amp;quot;) if err != nil { panic(err) } }  连接比较简单，直接调用 gorm.Open 传入数据库地址即可
+github.com/jinzhu/gorm/dialects/mysql 是 golang 的 mysql 驱动，实际上就是 github.com/go-sql-driver/mysql 作者这里为了好记，重新弄了个名字
+这里我用的 mysql，实际上支持基本上所有主流的关系数据库，连接方式上略有不同
+db.DB().SetMaxIdleConns(10) db.DB().SetMaxOpenConns(100) 还可以使用 db.DB() 对象设置连接池信息
+###表定义 先来定义一个点赞表，这里面一条记录表示某个用户在某个时刻对某篇文章点了一个赞，用 ip + ua 来标识用户，title 标识文章标题
+type Like struct { ID int `gorm:&amp;quot;primary_key&amp;quot;` Ip string `gorm:&amp;quot;type:varchar(20);not null;index:ip_idx&amp;quot;` Ua string `gorm:&amp;quot;type:varchar(256);not null;&amp;quot;` Title string `gorm:&amp;quot;type:varchar(128);not null;index:title_idx&amp;quot;` Hash uint64 `gorm:&amp;quot;unique_index:hash_idx;&amp;quot;` CreatedAt time.</description>
+    </item>
     
   </channel>
 </rss>

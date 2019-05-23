@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>源码阅读 on Wound:Abser&#39;s Blog</title>
+    <link>https://blog.abser.top/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/</link>
+    <description>Recent content in 源码阅读 on Wound:Abser&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 19 Mar 2019 14:34:55 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.abser.top/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bytes包阅读</title>
+      <link>https://blog.abser.top/blog/bytes%E5%8C%85%E9%98%85%E8%AF%BB/</link>
+      <pubDate>Tue, 19 Mar 2019 14:34:55 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/bytes%E5%8C%85%E9%98%85%E8%AF%BB/</guid>
+      <description>bytes 笔记 
+byte.go 
+Overview 操作字节切片的函数，与字符串 strings 包类似。
+
+核心函数 
+genSplit(s, sep []byte, sepSave, n int) [][]byte 切分切片使用的最核心的函数。
+有四个参数，第一个是被切切片，第二个是分隔符，第三个是选择包含分隔符在内往后几个字节一起作为子切片，最后一个是最多通过n个分隔符来切分 // Generic split: splits after each instance of sep, // including sepSave bytes of sep in the subslices. // 将含有 sep 的字节切片全部单独切开，最多切 n 个，同时 匹配到时候多切 sepSave 个字节一起切进同一个切片 func genSplit(s, sep []byte, sepSave, n int) [][]byte { if n == 0 { return nil } if len(sep) == 0 { return explode(s, n) } if n &amp;lt; 0 { n = Count(s, sep) + 1 } a := make([][]byte, n) n-- i := 0 for i &amp;lt; n { m := Index(s, sep) if m &amp;lt; 0 { break } a[i] = s[: m+sepSave : m+sepSave] s = s[m+len(sep):] i++ } a[i] = s return a[:i+1] }</description>
+    </item>
+    
+    <item>
+      <title>Example ACL</title>
+      <link>https://blog.abser.top/blog/example-acl/</link>
+      <pubDate>Thu, 13 Dec 2018 18:41:35 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/example-acl/</guid>
+      <description>项目简介 TL;DR; acl is a lightweight acl manager for go.
+Features  Design simple &amp;amp; reusable roles to empower your application. Acquire the rights of other roles to build a powerful set of permissions. Resolve possible roles by examine them in an unified way.  Example type User struct { isAdmin bool } func main() { // first of all: create a new manager instance to register all your roles in one place manager := acl.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,1536 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Create A Service By Gin-Gorm - Wound:Abser&#39;s Blog</title>
+<meta name="description" content="Learn how to create service by Gin and Gorm">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=1">
+  <link rel="manifest" href="/favicon/site.webmanifest?v=1">
+  
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg?v=1" color="#ffffff">
+    <link rel="shortcut icon" href="/favicon/favicon.ico?v=1">
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml?v=1">
+  
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+
+  <meta name="generator" content="Hugo 0.55.6" />
+  
+<meta itemprop="name" content="Create A Service By Gin-Gorm">
+<meta itemprop="description" content="Learn how to create service by Gin and Gorm">
+
+
+<meta itemprop="datePublished" content="2018-11-11T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-11-11T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1863">
+
+
+
+<meta itemprop="keywords" content="go,gorm,gin," />
+
+  <meta property="og:title" content="Create A Service By Gin-Gorm" />
+<meta property="og:description" content="Learn how to create service by Gin and Gorm" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.abser.top/blog/gin-grom%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1/" />
+<meta property="article:published_time" content="2018-11-11T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2018-11-11T00:00:00&#43;00:00"/>
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Create A Service By Gin-Gorm"/>
+<meta name="twitter:description" content="Learn how to create service by Gin and Gorm"/>
+<meta name="twitter:site" content="@example"/>
+
+  
+
+  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+  
+    
+      <link rel="stylesheet" href="/css/normalize.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+      <link rel="stylesheet" href="/css/main.min.css">
+      <link rel="stylesheet" href="/css/add-on.css">
+    
+  
+  
+</head>
+
+  <body>
+    
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/">
+        
+          
+            Blog
+          
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu">
+      
+        <a href="/" class="link"><i class="fas fa-home">&nbsp;</i>Home</a>
+      
+        <a href="/about/" class="link"><i class="far fa-id-card">&nbsp;</i>About</a>
+      
+        <a href="/categories/" class="link"><i class="fas fa-sitemap">&nbsp;</i>Categories</a>
+      
+        <a href="/tags/" class="link"><i class="far fa-newspaper">&nbsp;</i>Tag</a>
+      
+      <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      
+
+    </menu>
+    
+
+    <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="lang-toggle" lang="en"><span class="flag-icon flag-icon-en" alt="en"></span></a>
+    <a href="#site-nav" class="nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="lang-menu" class="flyout-menu">
+  <a href="#" lang="en" class="active"><span class="flag-icon flag-icon-en" alt="en"></span></a>
+  
+    
+      
+    
+      
+        <a href="/ch" lang="ch" class="no-lang"><span class="flag-icon flag-icon-ch" alt="ch"></span></a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu">
+      <h1>Share Post</h1>
+      
+
+
+
+  
+    <a href="//twitter.com/share?url=&amp;text=&amp" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//reddit.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=&amp;title=" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.stumbleupon.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn stumbleupon">
+          <i class="fab fa-stumbleupon"></i><p>&nbsp;StumbleUpon</p>
+        </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=&amp;description=" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by &amp;body=" target="_blank" class="share-btn email">
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro">
+  <a href="/"><img src="/img/avator/logo.png" class="hexagon" width="100" alt="abser" /></a>
+  <header>
+    <h1>Abser 杨鼎睿</h1>
+  </header>
+  <main>
+    <p>A PUNK Hacker,Artist.</p>
+  </main>
+  
+    <footer>
+      <ul class="social-icons">
+        
+
+        <li><a href="//github.com/yhyddr" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="weixin://contacts/profile/abser9216" target="_blank" rel="noopener" title="WeChat" class="fab fa-weixin"></a></li>
+<li><a href="//wpa.qq.com/msgrd?v=3&amp;uin=349037616&amp;site=qq&amp;menu=yes" target="_blank" rel="noopener" title="QQ" class="fab fa-qq"></a></li>
+
+
+<li><a href="//twitter.com/example" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+<li><a href="//telegram.me/example" target="_blank" rel="noopener" title="telegram" class="fab fa-telegram"></a></li>
+
+
+
+
+<li><a href="mailto:abserari@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        <article class="post">
+  <header>
+  <div class="title">
+    
+        <h2><a href="/blog/gin-grom%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1/">Create A Service By Gin-Gorm</a></h2>
+    
+    
+        <p>Learn how to create service by Gin and Gorm</p>
+    
+</div>
+  <div class="meta">
+    <time class="published" datetime="2018-11-11 00:00:00 &#43;0000 UTC">
+      November 11, 2018
+    </time>
+    <span class="author">Abser</span>
+    
+        <p>9 minute read</p>
+    
+  </div>
+</header>
+
+  <section id="social-share">
+    
+
+
+
+  
+    <a href="//twitter.com/share?url=&amp;text=&amp" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//reddit.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=&amp;title=" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.stumbleupon.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn stumbleupon">
+          <i class="fab fa-stumbleupon"></i><p>&nbsp;StumbleUpon</p>
+        </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=&amp;description=" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by &amp;body=" target="_blank" class="share-btn email">
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+  </section>
+  
+<a href="/blog/gin-grom%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1/" class="image featured">
+  <img src="/img/2018/11/pic01.jpg" alt="Pic 1">
+</a>
+
+
+  <div class="content">
+    
+
+<p><span data-type="color" style="color:rgb(47, 47, 47)"><span data-type="background" style="background-color:rgb(255, 255, 255)">原文链接：</span></span><a href="https://link.jianshu.com/?t=https%3A%2F%2Fmedium.com%2F%40cgrant%2Fdeveloping-a-simple-crud-api-with-go-gin-and-gorm-df87d98e6ed1">https://medium.com/@cgrant/developing-a-simple-crud-api-with-go-gin-and-gorm-df87d98e6ed1</a>
+翻译：<span data-type="color" style="color:rgb(47, 47, 47)"><span data-type="background" style="background-color:rgb(255, 255, 255)">devabel</span></span>
+整理：abser</p>
+
+<h2 id="入门">入门</h2>
+
+<p>这个例子假设你已经安装并运行go语言的环境。如果您还没有安装，请转到<a href="https://link.jianshu.com?t=http%3A%2F%2Fcgrant.io%2Ftutorials%2Fgo%2Fgetting-started-with-go%2F">http://cgrant.io/tutorials/go/getting-started-with-go/</a>获取快速入门。</p>
+
+<h3 id="gin-web框架">Gin Web框架</h3>
+
+<p>由于我们将通过HTTP提供我们的API，因此我们需要一个Web框架来处理路由并提供请求。有许多框架可用，具有不同的功能和性能指标。在这个例子中，我们将使用Gin框架<a href="https://link.jianshu.com?t=https%3A%2F%2Fgithub.com%2Fgin-gonic%2Fgin">https://github.com/gin-gonic/gin</a>  。由于速度和简单性，Gin是API开发的一个很好的框架。</p>
+
+<p>首先，让我们在<code>$ GOPATH / src / simple-api</code>中为我们的服务创建一个新文件夹，然后添加一个main.go文件，如下所示</p>
+
+<pre><code class="language-go">package main
+
+import “fmt”
+
+func main() {
+ fmt.Println(“Hello World”)
+}
+</code></pre>
+
+<p>在我们继续学习前，让我们测试一下，确保一切正常运行。</p>
+
+<pre><code class="language-go">$ go run main.go
+Hello World
+</code></pre>
+
+<p>程序运行正常。现在让我们使用Gin框架将它变成一个Web应用程序。</p>
+
+<pre><code class="language-go">package main
+
+import “github.com/gin-gonic/gin”
+
+func main() {
+ r := gin.Default()
+ r.GET(“/”, func(c *gin.Context) {
+ c.String(200, “Hello World”)
+ })
+ r.Run() 
+}
+</code></pre>
+
+<p>保存并运行它</p>
+
+<pre><code class="language-go">$ go run main.go
+[GIN-debug] [WARNING] Running in “debug” mode. Switch to “release” mode in production.
+ — using env: export GIN_MODE=release
+ — using code: gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET / → main.main.func1 (3 handlers)
+[GIN-debug] Environment variable PORT is undefined. Using port :8080 by default
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2016/12/02–14:57:52 | 200 | 33.798µs | ::1 | GET /
+</code></pre>
+
+<p>然后浏览器访问<a href="https://link.jianshu.com?t=http%3A%2F%2Flocalhost%3A8080%2F">http://localhost:8080/</a></p>
+
+<pre><code class="language-plain">Hello World
+</code></pre>
+
+<p>成功！！！</p>
+
+<p>我们正在构建一个API，但不是一个Web应用程序，所以让我们将其切换到JSON响应</p>
+
+<pre><code class="language-go">package main
+
+import “github.com/gin-gonic/gin”
+
+func main() {
+    r := gin.Default()
+    r.GET(“/”, func(c *gin.Context) {
+        c.JSON(200, gin.H{
+        “message”: “Hello World”,
+        })
+    })
+ r.Run() // listen and server on 0.0.0.0:8080
+}
+</code></pre>
+
+<p>保存文件，重新运行并刷新浏览器，您应该看到我们的JSON 消息
+<code>{“message”：“Hello World”}</code></p>
+
+<h3 id="gorm的数据持久性">GORM的数据持久性</h3>
+
+<p>现在让我们看看我们的持久层。对于本节我们将使用本地的基于SQLite文件的数据库开始。稍后我们将切换到使用MySql来证明。</p>
+
+<p>Gorm <a href="https://link.jianshu.com?t=http%3A%2F%2Fjinzhu.me%2Fgorm%2F">http://jinzhu.me/gorm/</a>是一个用于go的对象关系映射（ORM）框架。它大大简化了模型到数据库的映射和持久化。尽管我不是大型复杂系统的ORM的忠实拥趸，但他们对原型开发新的绿地应用程序确实很有效。Gorm在Go领域是一个非常受欢迎的工具，我们将在这里看看它。</p>
+
+<p>为了解决gorm问题，我们将把我们刚写的Gin代码换掉，并且演示一下gorm的功能。学习完这块，我们会将Gin重新添加到应用程序中。</p>
+
+<p>让我们开始一个小例子。</p>
+
+<pre><code class="language-go">package main
+
+import (
+ “github.com/jinzhu/gorm”
+ _ “github.com/jinzhu/gorm/dialects/sqlite”
+)
+
+func main() {
+ db, _ := gorm.Open(“sqlite3”, “./gorm.db”)
+ defer db.Close()
+
+}
+</code></pre>
+
+<p>如果你现在运行这个程序，你会在你的文件系统中看到一个名为gorm.db的新文件。这是我们的数据库文件系统将在应用程序中使用。虽然我们可以看到我们的应用程序正在运行，而且gorm正在被使用，但我们的系统还没有完成。让我们添加更多的代码。</p>
+
+<pre><code class="language-go">package main
+
+import (
+ “fmt”
+
+“github.com/jinzhu/gorm”
+ _ “github.com/jinzhu/gorm/dialects/sqlite”
+)
+
+type Person struct {
+ ID uint `json:”id”`
+ FirstName string `json:”firstname”`
+ LastName string `json:”lastname”`
+}
+
+func main() {
+ db, _ := gorm.Open(“sqlite3”, “./gorm.db”)
+ defer db.Close()
+
+ p1 := Person{FirstName: “John”, LastName: “Doe”}
+ p2 := Person{FirstName: “Jane”, LastName: “Smith”}
+
+ fmt.Println(p1.FirstName)
+ fmt.Println(p2.LastName)
+
+}
+</code></pre>
+
+<p>在这里，我们刚刚添加了一个简单的Person结构，并在使用它们打印出值之前创建了一些实例。请记住，Person结构中的字段需要以大写字母开头，因为Go定义这些是公共字段。</p>
+
+<p>现在我们已经有了一个可以使用Gorm的对象。</p>
+
+<pre><code class="language-go">package main
+
+import (
+ “fmt”
+
+“github.com/jinzhu/gorm”
+ _ “github.com/jinzhu/gorm/dialects/sqlite”
+)
+
+type Person struct {
+ ID uint `json:”id”`
+ FirstName string `json:”firstname”`
+ LastName string `json:”lastname”`
+}
+
+func main() {
+ db, _ := gorm.Open(“sqlite3”, “./gorm.db”)
+ defer db.Close()
+
+ db.AutoMigrate(&amp;Person{})
+
+ p1 := Person{FirstName: “John”, LastName: “Doe”}
+ p2 := Person{FirstName: “Jane”, LastName: “Smith”}
+
+ db.Create(&amp;p1)
+ var p3 Person // identify a Person type for us to store the results in
+ db.First(&amp;p3) // Find the first record in the Database and store it in p3
+
+ fmt.Println(p1.FirstName)
+ fmt.Println(p2.LastName)
+ fmt.Println(p3.LastName) // print out our record from the database
+
+}
+</code></pre>
+
+<p>现在让我们运行它，看看输出什么</p>
+
+<pre><code class="language-go">$ go run main.go
+John
+Smith
+Doe
+</code></pre>
+
+<p>哇，非常简单。只需几行代码，我们就可以保存并从数据库中检索。Gorm在如何存储和查询他们的网站上有更多的选项。接下来我们将介绍几个核心部分，但请查看他们的文档以获取更多选项。</p>
+
+<h2 id="api框架">API框架</h2>
+
+<p>我们已经回顾了框架如何独立运作。现在是时候把所有东西放在一起成为一个可用的API</p>
+
+<h3 id="查询所有信息">查询所有信息</h3>
+
+<p>让我们从查阅我们之前添加的数据开始阅读CRUD的部分。我将删除我们刚刚通过的一些行，并用一个新路由添加到Gin框架中，以查询我们的数据库。</p>
+
+<pre><code class="language-go">package main
+
+import (
+ “fmt”
+
+ “github.com/gin-gonic/gin”
+ “github.com/jinzhu/gorm”
+ _ “github.com/jinzhu/gorm/dialects/sqlite”
+)
+
+var db *gorm.DB
+var err error
+
+type Person struct {
+ ID uint `json:”id”`
+ FirstName string `json:”firstname”`
+ LastName string `json:”lastname”`
+}
+
+func main() {
+
+ // NOTE: See we’re using = to assign the global var
+ // instead of := which would assign it only in this function
+ db, err = gorm.Open(“sqlite3”, “./gorm.db”)
+ if err != nil {
+   fmt.Println(err)
+ }
+ defer db.Close()
+
+ db.AutoMigrate(&amp;Person{})
+
+ r := gin.Default()
+ r.GET(“/”, GetProjects)
+
+ r.Run(“:8080”)
+}
+
+func GetProjects(c *gin.Context) {
+ var people []Person
+ if err := db.Find(&amp;people).Error; err != nil {
+    c.AbortWithStatus(404)
+    fmt.Println(err)
+ } else {
+    c.JSON(200, people)
+ }
+
+}
+</code></pre>
+
+<p>现在运行它并转到<a href="https://link.jianshu.com?t=http%3A%2F%2Flocalhost%3A8080%2F">http://localhost:8080/</a>，你应该看到</p>
+
+<pre><code>[{“id”: 1,”firstname”: “John”,”lastname”: “Doe”}]
+</code></pre>
+
+<p>哇只是几行代码，我们已经获得API响应。大部分都是错误处理！</p>
+
+<h3 id="查询单条信息">查询单条信息</h3>
+
+<p>OK让我们以REST为导向更新上下文，并增加查找单条信息的功能。</p>
+
+<pre><code class="language-go">package main
+
+import (
+ “fmt”
+
+ “github.com/gin-gonic/gin”
+ “github.com/jinzhu/gorm”
+ _ “github.com/jinzhu/gorm/dialects/sqlite”
+)
+
+var db *gorm.DB
+var err error
+
+type Person struct {
+ ID uint `json:”id”`
+ FirstName string `json:”firstname”`
+ LastName string `json:”lastname”`
+}
+
+func main() {
+
+ // NOTE: See we’re using = to assign the global var
+ // instead of := which would assign it only in this function
+ db, err = gorm.Open(“sqlite3”, “./gorm.db”)
+ if err != nil {
+    fmt.Println(err)
+ }
+ defer db.Close()
+
+ db.AutoMigrate(&amp;Person{})
+
+ r := gin.Default()
+ r.GET(“/people/”, GetPeople)
+ r.GET(“/people/:id”, GetPerson)
+
+ r.Run(“:8080”)
+}
+
+func GetPerson(c *gin.Context) {
+ id := c.Params.ByName(“id”)
+ var person Person
+ if err := db.Where(“id = ?”, id).First(&amp;person).Error; err != nil {
+    c.AbortWithStatus(404)
+    fmt.Println(err)
+ } else {
+    c.JSON(200, person)
+ }
+}
+
+func GetPeople(c *gin.Context) {
+ var people []Person
+ if err := db.Find(&amp;people).Error; err != nil {
+ c.AbortWithStatus(404)
+    fmt.Println(err)
+ } else {
+    c.JSON(200, people)
+ }
+
+}
+</code></pre>
+
+<p>现在运行服务器，但请注意，我们更改了上下文，现在您将转到http：// localhost：8080 / people /查看您的列表。一旦将该ID添加到网址的末尾，您将得到单个记录返回http：// localhost：8080 / people / 1</p>
+
+<pre><code>$ go run main.go
+John
+Smith
+Doe
+</code></pre>
+
+<p>哇，非常简单。只需几行代码，我们就可以保存并从数据库中检索。Gorm在如何存储和查询他们的网站上有更多的选项。接下来我们将介绍几个核心部分，但请查看他们的文档以获取更多选项。</p>
+
+<h2 id="制作api">制作API</h2>
+
+<p>我们已经回顾了框架如何独立运作。现在是时候把所有东西放在一起成为一个可用的API</p>
+
+<h3 id="查询所有信息-1">查询所有信息</h3>
+
+<p>让我们从查阅我们之前添加的数据开始阅读CRUD的部分。我将删除我们刚刚通过的一些行，并用一个新路由添加到Gin框架中，以查询我们的数据库。</p>
+
+<pre><code class="language-go">package main
+
+import (
+ “fmt”
+
+ “github.com/gin-gonic/gin”
+ “github.com/jinzhu/gorm”
+ _ “github.com/jinzhu/gorm/dialects/sqlite”
+)
+
+var db *gorm.DB
+var err error
+
+type Person struct {
+ ID uint `json:”id”`
+ FirstName string `json:”firstname”`
+ LastName string `json:”lastname”`
+}
+
+func main() {
+
+ // NOTE: See we’re using = to assign the global var
+ // instead of := which would assign it only in this function
+ db, err = gorm.Open(“sqlite3”, “./gorm.db”)
+ if err != nil {
+   fmt.Println(err)
+ }
+ defer db.Close()
+
+ db.AutoMigrate(&amp;Person{})
+
+ r := gin.Default()
+ r.GET(“/”, GetProjects)
+
+ r.Run(“:8080”)
+}
+
+func GetProjects(c *gin.Context) {
+ var people []Person
+ if err := db.Find(&amp;people).Error; err != nil {
+    c.AbortWithStatus(404)
+    fmt.Println(err)
+ } else {
+    c.JSON(200, people)
+ }
+
+}
+</code></pre>
+
+<p>现在运行它并转到<a href="https://link.jianshu.com?t=http%3A%2F%2Flocalhost%3A8080%2F">http://localhost:8080/</a>，你应该看到</p>
+
+<pre><code>[{“id”: 1,”firstname”: “John”,”lastname”: “Doe”}]
+</code></pre>
+
+<p>哇只是几行代码，我们已经获得API响应。大部分都是错误处理！</p>
+
+<h3 id="查询单条信息-1">查询单条信息</h3>
+
+<p>OK让我们以REST为导向更新上下文，并增加查找单条信息的功能。</p>
+
+<pre><code class="language-go">package main
+
+import (
+ “fmt”
+
+ “github.com/gin-gonic/gin”
+ “github.com/jinzhu/gorm”
+ _ “github.com/jinzhu/gorm/dialects/sqlite”
+)
+
+var db *gorm.DB
+var err error
+
+type Person struct {
+ ID uint `json:”id”`
+ FirstName string `json:”firstname”`
+ LastName string `json:”lastname”`
+}
+
+func main() {
+
+ // NOTE: See we’re using = to assign the global var
+ // instead of := which would assign it only in this function
+ db, err = gorm.Open(“sqlite3”, “./gorm.db”)
+ if err != nil {
+    fmt.Println(err)
+ }
+ defer db.Close()
+
+ db.AutoMigrate(&amp;Person{})
+
+ r := gin.Default()
+ r.GET(“/people/”, GetPeople)
+ r.GET(“/people/:id”, GetPerson)
+
+ r.Run(“:8080”)
+}
+
+func GetPerson(c *gin.Context) {
+ id := c.Params.ByName(“id”)
+ var person Person
+ if err := db.Where(“id = ?”, id).First(&amp;person).Error; err != nil {
+    c.AbortWithStatus(404)
+    fmt.Println(err)
+ } else {
+    c.JSON(200, person)
+ }
+}
+
+func GetPeople(c *gin.Context) {
+ var people []Person
+ if err := db.Find(&amp;people).Error; err != nil {
+ c.AbortWithStatus(404)
+    fmt.Println(err)
+ } else {
+    c.JSON(200, people)
+ }
+
+}
+</code></pre>
+
+<p>现在运行服务器，但请注意，我们更改了上下文，现在您将转到http：// localhost：8080 / people /查看您的列表。一旦将该ID添加到网址的末尾，您将得到单个记录返回http：// localhost：8080 / people / 1</p>
+
+<pre><code class="language-json">{“id”: 1,”firstname”: “John”,”lastname”: “Doe”}
+</code></pre>
+
+<h3 id="创建">创建</h3>
+
+<p>很难用仅有一条记录来看出差异。很难区分[{&hellip;}]和{&hellip;}之间的区别所以让我们添加Create函数和路由</p>
+
+<pre><code class="language-go">package main
+
+import (
+ “fmt”
+
+ “github.com/gin-gonic/gin”
+ “github.com/jinzhu/gorm”
+ _ “github.com/jinzhu/gorm/dialects/sqlite”
+)
+
+var db *gorm.DB
+var err error
+
+type Person struct {
+ ID uint `json:”id”`
+ FirstName string `json:”firstname”`
+ LastName string `json:”lastname”`
+}
+
+func main() {
+
+ // NOTE: See we’re using = to assign the global var
+ // instead of := which would assign it only in this function
+ db, err = gorm.Open(“sqlite3”, “./gorm.db”)
+ if err != nil {
+ fmt.Println(err)
+ }
+ defer db.Close()
+
+db.AutoMigrate(&amp;Person{})
+
+ r := gin.Default()
+ r.GET(“/people/”, GetPeople)
+ r.GET(“/people/:id”, GetPerson)
+ r.POST(“/people”, CreatePerson)
+
+r.Run(“:8080”)
+}
+
+func CreatePerson(c *gin.Context) {
+
+ var person Person
+ c.BindJSON(&amp;person)
+
+ db.Create(&amp;person)
+ c.JSON(200, person)
+}
+
+func GetPerson(c *gin.Context) {
+ id := c.Params.ByName(“id”)
+ var person Person
+ if err := db.Where(“id = ?”, id).First(&amp;person).Error; err != nil {
+    c.AbortWithStatus(404)
+    fmt.Println(err)
+ } else {
+    c.JSON(200, person)
+ }
+}
+
+func GetPeople(c *gin.Context) {
+ var people []Person
+ if err := db.Find(&amp;people).Error; err != nil {
+    c.AbortWithStatus(404)
+    fmt.Println(err)
+ } else {
+    c.JSON(200, people)
+ }
+
+}
+</code></pre>
+
+<p>现在要测试这一个，我们将从命令行运行一个curl命令。我们还需要运行服务器，以便打开另一个终端窗口，以便可以运行这两个命令。使用\$ go run main.go在第一个窗口中运行服务器</p>
+
+<p>一旦运行，在第二个窗口运行：</p>
+
+<pre><code class="language-basic">$ curl -i -X POST http://localhost:8080/people -d ‘{ “FirstName”: “Elvis”, “LastName”: “Presley”}’
+</code></pre>
+
+<p>你应该看到一个成功的回应</p>
+
+<pre><code class="language-basic">HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Sat, 03 Dec 2016 00:14:06 GMT
+Content-Length: 50
+
+{“id”:2,”firstname”:”Elvis”,”lastname”:”Presley”}
+</code></pre>
+
+<p>现在让我们在浏览器中列出我们的人员，看看它是否列出了我们所有的条目
+<code>http：// localhost：8080 / people /</code></p>
+
+<pre><code class="language-json">[{“id”: 1,”firstname”: “John”,”lastname”: “Doe”},{“id”: 2,”firstname”: “Elvis”,”lastname”: “Presley”}]
+</code></pre>
+
+<p>太棒了，输出结果！看到这里你认为这很酷。</p>
+
+<p>这次只发送部分Person数据</p>
+
+<pre><code class="language-basic">$ curl -i -X POST [http://localhost:8080/people](http://localhost:8080/people) -d ‘{ “FirstName”: “Madison”}’
+</code></pre>
+
+<p>刷新浏览器并查看它只添加了我们发送的数据</p>
+
+<pre><code class="language-json">[{“id”: 1,”firstname”: “John”,”lastname”: “Doe”},{“id”: 2,”firstname”: “Elvis”,”lastname”: “Presley”},{“id”: 3,”firstname”: “Madison”,”lastname”: “”}]
+</code></pre>
+
+<p>这是Gin的一部分，请注意CreatePerson函数中的c.BindJSON（＆person）行。它会自动填充请求中的任何匹配数据字段。</p>
+
+<p><span data-type="background" style="background-color:#FADB14">你也可能错过了它，但我的数据库中的情况和我通过的情况是不同的。Gin 对大小写不敏感。我传入了FirstName ，但数据库使用了firstname.。</span></p>
+
+<p>很简单！</p>
+
+<h3 id="更新">更新</h3>
+
+<p>尽管如此，我们不能让Madison的last name为空。是时候添加我们的更新功能了</p>
+
+<pre><code class="language-go">package main
+
+import (
+ “fmt”
+
+ “github.com/gin-gonic/gin”
+ “github.com/jinzhu/gorm”
+ _ “github.com/jinzhu/gorm/dialects/sqlite”
+)
+
+var db *gorm.DB
+var err error
+
+type Person struct {
+ ID uint `json:”id”`
+ FirstName string `json:”firstname”`
+ LastName string `json:”lastname”`
+}
+
+func main() {
+
+ // NOTE: See we’re using = to assign the global var
+ // instead of := which would assign it only in this function
+ db, err = gorm.Open(“sqlite3”, “./gorm.db”)
+ if err != nil {
+    fmt.Println(err)
+ }
+ defer db.Close()
+
+ db.AutoMigrate(&amp;Person{})
+
+ r := gin.Default()
+ r.GET(“/people/”, GetPeople)
+ r.GET(“/people/:id”, GetPerson)
+ r.POST(“/people”, CreatePerson)
+ r.PUT(“/people/:id”, UpdatePerson)
+
+ r.Run(“:8080”)
+}
+
+func UpdatePerson(c *gin.Context) {
+
+ var person Person
+ id := c.Params.ByName(“id”)
+
+ if err := db.Where(“id = ?”, id).First(&amp;person).Error; err != nil {
+    c.AbortWithStatus(404)
+    fmt.Println(err)
+ }
+ c.BindJSON(&amp;person)
+
+ db.Save(&amp;person)
+ c.JSON(200, person)
+
+}
+
+func CreatePerson(c *gin.Context) {
+
+ var person Person
+ c.BindJSON(&amp;person)
+
+ db.Create(&amp;person)
+ c.JSON(200, person)
+}
+
+func GetPerson(c *gin.Context) {
+ id := c.Params.ByName(“id”)
+ var person Person
+ if err := db.Where(“id = ?”, id).First(&amp;person).Error; err != nil {
+    c.AbortWithStatus(404)
+    fmt.Println(err)
+ } else {
+    c.JSON(200, person)
+ }
+}
+
+func GetPeople(c *gin.Context) {
+ var people []Person
+ if err := db.Find(&amp;people).Error; err != nil {
+    c.AbortWithStatus(404)
+    fmt.Println(err)
+ } else {
+    c.JSON(200, people)
+ }
+
+}
+</code></pre>
+
+<p>为了测试这个，我们将使用一个类似的curl命令，但是我们会在特定的用户上调用PUT方法</p>
+
+<pre><code class="language-basic">$ curl -i -X PUT http://localhost:8080/people/3 -d ‘{ “FirstName”: “Madison”, “LastName”:”Sawyer” }’
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Sat, 03 Dec 2016 00:25:35 GMT
+Content-Length: 51
+
+{“id”:3,”firstname”:”Madison”,”lastname”:”Sawyer”}
+</code></pre>
+
+<p>果然，如果我们刷新我们的浏览器，我们看到它添加了Sawyer这条数据。</p>
+
+<pre><code class="language-json">[{“id”: 1,”firstname”: “John”,”lastname”: “Doe”},{“id”: 2,”firstname”: “Elvis”,”lastname”: “Presley”},{“id”: 3,”firstname”: “Madison”,”lastname”: “Sawyer”}]
+</code></pre>
+
+<p>我们再次可以发送部分数据进行部分更新</p>
+
+<pre><code class="language-basic">$ curl -i -X PUT http://localhost:8080/people/3 -d ‘{ “FirstName”: “Tom” }’
+</code></pre>
+
+<p>显示为</p>
+
+<pre><code class="language-json">[{“id”: 1,”firstname”: “John”,”lastname”: “Doe”},{“id”: 2,”firstname”: “Elvis”,”lastname”: “Presley”},{“id”: 3,”firstname”: “Tom”,”lastname”: “Sawyer”}]
+</code></pre>
+
+<h3 id="删除">删除</h3>
+
+<pre><code class="language-go">package main
+
+import (
+ “fmt”
+
+ “github.com/gin-gonic/gin”
+ “github.com/jinzhu/gorm”
+ _ “github.com/jinzhu/gorm/dialects/sqlite”
+)
+
+var db *gorm.DB
+var err error
+
+type Person struct {
+ ID uint `json:”id”`
+ FirstName string `json:”firstname”`
+ LastName string `json:”lastname”`
+}
+
+func main() {
+
+ // NOTE: See we’re using = to assign the global var
+ // instead of := which would assign it only in this function
+ db, err = gorm.Open(“sqlite3”, “./gorm.db”)
+ if err != nil {
+    fmt.Println(err)
+ }
+ defer db.Close()
+
+ db.AutoMigrate(&amp;Person{})
+
+ r := gin.Default()
+ r.GET(“/people/”, GetPeople)
+ r.GET(“/people/:id”, GetPerson)
+ r.POST(“/people”, CreatePerson)
+ r.PUT(“/people/:id”, UpdatePerson)
+ r.DELETE(“/people/:id”, DeletePerson)
+
+ r.Run(“:8080”)
+}
+
+func DeletePerson(c *gin.Context) {
+ id := c.Params.ByName(“id”)
+ var person Person
+ d := db.Where(“id = ?”, id).Delete(&amp;person)
+ fmt.Println(d)
+ c.JSON(200, gin.H{“id #” + id: “deleted”})
+}
+
+func UpdatePerson(c *gin.Context) {
+
+ var person Person
+ id := c.Params.ByName(“id”)
+
+ if err := db.Where(“id = ?”, id).First(&amp;person).Error; err != nil {
+    c.AbortWithStatus(404)
+    fmt.Println(err)
+ }
+ c.BindJSON(&amp;person)
+
+ db.Save(&amp;person)
+ c.JSON(200, person)
+
+}
+
+func CreatePerson(c *gin.Context) {
+
+ var person Person
+ c.BindJSON(&amp;person)
+
+ db.Create(&amp;person)
+ c.JSON(200, person)
+}
+
+func GetPerson(c *gin.Context) {
+ id := c.Params.ByName(“id”)
+ var person Person
+ if err := db.Where(“id = ?”, id).First(&amp;person).Error; err != nil {
+    c.AbortWithStatus(404)
+    fmt.Println(err)
+ } else {
+    c.JSON(200, person)
+ }
+}
+
+func GetPeople(c *gin.Context) {
+ var people []Person
+ if err := db.Find(&amp;people).Error; err != nil {
+    c.AbortWithStatus(404)
+    fmt.Println(err)
+ } else {
+    c.JSON(200, people)
+ }
+
+}
+</code></pre>
+
+<p>为了测试这个，我们将使用带curl的Delete方法来调用它</p>
+
+<pre><code class="language-basic">$ curl -i -X DELETE http://localhost:8080/people/1
+
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Sat, 03 Dec 2016 00:32:40 GMT
+Content-Length: 20
+
+{“id #1”:”deleted”}
+</code></pre>
+
+<p>刷新浏览器，你会看到我们的John Doe已被删除</p>
+
+<pre><code class="language-json">[{“id”: 2,”firstname”: “Elvis”,”lastname”: “Presley”},{“id”: 3,”firstname”: “Tom”,”lastname”: “Sawyer”}]
+</code></pre>
+
+<h2 id="修改模型">修改模型</h2>
+
+<p>在定义基本的API后，现在是开始改变Person对象的好时机。我们可以通过只更改person结构来轻松修改数据库和api。</p>
+
+<p>我要做的就是在Person Struct中添加一个city字段。没有其他的，就一行。</p>
+
+<pre><code class="language-go">type Person struct {
+ ID uint `json:”id”`
+ FirstName string `json:”firstname”`
+ LastName string `json:”lastname”`
+ City string `json:”city”`
+}
+</code></pre>
+
+<p>刷新我们的浏览器并拉出列表，您可以看到我所有的对象现在都有city</p>
+
+<pre><code class="language-json">[{“id”: 2,”firstname”: “Elvis”,”lastname”: “Presley”,”city”: “”},{“id”: 3,”firstname”: “Tom”,”lastname”: “Sawyer”,”city”: “”}]
+</code></pre>
+
+<p>我可以创建并更新新字段，而无需进行其他更改</p>
+
+<pre><code class="language-basic">$ curl -i -X PUT http://localhost:8080/people/2 -d ‘{ “city”: “Memphis” }’
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Sat, 03 Dec 2016 00:40:57 GMT
+Content-Length: 67
+
+{“id”:2,”firstname”:”Elvis”,”lastname”:”Presley”,”city”:”Memphis”}
+</code></pre>
+
+<p>这全部由我们主函数中的db.AutoMigrate（＆Person {}）行处理。在生产环境中，我们希望更接近地管理架构，但对于原型来说，这是完美的</p>
+
+<h1 id="使用mysql">使用MySql</h1>
+
+<p>好的，我明白，没问题，你想使用MySql而不是SQLite。</p>
+
+<p>为此，我们只需要修改一个导入声明和连接..</p>
+
+<p>导入_“github.com/go-sql-driver/mysql”</p>
+
+<p>连接</p>
+
+<pre><code class="language-go">db, _ = gorm.Open(“mysql”, “user:pass@tcp(127.0.0.1:3306)/samples?charset=utf8&amp;parseTime=True&amp;loc=Local”)
+</code></pre>
+
+<p>完整的例子</p>
+
+<pre><code class="language-go">package main
+
+// only need mysql OR sqlite 
+// both are included here for reference
+import (
+ “fmt”
+
+ “github.com/gin-gonic/gin”
+ _ “github.com/go-sql-driver/mysql” 
+ “github.com/jinzhu/gorm”
+ _ “github.com/jinzhu/gorm/dialects/sqlite”
+)
+
+var db *gorm.DB
+var err error
+
+type Person struct {
+ ID uint `json:”id”`
+ FirstName string `json:”firstname”`
+ LastName string `json:”lastname”`
+ City string `json:”city”`
+}
+
+func main() {
+
+ // NOTE: See we’re using = to assign the global var
+ // instead of := which would assign it only in this function
+ //db, err = gorm.Open(“sqlite3”, “./gorm.db”)
+ db, _ = gorm.Open(“mysql”, “user:pass@tcp(127.0.0.1:3306)/database?charset=utf8&amp;parseTime=True&amp;loc=Local”)
+
+ if err != nil {
+    fmt.Println(err)
+ }
+ defer db.Close()
+
+ db.AutoMigrate(&amp;Person{})
+
+ r := gin.Default()
+ r.GET(“/people/”, GetPeople)
+ r.GET(“/people/:id”, GetPerson)
+ r.POST(“/people”, CreatePerson)
+ r.PUT(“/people/:id”, UpdatePerson)
+ r.DELETE(“/people/:id”, DeletePerson)
+
+ r.Run(“:8080”)
+}
+
+func DeletePerson(c *gin.Context) {
+ id := c.Params.ByName(“id”)
+ var person Person
+ d := db.Where(“id = ?”, id).Delete(&amp;person)
+ fmt.Println(d)
+ c.JSON(200, gin.H{“id #” + id: “deleted”})
+}
+
+func UpdatePerson(c *gin.Context) {
+
+ var person Person
+ id := c.Params.ByName(“id”)
+
+ if err := db.Where(“id = ?”, id).First(&amp;person).Error; err != nil {
+    c.AbortWithStatus(404)
+    fmt.Println(err)
+ }
+ c.BindJSON(&amp;person)
+
+ db.Save(&amp;person)
+ c.JSON(200, person)
+
+}
+
+func CreatePerson(c *gin.Context) {
+
+ var person Person
+ c.BindJSON(&amp;person)
+
+ db.Create(&amp;person)
+ c.JSON(200, person)
+}
+
+func GetPerson(c *gin.Context) {
+ id := c.Params.ByName(“id”)
+ var person Person
+ if err := db.Where(“id = ?”, id).First(&amp;person).Error; err != nil {
+    c.AbortWithStatus(404)
+    fmt.Println(err)
+ } else {
+    c.JSON(200, person)
+ }
+}
+
+func GetPeople(c *gin.Context) {
+ var people []Person
+ if err := db.Find(&amp;people).Error; err != nil {
+    c.AbortWithStatus(404)
+    fmt.Println(err)
+ } else {
+    c.JSON(200, people)
+ }
+
+}
+</code></pre>
+
+  </div>
+  <footer>
+    <ul class="stats">
+  
+    
+    
+      <li class="categories">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://blog.abser.top/categories/learn">learn</a></li>
+          
+        </ul>
+      </li>
+    
+  
+  
+    
+    
+      <li class="tags">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://blog.abser.top/tags/go">go</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://blog.abser.top/tags/gorm">gorm</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://blog.abser.top/tags/gin">gin</a></li>
+          
+        </ul>
+      </li>
+    
+  
+</ul>
+
+  </footer>
+</article>
+<article class="post">
+  
+    <article class="post">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "blog-abser-top" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </article>
+
+
+</article>
+<div class="pagination">
+  
+    <a href="/blog/gorm-%E5%85%A5%E9%97%A8/" class="button big previous"><i class="fas fa-angle-left"></i> Learn Gorm</a>
+  
+  
+    <a href="/blog/hyperloglog%E7%AE%97%E6%B3%95/" class="button big next">HyperLogLog <i class="fas fa-angle-right"></i></a>
+  
+</div>
+
+
+      </main>
+      <section id="site-sidebar">
+  <section id="recent-posts">
+    <header>
+      <h1>Recent posts</h1>
+    </header>
+    
+    <article class="mini-post">
+      <section>
+        
+<a href="/blog/bytes%E5%8C%85%E9%98%85%E8%AF%BB/" class="image featured">
+  <img src="/img/2019/03/1.jpg" alt="">
+</a>
+
+
+      </section>
+      <header>
+        <h1><a href="/blog/bytes%E5%8C%85%E9%98%85%E8%AF%BB/">Bytes包阅读</a></h1>
+        <time class="published" datetime="">March 19, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+
+      </section>
+      <header>
+        <h1><a href="/blog/studycoding/">Studycoding</a></h1>
+        <time class="published" datetime="">March 12, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+
+      </section>
+      <header>
+        <h1><a href="/blog/%E5%AD%A6%E4%B9%A0%E5%9E%8B%E7%BB%84%E7%BB%87%E6%A6%82%E5%BF%B5/">学习型组织概念</a></h1>
+        <time class="published" datetime="">March 1, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+<a href="/blog/kickstart%E6%8C%87%E5%8D%97/" class="image featured">
+  <img src="/img/2019/01/pic04.jpg" alt="pic 3">
+</a>
+
+
+      </section>
+      <header>
+        <h1><a href="/blog/kickstart%E6%8C%87%E5%8D%97/">Kickstart指南</a></h1>
+        <time class="published" datetime="">January 24, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+<a href="/blog/ipfs%E8%AE%B2%E8%A7%A3/" class="image featured">
+  <img src="/img/2019/01/pic02.jpg" alt="pic02">
+</a>
+
+
+      </section>
+      <header>
+        <h1><a href="/blog/ipfs%E8%AE%B2%E8%A7%A3/">IPFS讲解</a></h1>
+        <time class="published" datetime="">January 19, 2019</time>
+      </header>
+    </article>
+    
+    
+      <a href="/blog/" class="button">See more</a>
+    
+  </section>
+
+  
+    
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+            
+          
+          
+          <li>
+            
+              <a href="/categories/learn/">learn<span class="count">51</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/essays/">essays<span class="count">2</span></a>
+            
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  <section id="mini-bio">
+    <header>
+      <h1>About</h1>
+    </header>
+    <p>欢迎来到这里</p>
+    <footer>
+      <a href="/about" class="button">Learn More</a>
+    </footer>
+  </section>
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="social-icons">
+        
+
+        <li><a href="//github.com/yhyddr" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="weixin://contacts/profile/abser9216" target="_blank" rel="noopener" title="WeChat" class="fab fa-weixin"></a></li>
+<li><a href="//wpa.qq.com/msgrd?v=3&amp;uin=349037616&amp;site=qq&amp;menu=yes" target="_blank" rel="noopener" title="QQ" class="fab fa-qq"></a></li>
+
+
+<li><a href="//twitter.com/example" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+<li><a href="//telegram.me/example" target="_blank" rel="noopener" title="telegram" class="fab fa-telegram"></a></li>
+
+
+
+
+<li><a href="mailto:abserari@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    
+      &copy; 2019
+      
+        Wound:Abser&#39;s Blog
+      
+    .
+    Powered by <a href="//gohugo.io" target="_blank" rel="noopener">Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/html.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/css.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/js.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/toml.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/go.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/bash.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+  <script src=/js/util.js></script>
+  <script src=/js/main.js></script>
+  <script src=/js/add-on.js></script>
+  
+
+
+
+    </div>
+  </body>
+</html>

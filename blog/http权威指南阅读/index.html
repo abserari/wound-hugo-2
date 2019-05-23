@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Http权威指南阅读 - Wound:Abser&#39;s Blog</title>
+<meta name="description" content="对于HTTP权威指南的阅读">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=1">
+  <link rel="manifest" href="/favicon/site.webmanifest?v=1">
+  
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg?v=1" color="#ffffff">
+    <link rel="shortcut icon" href="/favicon/favicon.ico?v=1">
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml?v=1">
+  
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+
+  <meta name="generator" content="Hugo 0.55.6" />
+  
+<meta itemprop="name" content="Http权威指南阅读">
+<meta itemprop="description" content="对于HTTP权威指南的阅读">
+
+
+<meta itemprop="datePublished" content="2019-01-04T16:52:25&#43;08:00" />
+<meta itemprop="dateModified" content="2019-01-04T16:52:25&#43;08:00" />
+<meta itemprop="wordCount" content="64">
+
+
+
+<meta itemprop="keywords" content="http,总结," />
+
+  <meta property="og:title" content="Http权威指南阅读" />
+<meta property="og:description" content="对于HTTP权威指南的阅读" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.abser.top/blog/http%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E9%98%85%E8%AF%BB/" />
+<meta property="article:published_time" content="2019-01-04T16:52:25&#43;08:00"/>
+<meta property="article:modified_time" content="2019-01-04T16:52:25&#43;08:00"/>
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Http权威指南阅读"/>
+<meta name="twitter:description" content="对于HTTP权威指南的阅读"/>
+<meta name="twitter:site" content="@example"/>
+
+  
+
+  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+  
+    
+      <link rel="stylesheet" href="/css/normalize.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+      <link rel="stylesheet" href="/css/main.min.css">
+      <link rel="stylesheet" href="/css/add-on.css">
+    
+  
+  
+</head>
+
+  <body>
+    
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/">
+        
+          
+            Blog
+          
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu">
+      
+        <a href="/" class="link"><i class="fas fa-home">&nbsp;</i>Home</a>
+      
+        <a href="/about/" class="link"><i class="far fa-id-card">&nbsp;</i>About</a>
+      
+        <a href="/categories/" class="link"><i class="fas fa-sitemap">&nbsp;</i>Categories</a>
+      
+        <a href="/tags/" class="link"><i class="far fa-newspaper">&nbsp;</i>Tag</a>
+      
+      <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      
+
+    </menu>
+    
+
+    <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="lang-toggle" lang="en"><span class="flag-icon flag-icon-en" alt="en"></span></a>
+    <a href="#site-nav" class="nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="lang-menu" class="flyout-menu">
+  <a href="#" lang="en" class="active"><span class="flag-icon flag-icon-en" alt="en"></span></a>
+  
+    
+      
+    
+      
+        <a href="/ch" lang="ch" class="no-lang"><span class="flag-icon flag-icon-ch" alt="ch"></span></a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu">
+      <h1>Share Post</h1>
+      
+
+
+
+  
+    <a href="//twitter.com/share?url=&amp;text=&amp" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//reddit.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=&amp;title=" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.stumbleupon.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn stumbleupon">
+          <i class="fab fa-stumbleupon"></i><p>&nbsp;StumbleUpon</p>
+        </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=&amp;description=" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by &amp;body=" target="_blank" class="share-btn email">
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro">
+  <a href="/"><img src="/img/avator/logo.png" class="hexagon" width="100" alt="abser" /></a>
+  <header>
+    <h1>Abser 杨鼎睿</h1>
+  </header>
+  <main>
+    <p>A PUNK Hacker,Artist.</p>
+  </main>
+  
+    <footer>
+      <ul class="social-icons">
+        
+
+        <li><a href="//github.com/yhyddr" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="weixin://contacts/profile/abser9216" target="_blank" rel="noopener" title="WeChat" class="fab fa-weixin"></a></li>
+<li><a href="//wpa.qq.com/msgrd?v=3&amp;uin=349037616&amp;site=qq&amp;menu=yes" target="_blank" rel="noopener" title="QQ" class="fab fa-qq"></a></li>
+
+
+<li><a href="//twitter.com/example" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+<li><a href="//telegram.me/example" target="_blank" rel="noopener" title="telegram" class="fab fa-telegram"></a></li>
+
+
+
+
+<li><a href="mailto:abserari@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        <article class="post">
+  <header>
+  <div class="title">
+    
+        <h2><a href="/blog/http%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E9%98%85%E8%AF%BB/">Http权威指南阅读</a></h2>
+    
+    
+        <p>对于HTTP权威指南的阅读</p>
+    
+</div>
+  <div class="meta">
+    <time class="published" datetime="2019-01-04 16:52:25 &#43;0800 CST">
+      January 4, 2019
+    </time>
+    <span class="author">Abser</span>
+    
+        <p>1 minute read</p>
+    
+  </div>
+</header>
+
+  <section id="social-share">
+    
+
+
+
+  
+    <a href="//twitter.com/share?url=&amp;text=&amp" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//reddit.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=&amp;title=" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.stumbleupon.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn stumbleupon">
+          <i class="fab fa-stumbleupon"></i><p>&nbsp;StumbleUpon</p>
+        </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=&amp;description=" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by &amp;body=" target="_blank" class="share-btn email">
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+  </section>
+  
+<a href="/blog/http%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E9%98%85%E8%AF%BB/" class="image featured">
+  <img src="/img/2019/01/pic03.jpg" alt="Pic 1">
+</a>
+
+
+  <div class="content">
+    
+
+<h1 id="http-权威指南-阅读">《HTTP 权威指南》阅读</h1>
+
+<h2 id="overview">Overview</h2>
+
+<p>说实话，看这本书的时候是2019年，我认为她的部分信息已经过时了，或者说是完全没有意义了。<br />但是作为现在网络传输信息的核心，总有一些东西是一直贯彻了几十年直到今日的。所以在这里写下读后感。<br />包括有哪些是我认为还能读的以及我的感受</p>
+
+<h2 id="part-one">Part One</h2>
+
+<p>这是关于 HTTP 的概述，是现在web的基础，只要现在还是使用这个协议，那么这一块一定是有价值的。只是说这部分有价值的东西其实日常的网络工程中能了解到，或者在一些百科上也能知道
+* 关于URL的定义
+  * 资源定位
+* 关于TCP/IP的使用
+  * 链接的建立
+* 关于Web使用的组件
+  * 代理
+  * 缓存
+  * 网关
+  * 隧道
+  * Agent代理
+* 关于报文的组成结构和C/S模式下的报文交互
+  * 方法
+  * 状态码</p>
+
+<h2 id="part-two">Part Two</h2>
+
+<p>这一部分是关于HTTP的结构，关于HTTP各种情况下是怎样交互的&ndash;使用不同的组件是什么情况<br />主要用一些网络知识的拓扑图让你理解了你从客户端发出的请求是经历的怎样的过程到达服务端又是怎样回来的。这对理解网络之间的文件传输概念提供了很好的构建方式。</p>
+
+<h2 id="part-three">Part Three</h2>
+
+<p>这一部分讲了怎样在交互中保证隐私，即安全。实际上是怎样在HTTP传输的时候能够识别出来谁是谁来保护信息。<br />讲到了Cookie和基本认证和摘要认证、HTTPS。<br />其中最重要的应为Cookies和HTTPS。Cookies实际上就是存储一些信息来帮助认证客户端属性。而HTTPS则是在HTTP和TCP两层之间加了一层SSL加密，使得信息通过加密传输</p>
+
+<h2 id="part-four">Part Four</h2>
+
+<p>这部分是关于协议和标准的事情，我个人认为有些过时同时也是我们现在不需要了解的一段。正如图灵图书上写的<br /><strong>站在巨人的肩膀上</strong><br />我们不应该注重于已经规范好的细枝末节上的实现，而是根据认真的使用他们，整合他们或者创新出的新的方式。<br />当然建立新标准也是很重要的事情</p>
+
+<h2 id="part-five">Part Five</h2>
+
+<p>这是关于网页内容方面的部分。<br />从这里你可以了解到网络上经常说到的重定向，DNS ，CDN 等各种名词其含义和起源，它们为什么要被这样设定，希望达到的是什么效果。<br />和日志监控，用来分析网站&ndash;实际上现在我们只需要用别人的网站分析服务就好，没有必要和精力去自己耗力。</p>
+
+<hr />
+
+<p>最后附录里说明了一些规定<br />如什么状态码代表什么情况，首部即header中的信息通常可以从名字判断出他们的信息是用来做什么的，然后是一些编码，语言和认证标识</p>
+
+<h3 id="拓展">拓展</h3>
+
+<p>HTTP或许以后会被取代，或者说被分掉大量的市场份额，比如这个<br />星际文件传输网络：<a href="https://achainofblocks.com/2018/10/05/ipfs-interplanetary-file-system-simply-explained/">https://achainofblocks.com/2018/10/05/ipfs-interplanetary-file-system-simply-explained/</a></p>
+
+  </div>
+  <footer>
+    <ul class="stats">
+  
+    
+    
+      <li class="categories">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://blog.abser.top/categories/learn">learn</a></li>
+          
+        </ul>
+      </li>
+    
+  
+  
+    
+    
+      <li class="tags">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://blog.abser.top/tags/http">http</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://blog.abser.top/tags/%E6%80%BB%E7%BB%93">总结</a></li>
+          
+        </ul>
+      </li>
+    
+  
+</ul>
+
+  </footer>
+</article>
+<article class="post">
+  
+    <article class="post">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "blog-abser-top" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </article>
+
+
+</article>
+<div class="pagination">
+  
+    <a href="/blog/%E4%BD%BF%E7%94%A8go%E8%BF%9B%E8%A1%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E7%9A%84mysql-docker%E5%AE%B9%E5%99%A8/" class="button big previous"><i class="fas fa-angle-left"></i> 使用Go进行集成测试的MySQL Docker容器</a>
+  
+  
+    <a href="/blog/ipfs%E8%AE%B2%E8%A7%A3/" class="button big next">IPFS讲解 <i class="fas fa-angle-right"></i></a>
+  
+</div>
+
+
+      </main>
+      <section id="site-sidebar">
+  <section id="recent-posts">
+    <header>
+      <h1>Recent posts</h1>
+    </header>
+    
+    <article class="mini-post">
+      <section>
+        
+<a href="/blog/bytes%E5%8C%85%E9%98%85%E8%AF%BB/" class="image featured">
+  <img src="/img/2019/03/1.jpg" alt="">
+</a>
+
+
+      </section>
+      <header>
+        <h1><a href="/blog/bytes%E5%8C%85%E9%98%85%E8%AF%BB/">Bytes包阅读</a></h1>
+        <time class="published" datetime="">March 19, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+
+      </section>
+      <header>
+        <h1><a href="/blog/studycoding/">Studycoding</a></h1>
+        <time class="published" datetime="">March 12, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+
+      </section>
+      <header>
+        <h1><a href="/blog/%E5%AD%A6%E4%B9%A0%E5%9E%8B%E7%BB%84%E7%BB%87%E6%A6%82%E5%BF%B5/">学习型组织概念</a></h1>
+        <time class="published" datetime="">March 1, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+<a href="/blog/kickstart%E6%8C%87%E5%8D%97/" class="image featured">
+  <img src="/img/2019/01/pic04.jpg" alt="pic 3">
+</a>
+
+
+      </section>
+      <header>
+        <h1><a href="/blog/kickstart%E6%8C%87%E5%8D%97/">Kickstart指南</a></h1>
+        <time class="published" datetime="">January 24, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+<a href="/blog/ipfs%E8%AE%B2%E8%A7%A3/" class="image featured">
+  <img src="/img/2019/01/pic02.jpg" alt="pic02">
+</a>
+
+
+      </section>
+      <header>
+        <h1><a href="/blog/ipfs%E8%AE%B2%E8%A7%A3/">IPFS讲解</a></h1>
+        <time class="published" datetime="">January 19, 2019</time>
+      </header>
+    </article>
+    
+    
+      <a href="/blog/" class="button">See more</a>
+    
+  </section>
+
+  
+    
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+            
+          
+          
+          <li>
+            
+              <a href="/categories/learn/">learn<span class="count">51</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/essays/">essays<span class="count">2</span></a>
+            
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  <section id="mini-bio">
+    <header>
+      <h1>About</h1>
+    </header>
+    <p>欢迎来到这里</p>
+    <footer>
+      <a href="/about" class="button">Learn More</a>
+    </footer>
+  </section>
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="social-icons">
+        
+
+        <li><a href="//github.com/yhyddr" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="weixin://contacts/profile/abser9216" target="_blank" rel="noopener" title="WeChat" class="fab fa-weixin"></a></li>
+<li><a href="//wpa.qq.com/msgrd?v=3&amp;uin=349037616&amp;site=qq&amp;menu=yes" target="_blank" rel="noopener" title="QQ" class="fab fa-qq"></a></li>
+
+
+<li><a href="//twitter.com/example" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+<li><a href="//telegram.me/example" target="_blank" rel="noopener" title="telegram" class="fab fa-telegram"></a></li>
+
+
+
+
+<li><a href="mailto:abserari@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    
+      &copy; 2019
+      
+        Wound:Abser&#39;s Blog
+      
+    .
+    Powered by <a href="//gohugo.io" target="_blank" rel="noopener">Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/html.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/css.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/js.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/toml.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/go.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/bash.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+  <script src=/js/util.js></script>
+  <script src=/js/main.js></script>
+  <script src=/js/add-on.js></script>
+  
+
+
+
+    </div>
+  </body>
+</html>

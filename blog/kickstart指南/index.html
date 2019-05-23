@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Kickstart指南 - Wound:Abser&#39;s Blog</title>
+<meta name="description" content="kickstart使用入门,google">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=1">
+  <link rel="manifest" href="/favicon/site.webmanifest?v=1">
+  
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg?v=1" color="#ffffff">
+    <link rel="shortcut icon" href="/favicon/favicon.ico?v=1">
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml?v=1">
+  
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+
+  <meta name="generator" content="Hugo 0.55.6" />
+  
+<meta itemprop="name" content="Kickstart指南">
+<meta itemprop="description" content="kickstart使用入门,google">
+
+
+<meta itemprop="datePublished" content="2019-01-24T15:43:05&#43;08:00" />
+<meta itemprop="dateModified" content="2019-01-24T15:43:05&#43;08:00" />
+<meta itemprop="wordCount" content="558">
+
+
+
+<meta itemprop="keywords" content="guide,kickstart,google," />
+
+  <meta property="og:title" content="Kickstart指南" />
+<meta property="og:description" content="kickstart使用入门,google" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.abser.top/blog/kickstart%E6%8C%87%E5%8D%97/" />
+<meta property="article:published_time" content="2019-01-24T15:43:05&#43;08:00"/>
+<meta property="article:modified_time" content="2019-01-24T15:43:05&#43;08:00"/>
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Kickstart指南"/>
+<meta name="twitter:description" content="kickstart使用入门,google"/>
+<meta name="twitter:site" content="@example"/>
+
+  
+
+  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+  
+    
+      <link rel="stylesheet" href="/css/normalize.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+      <link rel="stylesheet" href="/css/main.min.css">
+      <link rel="stylesheet" href="/css/add-on.css">
+    
+  
+  
+</head>
+
+  <body>
+    
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/">
+        
+          
+            Blog
+          
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu">
+      
+        <a href="/" class="link"><i class="fas fa-home">&nbsp;</i>Home</a>
+      
+        <a href="/about/" class="link"><i class="far fa-id-card">&nbsp;</i>About</a>
+      
+        <a href="/categories/" class="link"><i class="fas fa-sitemap">&nbsp;</i>Categories</a>
+      
+        <a href="/tags/" class="link"><i class="far fa-newspaper">&nbsp;</i>Tag</a>
+      
+      <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      
+
+    </menu>
+    
+
+    <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="lang-toggle" lang="en"><span class="flag-icon flag-icon-en" alt="en"></span></a>
+    <a href="#site-nav" class="nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="lang-menu" class="flyout-menu">
+  <a href="#" lang="en" class="active"><span class="flag-icon flag-icon-en" alt="en"></span></a>
+  
+    
+      
+    
+      
+        <a href="/ch" lang="ch" class="no-lang"><span class="flag-icon flag-icon-ch" alt="ch"></span></a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu">
+      <h1>Share Post</h1>
+      
+
+
+
+  
+    <a href="//twitter.com/share?url=&amp;text=&amp" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//reddit.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=&amp;title=" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.stumbleupon.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn stumbleupon">
+          <i class="fab fa-stumbleupon"></i><p>&nbsp;StumbleUpon</p>
+        </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=&amp;description=" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by &amp;body=" target="_blank" class="share-btn email">
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro">
+  <a href="/"><img src="/img/avator/logo.png" class="hexagon" width="100" alt="abser" /></a>
+  <header>
+    <h1>Abser 杨鼎睿</h1>
+  </header>
+  <main>
+    <p>A PUNK Hacker,Artist.</p>
+  </main>
+  
+    <footer>
+      <ul class="social-icons">
+        
+
+        <li><a href="//github.com/yhyddr" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="weixin://contacts/profile/abser9216" target="_blank" rel="noopener" title="WeChat" class="fab fa-weixin"></a></li>
+<li><a href="//wpa.qq.com/msgrd?v=3&amp;uin=349037616&amp;site=qq&amp;menu=yes" target="_blank" rel="noopener" title="QQ" class="fab fa-qq"></a></li>
+
+
+<li><a href="//twitter.com/example" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+<li><a href="//telegram.me/example" target="_blank" rel="noopener" title="telegram" class="fab fa-telegram"></a></li>
+
+
+
+
+<li><a href="mailto:abserari@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        <article class="post">
+  <header>
+  <div class="title">
+    
+        <h2><a href="/blog/kickstart%E6%8C%87%E5%8D%97/">Kickstart指南</a></h2>
+    
+    
+        <p>kickstart使用入门,google</p>
+    
+</div>
+  <div class="meta">
+    <time class="published" datetime="2019-01-24 15:43:05 &#43;0800 CST">
+      January 24, 2019
+    </time>
+    <span class="author">Abser</span>
+    
+        <p>3 minute read</p>
+    
+  </div>
+</header>
+
+  <section id="social-share">
+    
+
+
+
+  
+    <a href="//twitter.com/share?url=&amp;text=&amp" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//reddit.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=&amp;title=" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.stumbleupon.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn stumbleupon">
+          <i class="fab fa-stumbleupon"></i><p>&nbsp;StumbleUpon</p>
+        </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=&amp;description=" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by &amp;body=" target="_blank" class="share-btn email">
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+  </section>
+  
+<a href="/blog/kickstart%E6%8C%87%E5%8D%97/" class="image featured">
+  <img src="/img/2019/01/pic04.jpg" alt="pic 3">
+</a>
+
+
+  <div class="content">
+    
+
+<h1 id="kick-start快速入门">Kick Start快速入门</h1>
+
+<h2 id="background">Background</h2>
+
+<p>Code Jam Kickstart 为同学们提供向 Google 展现自己专业能力以及走近 Google 的机会。在家就可以参加由 Google 的工程师们设计的算法题。通过参加线上测试，同学们可以直观地了解 Google 技术性岗位对编程能力的要求，也是参与 Google 校园招聘的入场券。</p>
+
+<h2 id="requirement">Requirement</h2>
+
+<ul>
+<li>G家邮箱一枚</li>
+<li>科学上网工具</li>
+<li><a href="https://codingcompetitions.withgoogle.com/kickstart/archive">地址传送门</a>（如果从codejam进入的话，选择分类中的kickstart）</li>
+</ul>
+
+<h2 id="quickstart-overview">Quickstart-Overview</h2>
+
+<p>G家鼓励灵活的解决方案，所以施行的输入输出方案和其他的ACM在线测评不一样。</p>
+
+<p>不是让你不断提交代码然后系统给你测试，而是给你数据集让你自己测试后在本地生成输出文件进行上传。<br /><img src="https://cdn.nlark.com/yuque/0/2019/png/176280/1548304826927-983c0662-0022-4203-a838-b45e0b317718.png#align=left&amp;display=inline&amp;height=802&amp;linkTarget=_blank&amp;name=image.png&amp;originHeight=802&amp;originWidth=1433&amp;size=223294&amp;width=1433" alt="image.png" /><br /><br />
+1. 下载题目数据集 <code>.in</code> 文件（小数据集4分钟变一次，大数据集8分钟变一次）
+1. 解题并生成输出 <code>.out</code> 文件
+1. 提交输出文件 和 代码源文件（练习测试不用提交）</p>
+
+<p>PS. 每一道题都有小数据集和大数据集两个.in文件可供下载，大数据集的数据范围一般都比小数据集的范围更广，有更多的困难情况。<br /><br /></p>
+
+<h2 id="quickstart-https-codejam-withgoogle-com-codejam-resources-quickstart-guide"><a href="https://codejam.withgoogle.com/codejam/resources/quickstart-guide">QuickStart</a></h2>
+
+<h3 id="必要点">必要点    </h3>
+
+<p>如果你想参加比赛，请在比赛期间访问你的比赛主页。如果您想练习，请访问“过去的问题”页面并选择一个回合。然后选择一个问题。</p>
+
+<p>读问题，前面几段话将精确描述您的程序需要解决的问题。仔细注意极限部分。这些限制将帮助您确定处理大小数据集所需的解决方案类型。（通常会说明一些无解的数据不用考虑）</p>
+
+<p>编写一个程序，在不到3分钟的时间内用所描述的小限制解决问题。确保您的程序接受输入并以给定的格式输出;如果您使用示例输入作为输入运行它，它应该准确地生成示例输出(包括“Case #”文本)。如果您不确定如何处理输入和输出，请参阅下面的<a href="https://www.yuque.com/techcats/guide/enbito#9c961103">标准I/O教程</a>，了解可行的做法。</p>
+
+<p>在页面顶部，单击以 <code>solve A-small</code>  并下载输入文件。在真正的比赛中，我们一收到下载请求就会启动一个4分钟的计时器。如果你在练习，就不会有计时器。</p>
+
+<p>在该输入文件上运行程序，并将结果保存到文件中。将该文件作为输出文件提交。(在真正的比赛中，你还需要提交你的源代码。)服务器的响应方式有以下几种:</p>
+
+<ul>
+<li><p>正确示例:您提交的每个案例都完全正确!</p></li>
+
+<li><p>拒绝:您的提交被拒绝的原因与您的答案的正确性或不正确性无关。例如，您可能上传了一个输入文件或源代码，而不是您自己的输出文件。时钟仍然在运行，所以需要考虑您能否在超时之前修复这个问题(在这种情况下，您的提交将被视为不正确)。</p></li>
+
+<li><p>不正确：<strong>我们不会告诉您哪些情况是错误</strong>较小**的时间惩罚(但是解决问题总比不解决好，即使有惩罚!)</p></li>
+</ul>
+
+<p>在您解决小数据集之后，大数据集将变得可用。一旦您的程序准备好处理更高的限制，下载大型数据集。(参赛者通常只编写一个解决方案来解决两个数据集。)我们一收到下载请求就会启动一个8分钟的计时器。</p>
+
+<p>与小数据集一样运行程序并提交，直到比赛结束你才知道你是否正确地解决了问题。如果您的提交被拒绝或您想提交另一个答案，您可以在8分钟的时间限制内再次尝试，但只有最后一次提交将被判定。</p>
+
+<p>接着看另一个问题(左边有一个列表)。您正确解出的每个数据集都值下载链接旁边所写的点数。比赛结束时得分最多的选手排名最高。在一个小数据集上，每一次错误的提交最终被正确的回答，将会有4分钟的惩罚时间。为了引人注目，记分牌将显示“乐观”的初步结果,也就是说，它将假设每个大型提交都是正确的。比赛结束后，记分牌将显示真实的结果，包括哪些大的提交是错误的。</p>
+
+<h3 id="教程">教程</h3>
+
+<p>我们现在只有一个教程，但我们将来可能会添加更多教程。虽然阅读理论很好，但我们强烈建议您练习解决实际问题以使其变得更好。您可以访问我们的 <a href="https://codejam.withgoogle.com/codejam/past-contests">过去问题</a>部分来完成此操作。For Fun！</p>
+
+<h4 id="标准-解决方案-使用标准输入和输出">“标准”解决方案：使用标准输入和输出</h4>
+
+<p>Kickstart鼓励灵活解决问题：我们会为您提供输入文件，并让您以自己喜欢的方式解决问题。您可以选择语言，开发环境，体系结构，库等。</p>
+
+<p>我们的许多参赛者使用其他编程竞赛中常见的模型，如ACM-ICPC和Codeforces：一个单文件程序，它读取输入并准确生成所需的输出。本教程演示如何使用标准输入和标准输出将此模型应用于Kickstart！当然，仍然欢迎您以完全不同的方式阅读输入和/或写入输出; 这只是一个选择。</p>
+
+<h4 id="什么是标准输入和标准输出">什么是标准输入和标准输出？</h4>
+
+<p>标准输入（stdin）和标准输出（stdout）是程序用于与外界交互的数据流。当您以最简单的方式从控制台运行程序时，stdin就是从键盘读入程序的内容，而stdout就是打印在屏幕上的内容。但是，这两个流可以被定向读取和写入文件！</p>
+
+<p>假设您有一个名为“my_program”的程序，通常通过以下命令运行：<br /><code>MY_PROGRAM</code><br />请注意，如果使用像C语言++编译为机器码，<code>MY_PROGRAM</code>可能是这样的<br /><code>./my_binary</code><br />，对于像Java使用虚拟机，<br /><code>java my_java_binary_name</code><br />或者像Python这样的解释型语言<br /><code>python my_python_code.py</code><br />在Linux，Mac OS / X和Windows中，您可以使用&lt;和&gt;将stdin和stdout分别重定向到文件。</p>
+
+<p>命令行如下</p>
+
+<pre><code class="language-powershell">MY_PROGRAM &lt; input_file.txt &gt; output_file.txt
+</code></pre>
+
+<p>将使您的程序接收<code>input_file.txt</code>其stdin中的内容，并将输出写入其stdout <code>output_file.txt</code>。</p>
+
+<h4 id="如何在kickstart中使用stdin和stdout">如何在Kickstart中使用stdin和stdout？</h4>
+
+<p>在处理解决方案时，您可能希望从文件中读取（例如，<code>sample.txt</code>您已将问题的样本I / O复制到其中），但想要把输出写入控制台。你可以这样做：</p>
+
+<pre><code class="language-powershell">MY_PROGRAM &lt; sample.txt
+</code></pre>
+
+<p>下载输入后，您需要将输出定向到要上载的文件：</p>
+
+<pre><code class="language-powershell">MY_PROGRAM &lt; small_input.txt &gt; small_output.txt
+</code></pre>
+
+<p>如果程序的算法适用于Small和Large数据集，则只需重新运行此命令，甚至不需要更改或重新编译程序：</p>
+
+<pre><code class="language-powershell">MY_PROGRAM &lt; large_input.txt &gt; large_output.txt
+</code></pre>
+
+<h4 id="如何编写我的代码以从stdin读取并写入stdout">如何编写我的代码以从stdin读取并写入stdout？</h4>
+
+<p>考虑以下非常简单的问题。输入一个 **T ，T <strong>N </strong>M<strong>。所需的输出形式是<code>Case #x: y z</code>，在这里<code>x</code>， <code>y</code>和<code>z</code>均为整数; <code>x</code>是的第 x 个情况，<code>y</code>是的</strong>M<strong>N</strong>的总和，并且<code>z</code>是产品<strong>N</strong>M**。</p>
+
+<p>input_file.txt</p>
+
+<pre><code class="language-powershell">3
+1 5
+7 -2
+9001 0
+</code></pre>
+
+<p>这里有一些代码来解决这个问题，从stdin读取并以各种语言写入stdout。对于我们的示例，我们使用了Kickstart中一些最常用的语言，但您当然不仅限于使用这些语言！</p>
+
+<p>C ++（命令行）</p>
+
+<pre><code class="language-powershell">g++ solution.cpp -o solution
+./solution &lt; input_file.txt &gt; output_file.txt
+</code></pre>
+
+<p>C ++（solution.cpp）</p>
+
+<pre><code class="language-cpp">#include &lt;iostream&gt;  // includes cin to read from stdin and cout to write to stdout
+using namespace std;  // since cin and cout are both in namespace std, this saves some text
+int main() {
+  int t, n, m;
+  cin &gt;&gt; t;  // read t. cin knows that t is an int, so it reads it as such.
+  for (int i = 1; i &lt;= t; ++i) {
+    cin &gt;&gt; n &gt;&gt; m;  // read n and then m.
+    cout &lt;&lt; &quot;Case #&quot; &lt;&lt; i &lt;&lt; &quot;: &quot; &lt;&lt; (n + m) &lt;&lt; &quot; &quot; &lt;&lt; (n * m) &lt;&lt; endl;
+    // cout knows that n + m and n * m are ints, and prints them accordingly.
+    // It also knows &quot;Case #&quot;, &quot;: &quot;, and &quot; &quot; are strings and that endl ends the line.
+  }
+  return 0;
+}
+</code></pre>
+
+<p>Java（命令行）</p>
+
+<pre><code class="language-powershell">javac Solution.java
+java Solution &lt; input_file.txt &gt; output_file.txt
+</code></pre>
+
+<p>Java（Solution.java）</p>
+
+<pre><code class="language-java">import java.util.*;
+import java.io.*;
+public class Solution {
+  public static void main(String[] args) {
+    Scanner in = new Scanner(new BufferedReader(new InputStreamReader(System.in)));
+    int t = in.nextInt();  // Scanner has functions to read ints, longs, strings, chars, etc.
+    for (int i = 1; i &lt;= t; ++i) {
+      int n = in.nextInt();
+      int m = in.nextInt();
+      System.out.println(&quot;Case #&quot; + i + &quot;: &quot; + (n + m) + &quot; &quot; + (n * m));
+    }
+  }
+}
+</code></pre>
+
+<p>Python 2（命令）</p>
+
+<pre><code class="language-powershell">python2 solution.py &lt; input_file.txt &gt; output_file.txt
+</code></pre>
+
+<p>Python 2（solution.py）</p>
+
+<pre><code class="language-python"># raw_input() reads a string with a line of input, stripping the '\n' (newline) at the end.
+# This is all you need for most Kickstart problems.
+t = int(raw_input())  # read a line with a single integer
+for i in xrange(1, t + 1):
+  n, m = [int(s) for s in raw_input().split(&quot; &quot;)]  # read a list of integers, 2 in this case
+  print &quot;Case #{}: {} {}&quot;.format(i, n + m, n * m)
+  # check out .format's specification for more formatting options
+</code></pre>
+
+<p>Python 3（命令）</p>
+
+<pre><code class="language-powershell">python3 solution.py &lt; input_file.txt &gt; output_file.txt
+</code></pre>
+
+<p>Python 3（solution.py）</p>
+
+<pre><code class="language-python"># input() reads a string with a line of input, stripping the '\n' (newline) at the end.
+# This is all you need for most Kickstart problems.
+t = int(input())  # read a line with a single integer
+for i in range(1, t + 1):
+  n, m = [int(s) for s in input().split(&quot; &quot;)]  # read a list of integers, 2 in this case
+  print(&quot;Case #{}: {} {}&quot;.format(i, n + m, n * m))
+  # check out .format's specification for more formatting options
+</code></pre>
+
+<p>从这些示例中可以看出，大多数语言提供了从stdin读取和写入stdout的简单方法。这通常比直接引用代码中的特定文件更容易 - 从Small数据集切换到Large数据集时，或者从控制台切换输出目标（用于调试）时，无需更改或重新编译代码一个文件（所以你可以提交一样的源文件）。</p>
+
+<p>您可以随时查看您喜欢的语言的文档，以找到使用stdin和stdout的首选方法。几乎所有语言都有一个。</p>
+
+  </div>
+  <footer>
+    <ul class="stats">
+  
+    
+    
+      <li class="categories">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://blog.abser.top/categories/learn">learn</a></li>
+          
+        </ul>
+      </li>
+    
+  
+  
+    
+    
+      <li class="tags">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://blog.abser.top/tags/guide">guide</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://blog.abser.top/tags/kickstart">kickstart</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://blog.abser.top/tags/google">google</a></li>
+          
+        </ul>
+      </li>
+    
+  
+</ul>
+
+  </footer>
+</article>
+<article class="post">
+  
+    <article class="post">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "blog-abser-top" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </article>
+
+
+</article>
+<div class="pagination">
+  
+    <a href="/blog/ipfs%E8%AE%B2%E8%A7%A3/" class="button big previous"><i class="fas fa-angle-left"></i> IPFS讲解</a>
+  
+  
+    <a href="/blog/%E5%AD%A6%E4%B9%A0%E5%9E%8B%E7%BB%84%E7%BB%87%E6%A6%82%E5%BF%B5/" class="button big next">学习型组织概念 <i class="fas fa-angle-right"></i></a>
+  
+</div>
+
+
+      </main>
+      <section id="site-sidebar">
+  <section id="recent-posts">
+    <header>
+      <h1>Recent posts</h1>
+    </header>
+    
+    <article class="mini-post">
+      <section>
+        
+<a href="/blog/bytes%E5%8C%85%E9%98%85%E8%AF%BB/" class="image featured">
+  <img src="/img/2019/03/1.jpg" alt="">
+</a>
+
+
+      </section>
+      <header>
+        <h1><a href="/blog/bytes%E5%8C%85%E9%98%85%E8%AF%BB/">Bytes包阅读</a></h1>
+        <time class="published" datetime="">March 19, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+
+      </section>
+      <header>
+        <h1><a href="/blog/studycoding/">Studycoding</a></h1>
+        <time class="published" datetime="">March 12, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+
+      </section>
+      <header>
+        <h1><a href="/blog/%E5%AD%A6%E4%B9%A0%E5%9E%8B%E7%BB%84%E7%BB%87%E6%A6%82%E5%BF%B5/">学习型组织概念</a></h1>
+        <time class="published" datetime="">March 1, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+<a href="/blog/kickstart%E6%8C%87%E5%8D%97/" class="image featured">
+  <img src="/img/2019/01/pic04.jpg" alt="pic 3">
+</a>
+
+
+      </section>
+      <header>
+        <h1><a href="/blog/kickstart%E6%8C%87%E5%8D%97/">Kickstart指南</a></h1>
+        <time class="published" datetime="">January 24, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+<a href="/blog/ipfs%E8%AE%B2%E8%A7%A3/" class="image featured">
+  <img src="/img/2019/01/pic02.jpg" alt="pic02">
+</a>
+
+
+      </section>
+      <header>
+        <h1><a href="/blog/ipfs%E8%AE%B2%E8%A7%A3/">IPFS讲解</a></h1>
+        <time class="published" datetime="">January 19, 2019</time>
+      </header>
+    </article>
+    
+    
+      <a href="/blog/" class="button">See more</a>
+    
+  </section>
+
+  
+    
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+            
+          
+          
+          <li>
+            
+              <a href="/categories/learn/">learn<span class="count">51</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/essays/">essays<span class="count">2</span></a>
+            
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  <section id="mini-bio">
+    <header>
+      <h1>About</h1>
+    </header>
+    <p>欢迎来到这里</p>
+    <footer>
+      <a href="/about" class="button">Learn More</a>
+    </footer>
+  </section>
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="social-icons">
+        
+
+        <li><a href="//github.com/yhyddr" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="weixin://contacts/profile/abser9216" target="_blank" rel="noopener" title="WeChat" class="fab fa-weixin"></a></li>
+<li><a href="//wpa.qq.com/msgrd?v=3&amp;uin=349037616&amp;site=qq&amp;menu=yes" target="_blank" rel="noopener" title="QQ" class="fab fa-qq"></a></li>
+
+
+<li><a href="//twitter.com/example" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+<li><a href="//telegram.me/example" target="_blank" rel="noopener" title="telegram" class="fab fa-telegram"></a></li>
+
+
+
+
+<li><a href="mailto:abserari@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    
+      &copy; 2019
+      
+        Wound:Abser&#39;s Blog
+      
+    .
+    Powered by <a href="//gohugo.io" target="_blank" rel="noopener">Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/html.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/css.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/js.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/toml.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/go.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/bash.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+  <script src=/js/util.js></script>
+  <script src=/js/main.js></script>
+  <script src=/js/add-on.js></script>
+  
+
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>gorm on Wound:Abser&#39;s Blog</title>
+    <link>https://blog.abser.top/tags/gorm/</link>
+    <description>Recent content in gorm on Wound:Abser&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 11 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.abser.top/tags/gorm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Create A Service By Gin-Gorm</title>
+      <link>https://blog.abser.top/blog/gin-grom%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Sun, 11 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.abser.top/blog/gin-grom%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1/</guid>
+      <description>原文链接：https://medium.com/@cgrant/developing-a-simple-crud-api-with-go-gin-and-gorm-df87d98e6ed1 翻译：devabel 整理：abser
+入门 这个例子假设你已经安装并运行go语言的环境。如果您还没有安装，请转到http://cgrant.io/tutorials/go/getting-started-with-go/获取快速入门。
+Gin Web框架 由于我们将通过HTTP提供我们的API，因此我们需要一个Web框架来处理路由并提供请求。有许多框架可用，具有不同的功能和性能指标。在这个例子中，我们将使用Gin框架https://github.com/gin-gonic/gin 。由于速度和简单性，Gin是API开发的一个很好的框架。
+首先，让我们在$ GOPATH / src / simple-api中为我们的服务创建一个新文件夹，然后添加一个main.go文件，如下所示
+package main import “fmt” func main() { fmt.Println(“Hello World”) }  在我们继续学习前，让我们测试一下，确保一切正常运行。
+$ go run main.go Hello World  程序运行正常。现在让我们使用Gin框架将它变成一个Web应用程序。
+package main import “github.com/gin-gonic/gin” func main() { r := gin.Default() r.GET(“/”, func(c *gin.Context) { c.String(200, “Hello World”) }) r.Run() }  保存并运行它
+$ go run main.go [GIN-debug] [WARNING] Running in “debug” mode. Switch to “release” mode in production.</description>
+    </item>
+    
+    <item>
+      <title>Learn Gorm</title>
+      <link>https://blog.abser.top/blog/gorm-%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Sun, 11 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.abser.top/blog/gorm-%E5%85%A5%E9%97%A8/</guid>
+      <description>ORM（Object Relation Mapping），对象关系映射，实际上就是对数据库的操作进行封装，对上层开发人员屏蔽数据操作的细节，开发人员看到的就是一个个对象，大大简化了开发工作，提高了生产效率
+好了，下面我以这个点赞评论系统为例，介绍一下 gorm 的简单用法，以下使用的完整代码：https://github.com/hatlonely/...
+#gorm 用法介绍 ##库安装 go get -u github.com/jinzhu/gorm ##数据库连接
+import ( &amp;quot;github.com/jinzhu/gorm&amp;quot; _ &amp;quot;github.com/jinzhu/gorm/dialects/mysql&amp;quot; ） var db *gorm.DB func init() { var err error db, err = gorm.Open(&amp;quot;mysql&amp;quot;, &amp;quot;&amp;lt;user&amp;gt;:&amp;lt;password&amp;gt;/&amp;lt;database&amp;gt;?charset=utf8&amp;amp;parseTime=True&amp;amp;loc=Local&amp;quot;) if err != nil { panic(err) } }  连接比较简单，直接调用 gorm.Open 传入数据库地址即可
+github.com/jinzhu/gorm/dialects/mysql 是 golang 的 mysql 驱动，实际上就是 github.com/go-sql-driver/mysql 作者这里为了好记，重新弄了个名字
+这里我用的 mysql，实际上支持基本上所有主流的关系数据库，连接方式上略有不同
+db.DB().SetMaxIdleConns(10) db.DB().SetMaxOpenConns(100) 还可以使用 db.DB() 对象设置连接池信息
+###表定义 先来定义一个点赞表，这里面一条记录表示某个用户在某个时刻对某篇文章点了一个赞，用 ip + ua 来标识用户，title 标识文章标题
+type Like struct { ID int `gorm:&amp;quot;primary_key&amp;quot;` Ip string `gorm:&amp;quot;type:varchar(20);not null;index:ip_idx&amp;quot;` Ua string `gorm:&amp;quot;type:varchar(256);not null;&amp;quot;` Title string `gorm:&amp;quot;type:varchar(128);not null;index:title_idx&amp;quot;` Hash uint64 `gorm:&amp;quot;unique_index:hash_idx;&amp;quot;` CreatedAt time.</description>
+    </item>
+    
+  </channel>
+</rss>

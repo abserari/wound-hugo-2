@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>go on Wound:Abser&#39;s Blog</title>
+    <link>https://blog.abser.top/tags/go/</link>
+    <description>Recent content in go on Wound:Abser&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 19 Mar 2019 14:34:55 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.abser.top/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bytes包阅读</title>
+      <link>https://blog.abser.top/blog/bytes%E5%8C%85%E9%98%85%E8%AF%BB/</link>
+      <pubDate>Tue, 19 Mar 2019 14:34:55 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/bytes%E5%8C%85%E9%98%85%E8%AF%BB/</guid>
+      <description>bytes 笔记 
+byte.go 
+Overview 操作字节切片的函数，与字符串 strings 包类似。
+
+核心函数 
+genSplit(s, sep []byte, sepSave, n int) [][]byte 切分切片使用的最核心的函数。
+有四个参数，第一个是被切切片，第二个是分隔符，第三个是选择包含分隔符在内往后几个字节一起作为子切片，最后一个是最多通过n个分隔符来切分 // Generic split: splits after each instance of sep, // including sepSave bytes of sep in the subslices. // 将含有 sep 的字节切片全部单独切开，最多切 n 个，同时 匹配到时候多切 sepSave 个字节一起切进同一个切片 func genSplit(s, sep []byte, sepSave, n int) [][]byte { if n == 0 { return nil } if len(sep) == 0 { return explode(s, n) } if n &amp;lt; 0 { n = Count(s, sep) + 1 } a := make([][]byte, n) n-- i := 0 for i &amp;lt; n { m := Index(s, sep) if m &amp;lt; 0 { break } a[i] = s[: m+sepSave : m+sepSave] s = s[m+len(sep):] i++ } a[i] = s return a[:i+1] }</description>
+    </item>
+    
+    <item>
+      <title>使用Go进行集成测试的MySQL Docker容器</title>
+      <link>https://blog.abser.top/blog/%E4%BD%BF%E7%94%A8go%E8%BF%9B%E8%A1%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E7%9A%84mysql-docker%E5%AE%B9%E5%99%A8/</link>
+      <pubDate>Tue, 01 Jan 2019 12:27:27 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/%E4%BD%BF%E7%94%A8go%E8%BF%9B%E8%A1%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E7%9A%84mysql-docker%E5%AE%B9%E5%99%A8/</guid>
+      <description>使用Go进行集成测试的MySQL Docker容器 原文链接 作者：Mitesh 翻译整理 翻译整理：Abser
+Overview Bug在实际生产中常常代价高昂。我们可以使用测试用例来在开发过程中捕获它们，以降低我们的成本。测试在所有软件中都非常重要。这有助于确保代码的正确性并有助于防止恶化。单元测试有助于隔离测试组件，而无需任何外部依赖。但是单元测试不足以确保我们能够拥有经过良好测试的稳定系统。实际上，在集成不同组件的过程中会发生故障。如果我们不在真实的环境上测试数据库后端的应用程序将面临的问题，我们可能永远不会注意到由于事务未提交，数据库的错误版本等问题。集成测试在端到端测试中扮演了重要角色。
+在当今世界，我们编写了许多软件应用程序，其中包含数据库作为存储后端。模拟这些数据库调用以进行单元测试可能很麻烦。在纲要中进行小的更改可能会导致重写部分或全部。因为查询不会连接到实际的数据库引擎，因此不会验证查询的语法或约束。模拟每个查询都可能导致重复工作。为避免这种情况，我们应该测试一个真正的数据库，在测试完成后可以将其销毁。Docker非常适合运行测试用例，因为我们可以在几秒钟内运行容器并在完成后终止它们。
+安装docker 让我们了解如何启动MySQL docker容器并使用它来使用go代码进行测试。我们首先需要确保运行我们的测试用例的系统安装了docker，可以通过运行命令“ docker ps ” 来检查。如果未安装docker，请从此处安装docker 。
+func（d * Docker）isInstalled（）bool { command：= exec.Command（“docker”，“ps”） err：= command.Run（） if err！= nil { return false } return true }  运行容器 安装docker之后，我们需要使用用户和密码运行MySQL容器，该用户和密码可用于连接MySQL服务器。
+docker run --name our-mysql-container -e MYSQL_ROOT_PASSWORD = root -e MYSQL_USER = gouser -e MYSQL_PASSWORD = gopassword -e MYSQL_DATABASE = godb -p 3306：3306 --tmpfs / var / lib / mysql mysql：5.7  这将运行MySQL版本5.</description>
+    </item>
+    
+    <item>
+      <title>Example ACL</title>
+      <link>https://blog.abser.top/blog/example-acl/</link>
+      <pubDate>Thu, 13 Dec 2018 18:41:35 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/example-acl/</guid>
+      <description>项目简介 TL;DR; acl is a lightweight acl manager for go.
+Features  Design simple &amp;amp; reusable roles to empower your application. Acquire the rights of other roles to build a powerful set of permissions. Resolve possible roles by examine them in an unified way.  Example type User struct { isAdmin bool } func main() { // first of all: create a new manager instance to register all your roles in one place manager := acl.</description>
+    </item>
+    
+    <item>
+      <title>Hugo&#43;Github搭建个人博客</title>
+      <link>https://blog.abser.top/blog/hugo-github-blog/</link>
+      <pubDate>Sun, 25 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.abser.top/blog/hugo-github-blog/</guid>
+      <description>前言介绍  Hugo是什么?   Hugo是一种通用的网站框架。严格来说，Hugo应该被称作静态页面生成引擎。
+ 官网https://gohugo.io/
+ 静态页面生成引擎又是什么?   静态页面生成引擎从字面上来理解，就是将你的内容生成静态网站。所谓“静态”的含义其实反映在网站页面的生成的时间。一般的web服务器（WordPress, Ghost, Drupal等等）在收到页面请求时，需要调用数据库生成页面（也就是HTML代码），再返回给用户请求。而静态网站则不需要在收到请求后生成页面，而是在整个网站建立起之前就将所有的页面全部生成完成，页面一经生成便称为静态文件，访问时直接返回现成的静态页面，不需要数据库的参与。
+  那么我采用Hugo来搭建博客优点有哪些?
+ 访问快速.因为不需要每次访问生成页面当然，一旦网站有任何更改，静态网站生成器需要重新生成所有的与更改相关的页面。然后由于Hugo是用Go语言编写的在生成速度这方面做的非常好.5000篇文章的博客生成时间只需要6秒钟.对比其他的静态页面生成引擎动不动几分钟的时间优势非常明显 采用静态页面搭建博客,维护起来非常简单.事实上根本不需要什么维护，完全不用考虑复杂的运行时间，依赖和数据库的问题。再有也不用担心安全性的问题，没有数据库，网站注入什么的也无从下手 无依赖.低消耗资源. 专注于写作.我认为对于个人博客来说，应该将时间花在内容上而不是各种折腾网站。Hugo会将Markdown格式的内容和设置好模版一起，生成漂亮干净的页面。你只需要把Markdown文件放在content文件夹下面.一切水到渠成  听起来很棒的样子那搭建起来会不会非常复杂?
+  不会.跟着教程走下来.只需要十分钟.
+开始 需求 1.Hugo工具 2.GitHub个人账号 3.Git工具  安装 如果说速度快是Hugo的第一大优点，那么安装简单应该就是Hugo的第二大优点。对于Mac用户，没有brew的话先安装brew，在命令行里敲：
+$ ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;  然后再敲一行安装Hugo:
+$ brew new Hugo  当然你也可以在这里直接下载对应系统的binary文件，解压就行了。
+生成 site 目录 hugo new site blog cd blog git init #Congratulations! Your new Hugo site is created in /Users/steven/MyProjects/Demo/blog.</description>
+    </item>
+    
+    <item>
+      <title>Create A Service By Gin-Gorm</title>
+      <link>https://blog.abser.top/blog/gin-grom%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Sun, 11 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.abser.top/blog/gin-grom%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1/</guid>
+      <description>原文链接：https://medium.com/@cgrant/developing-a-simple-crud-api-with-go-gin-and-gorm-df87d98e6ed1 翻译：devabel 整理：abser
+入门 这个例子假设你已经安装并运行go语言的环境。如果您还没有安装，请转到http://cgrant.io/tutorials/go/getting-started-with-go/获取快速入门。
+Gin Web框架 由于我们将通过HTTP提供我们的API，因此我们需要一个Web框架来处理路由并提供请求。有许多框架可用，具有不同的功能和性能指标。在这个例子中，我们将使用Gin框架https://github.com/gin-gonic/gin 。由于速度和简单性，Gin是API开发的一个很好的框架。
+首先，让我们在$ GOPATH / src / simple-api中为我们的服务创建一个新文件夹，然后添加一个main.go文件，如下所示
+package main import “fmt” func main() { fmt.Println(“Hello World”) }  在我们继续学习前，让我们测试一下，确保一切正常运行。
+$ go run main.go Hello World  程序运行正常。现在让我们使用Gin框架将它变成一个Web应用程序。
+package main import “github.com/gin-gonic/gin” func main() { r := gin.Default() r.GET(“/”, func(c *gin.Context) { c.String(200, “Hello World”) }) r.Run() }  保存并运行它
+$ go run main.go [GIN-debug] [WARNING] Running in “debug” mode. Switch to “release” mode in production.</description>
+    </item>
+    
+    <item>
+      <title>Learn Gorm</title>
+      <link>https://blog.abser.top/blog/gorm-%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Sun, 11 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.abser.top/blog/gorm-%E5%85%A5%E9%97%A8/</guid>
+      <description>ORM（Object Relation Mapping），对象关系映射，实际上就是对数据库的操作进行封装，对上层开发人员屏蔽数据操作的细节，开发人员看到的就是一个个对象，大大简化了开发工作，提高了生产效率
+好了，下面我以这个点赞评论系统为例，介绍一下 gorm 的简单用法，以下使用的完整代码：https://github.com/hatlonely/...
+#gorm 用法介绍 ##库安装 go get -u github.com/jinzhu/gorm ##数据库连接
+import ( &amp;quot;github.com/jinzhu/gorm&amp;quot; _ &amp;quot;github.com/jinzhu/gorm/dialects/mysql&amp;quot; ） var db *gorm.DB func init() { var err error db, err = gorm.Open(&amp;quot;mysql&amp;quot;, &amp;quot;&amp;lt;user&amp;gt;:&amp;lt;password&amp;gt;/&amp;lt;database&amp;gt;?charset=utf8&amp;amp;parseTime=True&amp;amp;loc=Local&amp;quot;) if err != nil { panic(err) } }  连接比较简单，直接调用 gorm.Open 传入数据库地址即可
+github.com/jinzhu/gorm/dialects/mysql 是 golang 的 mysql 驱动，实际上就是 github.com/go-sql-driver/mysql 作者这里为了好记，重新弄了个名字
+这里我用的 mysql，实际上支持基本上所有主流的关系数据库，连接方式上略有不同
+db.DB().SetMaxIdleConns(10) db.DB().SetMaxOpenConns(100) 还可以使用 db.DB() 对象设置连接池信息
+###表定义 先来定义一个点赞表，这里面一条记录表示某个用户在某个时刻对某篇文章点了一个赞，用 ip + ua 来标识用户，title 标识文章标题
+type Like struct { ID int `gorm:&amp;quot;primary_key&amp;quot;` Ip string `gorm:&amp;quot;type:varchar(20);not null;index:ip_idx&amp;quot;` Ua string `gorm:&amp;quot;type:varchar(256);not null;&amp;quot;` Title string `gorm:&amp;quot;type:varchar(128);not null;index:title_idx&amp;quot;` Hash uint64 `gorm:&amp;quot;unique_index:hash_idx;&amp;quot;` CreatedAt time.</description>
+    </item>
+    
+  </channel>
+</rss>

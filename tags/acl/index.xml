@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>acl on Wound:Abser&#39;s Blog</title>
+    <link>https://blog.abser.top/tags/acl/</link>
+    <description>Recent content in acl on Wound:Abser&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 13 Dec 2018 18:41:35 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.abser.top/tags/acl/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Example ACL</title>
+      <link>https://blog.abser.top/blog/example-acl/</link>
+      <pubDate>Thu, 13 Dec 2018 18:41:35 +0800</pubDate>
+      
+      <guid>https://blog.abser.top/blog/example-acl/</guid>
+      <description>项目简介 TL;DR; acl is a lightweight acl manager for go.
+Features  Design simple &amp;amp; reusable roles to empower your application. Acquire the rights of other roles to build a powerful set of permissions. Resolve possible roles by examine them in an unified way.  Example type User struct { isAdmin bool } func main() { // first of all: create a new manager instance to register all your roles in one place manager := acl.</description>
+    </item>
+    
+  </channel>
+</rss>

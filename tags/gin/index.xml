@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>gin on Wound:Abser&#39;s Blog</title>
+    <link>https://blog.abser.top/tags/gin/</link>
+    <description>Recent content in gin on Wound:Abser&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 11 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.abser.top/tags/gin/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Create A Service By Gin-Gorm</title>
+      <link>https://blog.abser.top/blog/gin-grom%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Sun, 11 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.abser.top/blog/gin-grom%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1/</guid>
+      <description>原文链接：https://medium.com/@cgrant/developing-a-simple-crud-api-with-go-gin-and-gorm-df87d98e6ed1 翻译：devabel 整理：abser
+入门 这个例子假设你已经安装并运行go语言的环境。如果您还没有安装，请转到http://cgrant.io/tutorials/go/getting-started-with-go/获取快速入门。
+Gin Web框架 由于我们将通过HTTP提供我们的API，因此我们需要一个Web框架来处理路由并提供请求。有许多框架可用，具有不同的功能和性能指标。在这个例子中，我们将使用Gin框架https://github.com/gin-gonic/gin 。由于速度和简单性，Gin是API开发的一个很好的框架。
+首先，让我们在$ GOPATH / src / simple-api中为我们的服务创建一个新文件夹，然后添加一个main.go文件，如下所示
+package main import “fmt” func main() { fmt.Println(“Hello World”) }  在我们继续学习前，让我们测试一下，确保一切正常运行。
+$ go run main.go Hello World  程序运行正常。现在让我们使用Gin框架将它变成一个Web应用程序。
+package main import “github.com/gin-gonic/gin” func main() { r := gin.Default() r.GET(“/”, func(c *gin.Context) { c.String(200, “Hello World”) }) r.Run() }  保存并运行它
+$ go run main.go [GIN-debug] [WARNING] Running in “debug” mode. Switch to “release” mode in production.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>使用Go进行集成测试的MySQL Docker容器 - Wound:Abser&#39;s Blog</title>
+<meta name="description" content="MySQL Docker进行集成测试">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=1">
+  <link rel="manifest" href="/favicon/site.webmanifest?v=1">
+  
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg?v=1" color="#ffffff">
+    <link rel="shortcut icon" href="/favicon/favicon.ico?v=1">
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml?v=1">
+  
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+
+  <meta name="generator" content="Hugo 0.55.6" />
+  
+<meta itemprop="name" content="使用Go进行集成测试的MySQL Docker容器">
+<meta itemprop="description" content="MySQL Docker进行集成测试">
+
+
+<meta itemprop="datePublished" content="2019-01-01T12:27:27&#43;08:00" />
+<meta itemprop="dateModified" content="2019-01-01T12:27:27&#43;08:00" />
+<meta itemprop="wordCount" content="367">
+
+
+
+<meta itemprop="keywords" content="go,mysql,test," />
+
+  <meta property="og:title" content="使用Go进行集成测试的MySQL Docker容器" />
+<meta property="og:description" content="MySQL Docker进行集成测试" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.abser.top/blog/%E4%BD%BF%E7%94%A8go%E8%BF%9B%E8%A1%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E7%9A%84mysql-docker%E5%AE%B9%E5%99%A8/" />
+<meta property="article:published_time" content="2019-01-01T12:27:27&#43;08:00"/>
+<meta property="article:modified_time" content="2019-01-01T12:27:27&#43;08:00"/>
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用Go进行集成测试的MySQL Docker容器"/>
+<meta name="twitter:description" content="MySQL Docker进行集成测试"/>
+<meta name="twitter:site" content="@example"/>
+
+  
+
+  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+  
+    
+      <link rel="stylesheet" href="/css/normalize.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+      <link rel="stylesheet" href="/css/main.min.css">
+      <link rel="stylesheet" href="/css/add-on.css">
+    
+  
+  
+</head>
+
+  <body>
+    
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/">
+        
+          
+            Blog
+          
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu">
+      
+        <a href="/" class="link"><i class="fas fa-home">&nbsp;</i>Home</a>
+      
+        <a href="/about/" class="link"><i class="far fa-id-card">&nbsp;</i>About</a>
+      
+        <a href="/categories/" class="link"><i class="fas fa-sitemap">&nbsp;</i>Categories</a>
+      
+        <a href="/tags/" class="link"><i class="far fa-newspaper">&nbsp;</i>Tag</a>
+      
+      <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      
+
+    </menu>
+    
+
+    <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="lang-toggle" lang="en"><span class="flag-icon flag-icon-en" alt="en"></span></a>
+    <a href="#site-nav" class="nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="lang-menu" class="flyout-menu">
+  <a href="#" lang="en" class="active"><span class="flag-icon flag-icon-en" alt="en"></span></a>
+  
+    
+      
+    
+      
+        <a href="/ch" lang="ch" class="no-lang"><span class="flag-icon flag-icon-ch" alt="ch"></span></a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu">
+      <h1>Share Post</h1>
+      
+
+
+
+  
+    <a href="//twitter.com/share?url=&amp;text=&amp" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//reddit.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=&amp;title=" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.stumbleupon.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn stumbleupon">
+          <i class="fab fa-stumbleupon"></i><p>&nbsp;StumbleUpon</p>
+        </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=&amp;description=" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by &amp;body=" target="_blank" class="share-btn email">
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro">
+  <a href="/"><img src="/img/avator/logo.png" class="hexagon" width="100" alt="abser" /></a>
+  <header>
+    <h1>Abser 杨鼎睿</h1>
+  </header>
+  <main>
+    <p>A PUNK Hacker,Artist.</p>
+  </main>
+  
+    <footer>
+      <ul class="social-icons">
+        
+
+        <li><a href="//github.com/yhyddr" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="weixin://contacts/profile/abser9216" target="_blank" rel="noopener" title="WeChat" class="fab fa-weixin"></a></li>
+<li><a href="//wpa.qq.com/msgrd?v=3&amp;uin=349037616&amp;site=qq&amp;menu=yes" target="_blank" rel="noopener" title="QQ" class="fab fa-qq"></a></li>
+
+
+<li><a href="//twitter.com/example" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+<li><a href="//telegram.me/example" target="_blank" rel="noopener" title="telegram" class="fab fa-telegram"></a></li>
+
+
+
+
+<li><a href="mailto:abserari@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        <article class="post">
+  <header>
+  <div class="title">
+    
+        <h2><a href="/blog/%E4%BD%BF%E7%94%A8go%E8%BF%9B%E8%A1%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E7%9A%84mysql-docker%E5%AE%B9%E5%99%A8/">使用Go进行集成测试的MySQL Docker容器</a></h2>
+    
+    
+        <p>MySQL Docker进行集成测试</p>
+    
+</div>
+  <div class="meta">
+    <time class="published" datetime="2019-01-01 12:27:27 &#43;0800 CST">
+      January 1, 2019
+    </time>
+    <span class="author">Abser</span>
+    
+        <p>2 minute read</p>
+    
+  </div>
+</header>
+
+  <section id="social-share">
+    
+
+
+
+  
+    <a href="//twitter.com/share?url=&amp;text=&amp" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//reddit.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=&amp;title=" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.stumbleupon.com/submit?url=&amp;title=" target="_blank" rel="noopener" class="share-btn stumbleupon">
+          <i class="fab fa-stumbleupon"></i><p>&nbsp;StumbleUpon</p>
+        </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=&amp;description=" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by &amp;body=" target="_blank" class="share-btn email">
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+  </section>
+  
+<a href="/blog/%E4%BD%BF%E7%94%A8go%E8%BF%9B%E8%A1%8C%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E7%9A%84mysql-docker%E5%AE%B9%E5%99%A8/" class="image featured">
+  <img src="/img/2019/01/pic01.jpg" alt="cool">
+</a>
+
+
+  <div class="content">
+    
+
+<h1 id="使用go进行集成测试的mysql-docker容器">使用Go进行集成测试的MySQL Docker容器</h1>
+
+<p><a href="https://itnext.io/mysql-docker-container-for-integration-testing-using-go-f784b70a03b">原文链接</a>                                                                                     作者：Mitesh
+<a href="https://abser.top">翻译整理</a>                                                                                     翻译整理：Abser</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>Bug在实际生产中常常代价高昂。我们可以使用测试用例来在开发过程中捕获它们，以降低我们的成本。测试在所有软件中都非常重要。这有助于确保代码的正确性并有助于防止恶化。单元测试有助于隔离测试组件，而无需任何外部依赖。但是单元测试不足以确保我们能够拥有经过良好测试的稳定系统。实际上，在集成不同组件的过程中会发生故障。如果我们不在真实的环境上测试数据库后端的应用程序将面临的问题，我们可能永远不会注意到由于事务未提交，数据库的错误版本等问题。集成测试在端到端测试中扮演了重要角色。</p>
+
+<p>在当今世界，我们编写了许多软件应用程序，其中包含数据库作为存储后端。模拟这些数据库调用以进行单元测试可能很麻烦。在纲要中进行小的更改可能会导致重写部分或全部。因为查询不会连接到实际的数据库引擎，因此不会验证查询的语法或约束。模拟每个查询都可能导致重复工作。为避免这种情况，我们应该测试一个真正的数据库，在测试完成后可以将其销毁。<a href="https://www.docker.com/">Docker</a>非常适合运行测试用例，因为我们可以在几秒钟内运行容器并在完成后终止它们。</p>
+
+<h3 id="安装docker">安装docker</h3>
+
+<p>让我们了解如何启动MySQL docker容器并使用它来使用go代码进行测试。我们首先需要确保运行我们的测试用例的系统安装了docker，可以通过运行命令“ <strong>docker ps</strong> ” 来检查。如果未安装docker，请从<a href="https://docs.docker.com/install/">此处</a>安装docker 。</p>
+
+<pre><code class="language-go">func（d * Docker）isInstalled（）bool { 
+  command：= exec.Command（“docker”，“ps”）
+  err：= command.Run（）
+  if err！= nil { 
+    return false 
+  } 
+  return true 
+}
+</code></pre>
+
+<h3 id="运行容器">运行容器</h3>
+
+<p>安装docker之后，我们需要使用用户和密码运行MySQL容器，该用户和密码可用于连接MySQL服务器。</p>
+
+<pre><code class="language-bash">docker run --name our-mysql-container -e MYSQL_ROOT_PASSWORD = root -e MYSQL_USER = gouser -e MYSQL_PASSWORD = gopassword -e MYSQL_DATABASE = godb -p 3306：3306 --tmpfs / var / lib / mysql mysql：5.7
+</code></pre>
+
+<p>这将运行MySQL版本5.7的docker镜像，其容器名称为“our-mysql-container”。“-e”指定我们需要为MySQL docker容器设置的运行时变量。我们将root设置为root密码。使用密码“gopassword”创建用户“gouser”，我们用它来连接到我们的应用程序中的MySQL服务器。我们正在暴露Docker容器的3306端口，所以我们可以连接到在docker容器内运行的mysql服务器。我们使用的是<a href="https://docs.docker.com/v17.09/engine/admin/volumes/tmpfs/">tmpfs mount</a>，它只将数据存储在主机的内存中。当容器停止时，将删除tmpfs挂载。因为我们只是进行测试，所以不需要永久存。</p>
+
+<pre><code class="language-go">type ContainerOption struct {
+  Name              string
+  ContainerFileName string
+  Options           map[string]string
+  MountVolumePath   string
+  PortExpose        string
+}
+func (d *Docker) getDockerRunOptions(c ContainerOption) []string {
+  portExpose := fmt.Sprintf(&quot;%s:%s&quot;, c.PortExpose, c.PortExpose)
+  var args []string
+  for key, value := range c.Options {
+    args = append(args, []string{&quot;-e&quot;, fmt.Sprintf(&quot;%s=%s&quot;, key, value)}...)
+  }
+  args = append(args, []string{&quot;--tmpfs&quot;, c.MountVolumePath, c.ContainerFileName}...)
+  dockerArgs := append([]string{&quot;run&quot;, &quot;-d&quot;, &quot;--name&quot;, c.Name, &quot;-p&quot;, portExpose}, args...)
+  return dockerArgs
+}
+func (d *Docker) Start(c ContainerOption) (string, error) {
+  dockerArgs := d.getDockerRunOptions(c)
+  command := exec.Command(&quot;docker&quot;, dockerArgs...)
+  command.Stderr = os.Stderr
+  result, err := command.Output()
+  if err != nil {
+    return &quot;&quot;, err
+  }
+  d.ContainerID = strings.TrimSpace(string(result))
+  d.ContainerName = c.Name
+  command = exec.Command(&quot;docker&quot;, &quot;inspect&quot;, d.ContainerID)
+  result, err = command.Output()
+  if err != nil {
+    d.Stop()
+    return &quot;&quot;, err
+  }
+  return string(result), nil
+}
+func (m *MysqlDocker) StartMysqlDocker() {
+  mysqlOptions := map[string]string{
+    &quot;MYSQL_ROOT_PASSWORD&quot;: &quot;root&quot;,
+    &quot;MYSQL_USER&quot;:          &quot;gouser&quot;,
+    &quot;MYSQL_PASSWORD&quot;:      &quot;gopassword&quot;,
+    &quot;MYSQL_DATABASE&quot;:      &quot;godb&quot;,
+  }
+  containerOption := ContainerOption{
+    Name:              &quot;our-mysql-container&quot;,
+    Options:           mysqlOptions,
+    MountVolumePath:   &quot;/var/lib/mysql&quot;,
+    PortExpose:        &quot;3306&quot;,
+    ContainerFileName: &quot;mysql:5.7&quot;,
+  }
+  m.Docker = Docker{}
+  m.Docker.Start(containerOption)
+}
+</code></pre>
+
+<p>我们可以通过 containerId 检查容器以获取容器的详细信息。</p>
+
+<pre><code class="language-bash">docker inspect containerId
+</code></pre>
+
+<p>一旦我们运行Docker容器，我们需要等到我们的docker容器启动并运行。我们可以使用以下命令检查这个。</p>
+
+<pre><code class="language-basic">docker ps -a
+</code></pre>
+
+<h3 id="使用实例">使用实例</h3>
+
+<p>一旦docker启动并运行，我们就可以开始在我们的应用程序中使用它来运行真实数据库的集成测试用例。</p>
+
+<pre><code class="language-go">func (d *Docker) WaitForStartOrKill(timeout int) error {
+  for tick := 0; tick &lt; timeout; tick++ {
+    containerStatus := d.getContainerStatus()
+    if containerStatus == dockerStatusRunning {
+     return nil
+    }
+    if containerStatus == dockerStatusExited {
+     return nil
+    }
+    time.Sleep(time.Second)
+  }
+  d.Stop()
+  return errors.New(&quot;Docker faile to start in given time period so stopped&quot;)
+}
+func (d *Docker) getContainerStatus() string {
+  command := exec.Command(&quot;docker&quot;, &quot;ps&quot;, &quot;-a&quot;, &quot;--format&quot;, &quot;{{.ID}}|{{.Status}}|{{.Ports}}|{{.Names}}&quot;)
+  output, err := command.CombinedOutput()
+  if err != nil {
+    d.Stop()
+    return dockerStatusExited
+  }
+  outputString := string(output)
+  outputString = strings.TrimSpace(outputString)
+  dockerPsResponse := strings.Split(outputString, &quot;\n&quot;)
+  for _, response := range dockerPsResponse {
+    containerStatusData := strings.Split(response, &quot;|&quot;)
+    containerStatus := containerStatusData[1]
+    containerName := containerStatusData[3]
+    if containerName == d.ContainerName {
+      if strings.HasPrefix(containerStatus, &quot;Up &quot;) {
+        return dockerStatusRunning
+      }
+    }
+  }
+  return dockerStatusStarting
+}
+</code></pre>
+
+<p>我们可以使用下面的连接字符串从go代码连接到docker中运行的MySQL服务器。</p>
+
+<pre><code class="language-bash">gouser:gopassword@tcp(localhost:3306)/godb?charset=utf8&amp;parseTime=True&amp;loc=Local
+</code></pre>
+
+<h3 id="结束">结束</h3>
+
+<p>这些可以在每次运行时重新创建来模拟使用真实数据库运行集成测试。这有助于确保我们的应用程序已准备好进行生产发布。</p>
+
+<p>完整的代码可以在这个git存储库中找到：<a href="https://github.com/MiteshSharma/DockerMysqlGo">https</a>：<a href="https://github.com/MiteshSharma/DockerMysqlGo">//github.com/MiteshSharma/DockerMysqlGo</a></p>
+
+  </div>
+  <footer>
+    <ul class="stats">
+  
+    
+    
+      <li class="categories">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://blog.abser.top/categories/learn">learn</a></li>
+          
+        </ul>
+      </li>
+    
+  
+  
+    
+    
+      <li class="tags">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://blog.abser.top/tags/go">go</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://blog.abser.top/tags/mysql">mysql</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://blog.abser.top/tags/test">test</a></li>
+          
+        </ul>
+      </li>
+    
+  
+</ul>
+
+  </footer>
+</article>
+<article class="post">
+  
+    <article class="post">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "blog-abser-top" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </article>
+
+
+</article>
+<div class="pagination">
+  
+    <a href="/blog/tokenbucket/" class="button big previous"><i class="fas fa-angle-left"></i> TokenBucket</a>
+  
+  
+    <a href="/blog/http%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E9%98%85%E8%AF%BB/" class="button big next">Http权威指南阅读 <i class="fas fa-angle-right"></i></a>
+  
+</div>
+
+
+      </main>
+      <section id="site-sidebar">
+  <section id="recent-posts">
+    <header>
+      <h1>Recent posts</h1>
+    </header>
+    
+    <article class="mini-post">
+      <section>
+        
+<a href="/blog/bytes%E5%8C%85%E9%98%85%E8%AF%BB/" class="image featured">
+  <img src="/img/2019/03/1.jpg" alt="">
+</a>
+
+
+      </section>
+      <header>
+        <h1><a href="/blog/bytes%E5%8C%85%E9%98%85%E8%AF%BB/">Bytes包阅读</a></h1>
+        <time class="published" datetime="">March 19, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+
+      </section>
+      <header>
+        <h1><a href="/blog/studycoding/">Studycoding</a></h1>
+        <time class="published" datetime="">March 12, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+
+      </section>
+      <header>
+        <h1><a href="/blog/%E5%AD%A6%E4%B9%A0%E5%9E%8B%E7%BB%84%E7%BB%87%E6%A6%82%E5%BF%B5/">学习型组织概念</a></h1>
+        <time class="published" datetime="">March 1, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+<a href="/blog/kickstart%E6%8C%87%E5%8D%97/" class="image featured">
+  <img src="/img/2019/01/pic04.jpg" alt="pic 3">
+</a>
+
+
+      </section>
+      <header>
+        <h1><a href="/blog/kickstart%E6%8C%87%E5%8D%97/">Kickstart指南</a></h1>
+        <time class="published" datetime="">January 24, 2019</time>
+      </header>
+    </article>
+    
+    <article class="mini-post">
+      <section>
+        
+<a href="/blog/ipfs%E8%AE%B2%E8%A7%A3/" class="image featured">
+  <img src="/img/2019/01/pic02.jpg" alt="pic02">
+</a>
+
+
+      </section>
+      <header>
+        <h1><a href="/blog/ipfs%E8%AE%B2%E8%A7%A3/">IPFS讲解</a></h1>
+        <time class="published" datetime="">January 19, 2019</time>
+      </header>
+    </article>
+    
+    
+      <a href="/blog/" class="button">See more</a>
+    
+  </section>
+
+  
+    
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+            
+          
+          
+          <li>
+            
+              <a href="/categories/learn/">learn<span class="count">51</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/essays/">essays<span class="count">2</span></a>
+            
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  <section id="mini-bio">
+    <header>
+      <h1>About</h1>
+    </header>
+    <p>欢迎来到这里</p>
+    <footer>
+      <a href="/about" class="button">Learn More</a>
+    </footer>
+  </section>
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="social-icons">
+        
+
+        <li><a href="//github.com/yhyddr" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="weixin://contacts/profile/abser9216" target="_blank" rel="noopener" title="WeChat" class="fab fa-weixin"></a></li>
+<li><a href="//wpa.qq.com/msgrd?v=3&amp;uin=349037616&amp;site=qq&amp;menu=yes" target="_blank" rel="noopener" title="QQ" class="fab fa-qq"></a></li>
+
+
+<li><a href="//twitter.com/example" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+<li><a href="//telegram.me/example" target="_blank" rel="noopener" title="telegram" class="fab fa-telegram"></a></li>
+
+
+
+
+<li><a href="mailto:abserari@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    
+      &copy; 2019
+      
+        Wound:Abser&#39;s Blog
+      
+    .
+    Powered by <a href="//gohugo.io" target="_blank" rel="noopener">Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/html.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/css.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/js.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/toml.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/go.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/bash.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+  <script src=/js/util.js></script>
+  <script src=/js/main.js></script>
+  <script src=/js/add-on.js></script>
+  
+
+
+
+    </div>
+  </body>
+</html>
